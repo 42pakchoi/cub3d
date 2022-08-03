@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:33:12 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/03 01:41:07 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/03 16:54:59 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,14 @@ int	main(int argc, char *argv[])
 	}
 	else
 		ft_putstr_fd("usage: ./cub3d <map_file_name>\n", 1);
+
+	t_game	*data;
+
+	data = malloc(sizeof(t_game));
+	data->mlx = mlx_init();
+	data->win = mlx_new_window(data->mlx, 300, 300, "cub3d");
+
+	mlx_clear_window(data->mlx, data->win);
+	mlx_loop(data->mlx);
 	return (0);
 }
