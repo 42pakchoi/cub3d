@@ -6,13 +6,19 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/03 16:55:00 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/03 17:35:53 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include <unistd.h>
+# include <stdlib.h>
+# include <fcntl.h>
+# include <stdio.h>
+# include <string.h>
+# include <math.h>
 # include "mlx.h"
 # include "libft.h"
 # include "get_next_line.h"
@@ -71,12 +77,21 @@ typedef struct s_game
 **/
 
 # define WINDOW_WIDTH 640
-# define WINDWO_HEIGHT 480
-# define MINIMAP_BOX_WIDTH 50
-# define MINIMAP_BOX_HEIGHT 50
+# define WINDOW_HEIGHT 480
+# define MINIMAP_TILE_SIZE 50
 # define MINIMAP_WALL_COLOR 0x00FF00
 # define MINIMAP_FLOOR_COLOR 0x000000
 # define MINIMAP_PLAYER_COLOR 0x0000FF
+
+/*
+** map characters
+*/
+# define MAP_PLAYER_N	'N'
+# define MAP_PLAYER_S	'S'
+# define MAP_PLAYER_E	'E'
+# define MAP_PLAYER_W	'W'
+# define MAP_EMPTY		'0'
+# define MAP_WALL		'1'
 
 /*
 ** keycodes
@@ -96,5 +111,10 @@ typedef struct s_game
 # define KEY_ARROW_LEFT		123
 # define KEY_ARROW_RIGHT	124
 # define CLOSE_BUTTON		17
+
+/*
+** functions
+*/
+void	draw_minimap();
 
 #endif
