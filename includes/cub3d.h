@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/03 17:35:53 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/04 13:32:59 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ typedef struct s_game
 	t_vector	player_pos;
 	t_bool		is_gameend;
 }				t_game;
+
+t_game	*get_game_struct(void);
 
 /*
 ** constants
