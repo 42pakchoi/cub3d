@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 18:45:00 by sarchoi           #+#    #+#             */
-/*   Updated: 2021/05/11 12:57:38 by sarchoi          ###   ########.fr       */
+/*   Updated: 2022/08/04 15:19:15 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,15 @@ static unsigned int	ft_get_next_str_len(char const **str, char delim)
 	return (i);
 }
 
-static char			**ft_malloc_error(char **tab)
+char	**ft_split_free(char **tab)
 {
 	unsigned int	i;
 
 	i = 0;
 	while (tab[i])
 	{
-		free(tab[i]);
+		if (tab[i])
+			free(tab[i]);
 		i++;
 	}
 	free(tab);
@@ -96,7 +97,7 @@ char				**ft_split(char const *s, char c)
 		str_len = ft_get_next_str_len(&s, c);
 		tab[i] = (char *)malloc(sizeof(char) * (str_len + 1));
 		if (!tab[i])
-			return (ft_malloc_error(tab));
+			return (ft_split_free(tab));
 		tab[i] = ft_strncpy(tab[i], s, str_len);
 		s += str_len;
 		tab[i][str_len] = '\0';
