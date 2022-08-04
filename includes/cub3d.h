@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/04 13:32:59 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/08 01:21:08 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,22 +45,30 @@ typedef struct s_img
 	int			endian;
 }				t_img;
 
-typedef struct s_objects
+typedef struct s_textures
 {
-	void	*player;
-	void	*collect;
-	void	*wall;
-	void	*exit;
-}				t_objects;
+	void	*north;
+	void	*south;
+	void	*west;
+	void	*east;
+	t_img	floor;
+	t_img	ceiling;
+}				t_textures;
 
 typedef struct s_map
 {
 	t_list		*raw;
 	char		**array;
-	int			width;
-	int			height;
-	t_img		background;
-	t_objects	objects;
+	int			is_walled;
+	size_t		width;
+	size_t		height;
+	char		*path_north_texture;
+	char		*path_south_texture;
+	char		*path_west_texture;
+	char		*path_east_texture;
+	int			floor_color;
+	int			ceiling_color;
+	t_textures	textures;
 }				t_map;
 
 typedef struct s_game
@@ -81,19 +89,21 @@ t_game	*get_game_struct(void);
 # define WINDOW_WIDTH 640
 # define WINDOW_HEIGHT 480
 # define MINIMAP_TILE_SIZE 50
-# define MINIMAP_WALL_COLOR 0x00FF00
-# define MINIMAP_FLOOR_COLOR 0x000000
-# define MINIMAP_PLAYER_COLOR 0x0000FF
+# define MINIMAP_WALL_COLOR 0x0000FF00
+# define MINIMAP_FLOOR_COLOR 0x00000000
+# define MINIMAP_PLAYER_COLOR 0x000000FF
 
 /*
 ** map characters
 */
-# define MAP_PLAYER_N	'N'
-# define MAP_PLAYER_S	'S'
-# define MAP_PLAYER_E	'E'
-# define MAP_PLAYER_W	'W'
-# define MAP_EMPTY		'0'
-# define MAP_WALL		'1'
+# define MAP_PLAYER_N		'N'
+# define MAP_PLAYER_S		'S'
+# define MAP_PLAYER_E		'E'
+# define MAP_PLAYER_W		'W'
+# define MAP_EMPTY			'0'
+# define MAP_WALL			'1'
+# define MAP_OUTSIDE		' '
+# define MAP_TEST_VISITED	'.'
 
 /*
 ** keycodes
@@ -117,6 +127,12 @@ t_game	*get_game_struct(void);
 /*
 ** functions
 */
-void	draw_minimap();
+void	prepare_map(char *map_filepath);
+int		parse_map(void);
+int		read_textures(void);
+int		read_colors(void);
+int		read_map(void);
+int		validate_map(void);
+int		check_map_walls(void);
 
 #endif
