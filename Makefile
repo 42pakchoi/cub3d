@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+         #
+#    By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/28 19:18:15 by sarchoi           #+#    #+#              #
-#    Updated: 2022/08/03 01:39:49 by sarchoi          ###   ########seoul.kr   #
+#    Updated: 2022/08/04 11:54:29 by cpak             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,12 @@ NAME = cub3d
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS_ROOT = main.c
+SRCS_ROOT = main.c \
+			draw_frame.c \
+			draw_line.c \
+			draw_rect.c \
+			draw_minimap_player.c
+
 SRCS = $(addprefix ./src/, $(SRCS_ROOT))
 
 OBJS = $(SRCS:.c=.o)
