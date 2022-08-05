@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_frame.c                                       :+:      :+:    :+:   */
+/*   ft_swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/04 10:34:02 by cpak              #+#    #+#             */
-/*   Updated: 2022/08/06 04:31:21 by cpak             ###   ########seoul.kr  */
+/*   Created: 2022/08/06 03:38:47 by cpak              #+#    #+#             */
+/*   Updated: 2022/08/06 03:49:40 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-
-int	draw_frame(void)
+void	ft_swap_int(int *a, int *b)
 {
-	t_game	*game;
+	int	tmp;
 
-	game = get_game_struct();
-	mlx_clear_window(game->mlx, game->win);
-
-	draw_minimap_dirline();
-	draw_minimap_player();
-
-	return (0);
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
 }

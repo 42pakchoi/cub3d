@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:33:12 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/04 13:10:10 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/06 04:34:15 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main(int argc, char *argv[])
 {
-	t_game	*data;
+	t_game	*game;
 
 	if (argc == 2)
 	{
@@ -23,13 +23,20 @@ int	main(int argc, char *argv[])
 		ft_putstr_fd(argv[1], 1);
 		ft_putstr_fd("\n", 1);
 
-		data = malloc(sizeof(t_game));
-		data->mlx = mlx_init();
-		data->win = mlx_new_window(data->mlx, WINDOW_WIDTH, WINDWO_HEIGHT, "cub3d");
+		game = get_game_struct();
+		game->mlx = mlx_init();
+		game->win = mlx_new_window(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "cub3d");
+		
+		// temp value
+		game->player_pos.x = 200;
+		game->player_pos.y = 200;
+		game->player_dir.x = 20;
+		game->player_dir.y = 12;
 
-		mlx_clear_window(data->mlx, data->win);
-		mlx_loop_hook(data->mlx, draw_frame, data);
-		mlx_loop(data->mlx);
+		mlx_clear_window(game->mlx, game->win);
+		mlx_loop_hook(game->mlx, draw_frame, NULL);
+		mlx_mouse_hook(game->win, mouse_hook, NULL);
+		mlx_loop(game->mlx);
 	}
 	else
 		ft_putstr_fd("usage: ./cub3d <map_file_name>\n", 1);

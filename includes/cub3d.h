@@ -6,13 +6,18 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/04 13:40:58 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/06 04:36:19 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include <unistd.h>
+# include <stdlib.h>
+# include <fcntl.h>
+# include <stdio.h>
+# include <string.h>
 # include <math.h>
 # include "mlx.h"
 # include "libft.h"
@@ -30,6 +35,18 @@ typedef struct s_vector
 	float		x;
 	float		y;
 }				t_vector;
+
+typedef struct s_point
+{
+	int			x;
+	int			y;
+}				t_point;
+
+typedef struct s_size
+{
+	int			w;
+	int			h;
+}				t_size;
 
 typedef struct s_img
 {
@@ -68,20 +85,31 @@ typedef struct s_game
 	t_bool		is_gameend;
 }				t_game;
 
+t_game	*get_game_struct(void);
+
 /*
 ** constants
 **/
 
 # define WINDOW_WIDTH 640
-# define WINDWO_HEIGHT 480
-# define MINIMAP_BOX_WIDTH 50
-# define MINIMAP_BOX_HEIGHT 50
-# define MINIMAP_WALL_COLOR 0x0000FF
+# define WINDOW_HEIGHT 480
+# define MINIMAP_TILE_SIZE 50
+# define MINIMAP_WALL_COLOR 0x00FF00
 # define MINIMAP_FLOOR_COLOR 0x000000
-# define MINIMAP_DIRLINE_COLOR 0x0000FF
+# define MINIMAP_DIRLINE_COLOR 0xFFFFFF
 # define MINIMAP_PLAYER_COLOR 0x00FF00
 # define MINIMAP_PLAYER_WIDTH 10
 # define MINIMAP_PLAYER_HEIGHT 10
+
+/*
+** map characters
+*/
+# define MAP_PLAYER_N	'N'
+# define MAP_PLAYER_S	'S'
+# define MAP_PLAYER_E	'E'
+# define MAP_PLAYER_W	'W'
+# define MAP_EMPTY		'0'
+# define MAP_WALL		'1'
 
 /*
 ** keycodes
@@ -104,15 +132,21 @@ typedef struct s_game
 
 /*
 ** functions
-**/
+*/
 
-int		draw_frame(t_game *data);
+int		draw_frame(void);
+int		draw_minimap_dirline(void);
+int		draw_minimap_player(void);
 
-void	draw_line(t_game *data, t_vector start, t_vector end, int color);
-void	draw_rect(t_game *data, t_vector start, t_vector end, int color);
+void	draw_line(t_vector start, t_vector end, int color);
+void	draw_rect(t_vector start, t_vector end, int color);
 
+void	set_pixel(t_point point, int color);
 
-int		draw_minimap_dirline(t_game *data);
-int		draw_minimap_player(t_game *data);
+/*
+** functions - hooks
+*/
+
+int		mouse_hook(int button, int x, int y);
 
 #endif

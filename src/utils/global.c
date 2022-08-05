@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_frame.c                                       :+:      :+:    :+:   */
+/*   global.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/04 10:34:02 by cpak              #+#    #+#             */
-/*   Updated: 2022/08/06 04:31:21 by cpak             ###   ########seoul.kr  */
+/*   Created: 2022/08/04 13:31:28 by sarchoi           #+#    #+#             */
+/*   Updated: 2022/08/04 13:33:30 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	draw_frame(void)
+/*
+** static as global variable
+*/
+t_game	*get_game_struct(void)
 {
-	t_game	*game;
+	static t_game	game;
 
-	game = get_game_struct();
-	mlx_clear_window(game->mlx, game->win);
-
-	draw_minimap_dirline();
-	draw_minimap_player();
-
-	return (0);
+	return (&game);
 }
