@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/07 17:17:03 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/08 00:59:39 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct s_game
 	t_vector	player_pos;
 	t_vector	player_mov;
 	t_vector	player_dir;
+	int			player_angl;
 	t_bool		is_gameend;
 }				t_game;
 
@@ -135,23 +136,29 @@ t_game	*get_game_struct(void);
 ** functions
 */
 
-int		draw_frame(void);
-int		draw_minimap_dirline(void);
-int		draw_minimap_player(void);
-int		erase_minimap_dirline(void);
-int		erase_minimap_player(void);
+int			draw_frame(void);
+int			draw_minimap_dirline(void);
+int			draw_minimap_player(void);
+int			erase_minimap_dirline(void);
+int			erase_minimap_player(void);
 
-void	draw_line(t_vector start, t_vector end, int color);
-void	draw_rect(t_vector start, t_vector end, int color);
+void		draw_line(t_vector start, t_vector end, int color);
+void		draw_rect(t_vector start, t_vector end, int color);
 
-void	set_pixel(t_point point, int color);
+void		set_pixel(t_point point, int color);
 
 /*
 ** functions - hooks
 */
 
-int		mouse_hook(int button, int x, int y);
-int		key_down_hook(int keycode);
-int		key_up_hook(void);
+int			mouse_hook(int button, int x, int y);
+int			key_down_hook(int keycode);
+int			key_up_hook(void);
+
+/*
+** functions - calc
+*/
+
+t_vector	calc_rotated_vector(t_vector v, int d);
 
 #endif

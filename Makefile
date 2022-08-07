@@ -6,7 +6,7 @@
 #    By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/28 19:18:15 by sarchoi           #+#    #+#              #
-#    Updated: 2022/08/07 17:17:58 by cpak             ###   ########seoul.kr   #
+#    Updated: 2022/08/08 01:00:11 by cpak             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRCS_ROOT = main.c \
 			set_pixel.c \
 			mouse_hook.c \
 			key_hook.c \
+			calc_rotated_vector.c
 
 SRCS_UTIL = global.c
 
