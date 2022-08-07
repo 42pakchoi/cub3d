@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:33:12 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/06 04:34:15 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/07 17:16:29 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,10 @@ int	main(int argc, char *argv[])
 		game->player_dir.x = 20;
 		game->player_dir.y = 12;
 
-		mlx_clear_window(game->mlx, game->win);
-		mlx_loop_hook(game->mlx, draw_frame, NULL);
 		mlx_mouse_hook(game->win, mouse_hook, NULL);
+		mlx_hook(game->win, 2, 0L, key_down_hook, NULL);
+		mlx_hook(game->win, 3, 0L, key_up_hook, NULL);
+		mlx_loop_hook(game->mlx, draw_frame, NULL);
 		mlx_loop(game->mlx);
 	}
 	else

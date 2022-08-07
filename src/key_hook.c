@@ -1,25 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mouse_hook.c                                       :+:      :+:    :+:   */
+/*   key_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/06 04:34:00 by cpak              #+#    #+#             */
-/*   Updated: 2022/08/07 17:14:22 by cpak             ###   ########seoul.kr  */
+/*   Created: 2022/08/07 17:16:16 by cpak              #+#    #+#             */
+/*   Updated: 2022/08/07 17:16:31 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	mouse_hook(int button, int x, int y)
+int	key_down_hook(int keycode)
 {
 	t_game	*game;
 
-	(void)button;
 	game = get_game_struct();
-	erase_minimap_dirline();
-	game->player_dir.x = x - game->player_pos.x;
-	game->player_dir.y = y - game->player_pos.y;
+	if (keycode == KEY_W)
+		game->player_mov.y = -5;
+	if (keycode == KEY_A)
+		game->player_mov.x = -5;
+	if (keycode == KEY_S)
+		game->player_mov.y = 5;
+	if (keycode == KEY_D)
+		game->player_mov.x = 5;
+	return (0);
+}
+
+int	key_up_hook(void)
+{
+	t_game	*game;
+
+	game = get_game_struct();
+	game->player_mov.x = 0;
+	game->player_mov.y = 0;
 	return (0);
 }
