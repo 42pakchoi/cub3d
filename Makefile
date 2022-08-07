@@ -6,7 +6,7 @@
 #    By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/28 19:18:15 by sarchoi           #+#    #+#              #
-#    Updated: 2022/08/03 01:39:49 by sarchoi          ###   ########seoul.kr   #
+#    Updated: 2022/08/08 01:27:03 by sarchoi          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,9 @@ NAME = cub3d
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS_ROOT = main.c
+SRCS_ROOT = main.c \
+	map.c map_parse.c map_parse2.c map_validate.c map_validate2.c\
+	utils/global.c
 SRCS = $(addprefix ./src/, $(SRCS_ROOT))
 
 OBJS = $(SRCS:.c=.o)
