@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 11:08:31 by cpak              #+#    #+#             */
-/*   Updated: 2022/08/06 04:41:00 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/07 17:41:55 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,9 @@ void	draw_line(t_vector start, t_vector end, int color)
 
 	w = end.x - start.x;
 	h = end.y - start.y;
-	if (w > 0 && h > 0)
+	if (w >= 0 && h >= 0)
 		draw_quadrant_one_four(start, end, color);
-	else if (w < 0 && h < 0)
+	else if (w <= 0 && h <= 0)
 		draw_quadrant_one_four(end, start, color);
 	else if (w < 0)
 		draw_quadrant_two_three(start, end, color);
