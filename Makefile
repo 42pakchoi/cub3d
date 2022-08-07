@@ -6,7 +6,7 @@
 #    By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/28 19:18:15 by sarchoi           #+#    #+#              #
-#    Updated: 2022/08/08 01:27:03 by sarchoi          ###   ########seoul.kr   #
+#    Updated: 2022/08/08 02:18:23 by sarchoi          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,9 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
 SRCS_ROOT = main.c \
-	map.c map_parse.c map_parse2.c map_validate.c map_validate2.c\
-	utils/global.c
+	map.c map_parse.c map_parse2.c map_validate.c map_validate2.c \
+	graphic_init.c graphic_draw.c \
+	utils/global.c utils/mlx_image.c
 SRCS = $(addprefix ./src/, $(SRCS_ROOT))
 
 OBJS = $(SRCS:.c=.o)

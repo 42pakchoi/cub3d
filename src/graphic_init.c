@@ -1,37 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   graphic_init.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/03 01:33:12 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/08 02:44:21 by sarchoi          ###   ########seoul.kr  */
+/*   Created: 2022/08/08 01:53:01 by sarchoi           #+#    #+#             */
+/*   Updated: 2022/08/08 02:17:29 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	run_game(char *map_filepath)
+static void	set_minimap_images(void)
 {
 	t_game	*game;
+	t_map	*map;
 
 	game = get_game_struct();
-	game->mlx = mlx_init();
-	game->win = mlx_new_window(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "cub3d");
-
-	prepare_map(map_filepath);
-	init_images();
-	draw_frame();
-
-	mlx_loop(game->mlx);
+	map = &(game->map);
+	map->textures.minimap_floor = make_mlx_image(
+		(int)game->map.width * MINIMAP_TILE_SIZE,
+		(int)game->map.height * MINIMAP_TILE_SIZE,
+		MINIMAP_FLOOR_COLOR
+	);
+	map->textures.minimap_wall = make_mlx_image(
+		MINIMAP_TILE_SIZE,
+		MINIMAP_TILE_SIZE,
+		MINIMAP_WALL_COLOR
+	);
 }
 
-int	main(int argc, char *argv[])
+void	init_images(void)
 {
-	if (argc == 2)
-		run_game(argv[1]);
-	else
-		ft_putstr_fd("usage: ./cub3d <map_file_name>\n", 1);
-	return (0);
+	set_minimap_images();
 }

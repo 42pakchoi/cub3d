@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/08 01:21:08 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/08 02:47:29 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ typedef struct s_textures
 	void	*east;
 	t_img	floor;
 	t_img	ceiling;
+	t_img	*minimap_floor;
+	t_img	*minimap_wall;
 }				t_textures;
 
 typedef struct s_map
@@ -88,10 +90,10 @@ t_game	*get_game_struct(void);
 
 # define WINDOW_WIDTH 640
 # define WINDOW_HEIGHT 480
-# define MINIMAP_TILE_SIZE 50
-# define MINIMAP_WALL_COLOR 0x0000FF00
-# define MINIMAP_FLOOR_COLOR 0x00000000
-# define MINIMAP_PLAYER_COLOR 0x000000FF
+# define MINIMAP_TILE_SIZE 25
+# define MINIMAP_WALL_COLOR 0x0000FFFF
+# define MINIMAP_FLOOR_COLOR 0x00989898
+# define MINIMAP_PLAYER_COLOR 0x00FF00FF
 
 /*
 ** map characters
@@ -134,5 +136,15 @@ int		read_colors(void);
 int		read_map(void);
 int		validate_map(void);
 int		check_map_walls(void);
+
+void	init_images(void);
+void	draw_frame(void);
+
+/*
+** utils/mlx_image
+*/
+t_img	*make_mlx_image(int width, int height, int color);
+void	*get_png_image(char *filepath);
+void	sl_put_image(void *img_ptr, t_vector *img_pos);
 
 #endif
