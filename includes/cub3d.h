@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/06 04:36:19 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/07 17:17:03 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ typedef struct s_game
 	void		*win;
 	t_map		map;
 	t_vector	player_pos;
+	t_vector	player_mov;
 	t_vector	player_dir;
 	t_bool		is_gameend;
 }				t_game;
@@ -137,6 +138,8 @@ t_game	*get_game_struct(void);
 int		draw_frame(void);
 int		draw_minimap_dirline(void);
 int		draw_minimap_player(void);
+int		erase_minimap_dirline(void);
+int		erase_minimap_player(void);
 
 void	draw_line(t_vector start, t_vector end, int color);
 void	draw_rect(t_vector start, t_vector end, int color);
@@ -148,5 +151,7 @@ void	set_pixel(t_point point, int color);
 */
 
 int		mouse_hook(int button, int x, int y);
+int		key_down_hook(int keycode);
+int		key_up_hook(void);
 
 #endif
