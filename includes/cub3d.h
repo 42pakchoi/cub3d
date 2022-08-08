@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/08 10:31:24 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/08 11:27:09 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ typedef struct s_game
 	t_vector	player_dir;
 	int			player_angl;
 	t_line		fov;
+	t_vector	ray_vec[20];
 	t_bool		is_gameend;
 }				t_game;
 
@@ -106,6 +107,7 @@ t_game	*get_game_struct(void);
 # define MINIMAP_WALL_COLOR 0x00FF00
 # define MINIMAP_FLOOR_COLOR 0x000000
 # define MINIMAP_DIRLINE_COLOR 0xFFFFFF
+# define MINIMAP_RAY_COLOR 0xFF0000
 # define MINIMAP_PLAYER_COLOR 0x00FF00
 # define MINIMAP_PLAYER_WIDTH 10
 # define MINIMAP_PLAYER_HEIGHT 10
@@ -147,8 +149,10 @@ int			draw_frame(void);
 int			draw_minimap_dirline(void);
 int			draw_minimap_fov(void);
 int			draw_minimap_player(void);
+int			draw_minimap_ray(void);
 int			erase_minimap_dirline(void);
 int			erase_minimap_fov(void);
+int			erase_minimap_ray(void);
 int			erase_minimap_player(void);
 
 void		draw_line(t_vector start, t_vector end, int color);

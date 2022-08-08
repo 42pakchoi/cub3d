@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:33:12 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/08 10:35:47 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/08 11:27:17 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,20 @@ int	main(int argc, char *argv[])
 		game->player_pos.y = 200;
 		game->player_dir.x = 0;
 		game->player_dir.y = -30;
-		game->fov.start.x = -15;
+		game->fov.start.x = -20;
 		game->fov.start.y = -30;
-		game->fov.end.x = 15;
+		game->fov.end.x = 20;
 		game->fov.end.y = -30;
+
+		int	val = -20;
+		int i = 0;
+		while (val <= 20)
+		{
+			game->ray_vec[i].x = val;
+			game->ray_vec[i].y = -30;
+			val += 2;
+			i += 1;
+		}
 
 		mlx_mouse_hook(game->win, mouse_hook, NULL);
 		mlx_hook(game->win, 2, 0L, key_down_hook, NULL);
