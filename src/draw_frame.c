@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 10:34:02 by cpak              #+#    #+#             */
-/*   Updated: 2022/08/08 15:34:11 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/08 17:42:44 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,14 @@ static void	init_frame(t_game *game)
 	erase_minimap_player();
 }
 
-static void	set_frame(t_game *game)
+void	set_frame(t_game *game)
 {
-	game->player_pos.x += game->player_mov.x;
-	game->player_pos.y += game->player_mov.y;
-	if (game->player_angl != 0)
-	{
-		game->player_dir = calc_rotated_vector(game->player_dir, game->player_angl);
-		game->fov.start = calc_rotated_vector(game->fov.start, game->player_angl);
-		game->fov.end = calc_rotated_vector(game->fov.end, game->player_angl);
-		int	i = 0;
-		while (i <= 20)
-		{
-			game->ray_vec[i] = calc_rotated_vector(game->ray_vec[i], game->player_angl);
-			i += 1;
-		}
-	}
+	if (game->player.delta.x != 0)
+		game->player.pos.x += game->player.delta.x;
+	if (game->player.delta.y != 0)
+		game->player.pos.y += game->player.delta.y;
+	if (game->player.delta.angle != 0)
+		rotate_player(game, game->player.delta.angle);
 }
 
 int	draw_frame(void)
