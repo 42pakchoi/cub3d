@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/04 13:32:59 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/08 11:27:09 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,24 @@ typedef struct s_vector
 	float		x;
 	float		y;
 }				t_vector;
+
+typedef struct s_point
+{
+	int			x;
+	int			y;
+}				t_point;
+
+typedef struct s_size
+{
+	int			w;
+	int			h;
+}				t_size;
+
+typedef struct s_line
+{
+	t_vector	start;
+	t_vector	end;
+}				t_line;
 
 typedef struct s_img
 {
@@ -69,6 +87,11 @@ typedef struct s_game
 	void		*win;
 	t_map		map;
 	t_vector	player_pos;
+	t_vector	player_mov;
+	t_vector	player_dir;
+	int			player_angl;
+	t_line		fov;
+	t_vector	ray_vec[20];
 	t_bool		is_gameend;
 }				t_game;
 
@@ -83,7 +106,11 @@ t_game	*get_game_struct(void);
 # define MINIMAP_TILE_SIZE 50
 # define MINIMAP_WALL_COLOR 0x00FF00
 # define MINIMAP_FLOOR_COLOR 0x000000
-# define MINIMAP_PLAYER_COLOR 0x0000FF
+# define MINIMAP_DIRLINE_COLOR 0xFFFFFF
+# define MINIMAP_RAY_COLOR 0xFF0000
+# define MINIMAP_PLAYER_COLOR 0x00FF00
+# define MINIMAP_PLAYER_WIDTH 10
+# define MINIMAP_PLAYER_HEIGHT 10
 
 /*
 ** map characters
@@ -117,6 +144,34 @@ t_game	*get_game_struct(void);
 /*
 ** functions
 */
-void	draw_minimap();
+
+int			draw_frame(void);
+int			draw_minimap_dirline(void);
+int			draw_minimap_fov(void);
+int			draw_minimap_player(void);
+int			draw_minimap_ray(void);
+int			erase_minimap_dirline(void);
+int			erase_minimap_fov(void);
+int			erase_minimap_ray(void);
+int			erase_minimap_player(void);
+
+void		draw_line(t_vector start, t_vector end, int color);
+void		draw_rect(t_vector start, t_vector end, int color);
+
+void		set_pixel(t_point point, int color);
+
+/*
+** functions - hooks
+*/
+
+int			mouse_hook(int button, int x, int y);
+int			key_down_hook(int keycode);
+int			key_up_hook(void);
+
+/*
+** functions - calc
+*/
+
+t_vector	calc_rotated_vector(t_vector v, int d);
 
 #endif
