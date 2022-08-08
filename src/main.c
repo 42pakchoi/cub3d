@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:33:12 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/07 17:16:29 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/08 10:35:47 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,15 @@ int	main(int argc, char *argv[])
 		game->mlx = mlx_init();
 		game->win = mlx_new_window(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "cub3d");
 		
-		// temp value
+		// temp init value
 		game->player_pos.x = 200;
 		game->player_pos.y = 200;
-		game->player_dir.x = 20;
-		game->player_dir.y = 12;
+		game->player_dir.x = 0;
+		game->player_dir.y = -30;
+		game->fov.start.x = -15;
+		game->fov.start.y = -30;
+		game->fov.end.x = 15;
+		game->fov.end.y = -30;
 
 		mlx_mouse_hook(game->win, mouse_hook, NULL);
 		mlx_hook(game->win, 2, 0L, key_down_hook, NULL);

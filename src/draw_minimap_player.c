@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 10:28:45 by cpak              #+#    #+#             */
-/*   Updated: 2022/08/07 17:08:09 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/08 10:29:26 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,20 @@ int draw_minimap_dirline(void)
 	end.x = game->player_pos.x + game->player_dir.x;
 	end.y = game->player_pos.y + game->player_dir.y;
 	draw_line(start, end, MINIMAP_DIRLINE_COLOR);
+	return (0);
+}
+
+int	draw_minimap_fov(void)
+{
+	t_game		*game;
+	t_line		line;
+
+	game = get_game_struct();
+	line.start.x = game->player_pos.x + game->fov.start.x;
+	line.start.y = game->player_pos.y + game->fov.start.y;
+	line.end.x = game->player_pos.x + game->fov.end.x;
+	line.end.y = game->player_pos.y + game->fov.end.y;
+	draw_line(line.start, line.end, MINIMAP_DIRLINE_COLOR);
 	return (0);
 }
 
@@ -54,6 +68,20 @@ int erase_minimap_dirline(void)
 	end.x = game->player_pos.x + game->player_dir.x;
 	end.y = game->player_pos.y + game->player_dir.y;
 	draw_line(start, end, 0);
+	return (0);
+}
+
+int	erase_minimap_fov(void)
+{
+	t_game		*game;
+	t_line		line;
+
+	game = get_game_struct();
+	line.start.x = game->player_pos.x + game->fov.start.x;
+	line.start.y = game->player_pos.y + game->fov.start.y;
+	line.end.x = game->player_pos.x + game->fov.end.x;
+	line.end.y = game->player_pos.y + game->fov.end.y;
+	draw_line(line.start, line.end, 0);
 	return (0);
 }
 
