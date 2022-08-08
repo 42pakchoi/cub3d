@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/08 15:14:48 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/08 17:40:39 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,17 +91,31 @@ typedef struct s_map
 	t_textures	textures;
 }				t_map;
 
+typedef struct s_delta
+{
+	float		x;
+	float		y;
+	float		angle;
+}			t_delta;
+
+
+typedef struct s_player
+{
+	char		character;
+	t_point		grid_pos;
+	t_vector	pos;
+	t_vector	dir;
+	t_line		fov;
+	t_vector	rays[21];
+	t_delta		delta;
+}				t_player;
+
 typedef struct s_game
 {
 	void		*mlx;
 	void		*win;
 	t_map		map;
-	t_vector	player_pos;
-	t_vector	player_mov;
-	t_vector	player_dir;
-	int			player_angl;
-	t_line		fov;
-	t_vector	ray_vec[20];
+	t_player	player;
 	t_bool		is_gameend;
 }				t_game;
 
@@ -207,5 +221,13 @@ int			key_up_hook(int keycode);
 */
 
 t_vector	calc_rotated_vector(t_vector v, int d);
+
+/*
+** functions - player
+*/
+
+void	rotate_player(t_game *game, int angle);
+void	set_player_pos(void);
+void	prepare_player(void);
 
 #endif

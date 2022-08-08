@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+         #
+#    By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/28 19:18:15 by sarchoi           #+#    #+#              #
-#    Updated: 2022/08/08 02:18:23 by sarchoi          ###   ########seoul.kr   #
+#    Updated: 2022/08/08 17:39:55 by sarchoi          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ SRCS_ROOT = main.c \
 			set_pixel.c \
 			mouse_hook.c \
 			key_hook.c \
-			calc_rotated_vector.c
+			calc_rotated_vector.c \
+			player.c
 SRCS_UTIL = global.c mlx_image.c
 SRCS = $(addprefix ./src/, $(SRCS_ROOT)) \
 		$(addprefix ./src/utils/, $(SRCS_UTIL))
