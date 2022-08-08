@@ -12,6 +12,21 @@
 
 #include "cub3d.h"
 
+static void	run_game(char *map_filepath)
+{
+	t_game	*game;
+
+	game = get_game_struct();
+	game->mlx = mlx_init();
+	game->win = mlx_new_window(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "cub3d");
+
+	prepare_map(map_filepath);
+	init_images();
+	draw_frame();
+
+	mlx_loop(game->mlx);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_game	*game;

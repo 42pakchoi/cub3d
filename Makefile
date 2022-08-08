@@ -6,7 +6,7 @@
 #    By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/28 19:18:15 by sarchoi           #+#    #+#              #
-#    Updated: 2022/08/08 01:00:11 by cpak             ###   ########seoul.kr   #
+#    Updated: 2022/08/08 02:18:23 by sarchoi          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,13 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
 SRCS_ROOT = main.c \
+			map.c \
+      map_parse.c \
+      map_parse2.c \
+      map_validate.c \
+      map_validate2.c \
+			graphic_init.c \
+      graphic_draw.c \
 			draw_frame.c \
 			draw_line.c \
 			draw_rect.c \
@@ -26,9 +33,7 @@ SRCS_ROOT = main.c \
 			mouse_hook.c \
 			key_hook.c \
 			calc_rotated_vector.c
-
-SRCS_UTIL = global.c
-
+SRCS_UTIL = global.c mlx_image.c
 SRCS = $(addprefix ./src/, $(SRCS_ROOT)) \
 		$(addprefix ./src/utils/, $(SRCS_UTIL))
 

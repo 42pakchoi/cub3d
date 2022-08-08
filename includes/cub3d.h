@@ -63,22 +63,32 @@ typedef struct s_img
 	int			endian;
 }				t_img;
 
-typedef struct s_objects
+typedef struct s_textures
 {
-	void	*player;
-	void	*collect;
-	void	*wall;
-	void	*exit;
-}				t_objects;
+	void	*north;
+	void	*south;
+	void	*west;
+	void	*east;
+	t_img	floor;
+	t_img	ceiling;
+	t_img	*minimap_floor;
+	t_img	*minimap_wall;
+}				t_textures;
 
 typedef struct s_map
 {
 	t_list		*raw;
 	char		**array;
-	int			width;
-	int			height;
-	t_img		background;
-	t_objects	objects;
+	int			is_walled;
+	size_t		width;
+	size_t		height;
+	char		*path_north_texture;
+	char		*path_south_texture;
+	char		*path_west_texture;
+	char		*path_east_texture;
+	int			floor_color;
+	int			ceiling_color;
+	t_textures	textures;
 }				t_map;
 
 typedef struct s_game
@@ -103,24 +113,26 @@ t_game	*get_game_struct(void);
 
 # define WINDOW_WIDTH 640
 # define WINDOW_HEIGHT 480
-# define MINIMAP_TILE_SIZE 50
-# define MINIMAP_WALL_COLOR 0x00FF00
-# define MINIMAP_FLOOR_COLOR 0x000000
+# define MINIMAP_TILE_SIZE 25
+# define MINIMAP_WALL_COLOR 0x0000FFFF
+# define MINIMAP_FLOOR_COLOR 0x00989898
 # define MINIMAP_DIRLINE_COLOR 0xFFFFFF
 # define MINIMAP_RAY_COLOR 0xFF0000
-# define MINIMAP_PLAYER_COLOR 0x00FF00
+# define MINIMAP_PLAYER_COLOR 0x00FF00FF
 # define MINIMAP_PLAYER_WIDTH 10
 # define MINIMAP_PLAYER_HEIGHT 10
 
 /*
 ** map characters
 */
-# define MAP_PLAYER_N	'N'
-# define MAP_PLAYER_S	'S'
-# define MAP_PLAYER_E	'E'
-# define MAP_PLAYER_W	'W'
-# define MAP_EMPTY		'0'
-# define MAP_WALL		'1'
+# define MAP_PLAYER_N		'N'
+# define MAP_PLAYER_S		'S'
+# define MAP_PLAYER_E		'E'
+# define MAP_PLAYER_W		'W'
+# define MAP_EMPTY			'0'
+# define MAP_WALL			'1'
+# define MAP_OUTSIDE		' '
+# define MAP_TEST_VISITED	'.'
 
 /*
 ** keycodes
@@ -159,6 +171,27 @@ void		draw_line(t_vector start, t_vector end, int color);
 void		draw_rect(t_vector start, t_vector end, int color);
 
 void		set_pixel(t_point point, int color);
+
+/*
+** minimap
+*/
+void	prepare_map(char *map_filepath);
+int		parse_map(void);
+int		read_textures(void);
+int		read_colors(void);
+int		read_map(void);
+int		validate_map(void);
+int		check_map_walls(void);
+
+void	init_images(void);
+void	draw_frame(void);
+
+/*
+** utils/mlx_image
+*/
+t_img	*make_mlx_image(int width, int height, int color);
+void	*get_png_image(char *filepath);
+void	sl_put_image(void *img_ptr, t_vector *img_pos);
 
 /*
 ** functions - hooks
