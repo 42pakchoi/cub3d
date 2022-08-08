@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/08 00:59:39 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/08 10:31:24 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,12 @@ typedef struct s_size
 	int			h;
 }				t_size;
 
+typedef struct s_line
+{
+	t_vector	start;
+	t_vector	end;
+}				t_line;
+
 typedef struct s_img
 {
 	void		*img_ptr;
@@ -84,6 +90,7 @@ typedef struct s_game
 	t_vector	player_mov;
 	t_vector	player_dir;
 	int			player_angl;
+	t_line		fov;
 	t_bool		is_gameend;
 }				t_game;
 
@@ -138,8 +145,10 @@ t_game	*get_game_struct(void);
 
 int			draw_frame(void);
 int			draw_minimap_dirline(void);
+int			draw_minimap_fov(void);
 int			draw_minimap_player(void);
 int			erase_minimap_dirline(void);
+int			erase_minimap_fov(void);
 int			erase_minimap_player(void);
 
 void		draw_line(t_vector start, t_vector end, int color);

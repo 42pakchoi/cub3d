@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 04:34:00 by cpak              #+#    #+#             */
-/*   Updated: 2022/08/07 17:14:22 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/08 10:31:57 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,7 @@
 
 int	mouse_hook(int button, int x, int y)
 {
-	t_game	*game;
-
 	(void)button;
-	game = get_game_struct();
-	erase_minimap_dirline();
-	game->player_dir.x = x - game->player_pos.x;
-	game->player_dir.y = y - game->player_pos.y;
+	printf("x: %d, y: %d\n", x, y);
 	return (0);
 }
