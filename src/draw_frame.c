@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_frame.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 10:34:02 by cpak              #+#    #+#             */
-/*   Updated: 2022/08/08 11:45:03 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/08 15:34:11 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,13 @@ int	draw_frame(void)
 	t_game	*game;
 
 	game = get_game_struct();
-	init_frame(game);
-	set_frame(game);
+	init_frame(game); // clear window
+	set_frame(game); // calculate player position and direction
+	// draw frame
+	put_minimap();
+	draw_minimap_ray();
 	draw_minimap_dirline();
 	draw_minimap_fov();
-	draw_minimap_ray();
 	draw_minimap_player();
 	return (0);
 }

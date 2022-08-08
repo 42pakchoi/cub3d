@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/08 11:27:09 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/08 15:14:48 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ t_game	*get_game_struct(void);
 
 # define WINDOW_WIDTH 640
 # define WINDOW_HEIGHT 480
-# define MINIMAP_TILE_SIZE 25
+# define MINIMAP_TILE_SIZE 15
 # define MINIMAP_WALL_COLOR 0x0000FFFF
 # define MINIMAP_FLOOR_COLOR 0x00989898
 # define MINIMAP_DIRLINE_COLOR 0xFFFFFF
@@ -184,14 +184,15 @@ int		validate_map(void);
 int		check_map_walls(void);
 
 void	init_images(void);
-void	draw_frame(void);
+void	put_minimap(void);
+// void	draw_frame(void);
 
 /*
 ** utils/mlx_image
 */
 t_img	*make_mlx_image(int width, int height, int color);
 void	*get_png_image(char *filepath);
-void	sl_put_image(void *img_ptr, t_vector *img_pos);
+void	put_image(void *img_ptr, t_vector *img_pos);
 
 /*
 ** functions - hooks
@@ -199,7 +200,7 @@ void	sl_put_image(void *img_ptr, t_vector *img_pos);
 
 int			mouse_hook(int button, int x, int y);
 int			key_down_hook(int keycode);
-int			key_up_hook(void);
+int			key_up_hook(int keycode);
 
 /*
 ** functions - calc

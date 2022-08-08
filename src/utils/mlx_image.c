@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 01:58:15 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/08 02:48:30 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/08 15:14:53 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	*get_png_image(char *filepath)
 	return (img_ptr);
 }
 
-void	sl_put_image(void *img_ptr, t_vector *img_pos)
+void	put_image(void *img_ptr, t_vector *img_pos)
 {
 	t_game	*game;
 

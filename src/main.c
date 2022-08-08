@@ -3,29 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:33:12 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/08 11:27:17 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/08 15:33:01 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static void	run_game(char *map_filepath)
-{
-	t_game	*game;
-
-	game = get_game_struct();
-	game->mlx = mlx_init();
-	game->win = mlx_new_window(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "cub3d");
-
-	prepare_map(map_filepath);
-	init_images();
-	draw_frame();
-
-	mlx_loop(game->mlx);
-}
 
 int	main(int argc, char *argv[])
 {
@@ -37,11 +22,15 @@ int	main(int argc, char *argv[])
 		ft_putstr_fd("map file name: ", 1);
 		ft_putstr_fd(argv[1], 1);
 		ft_putstr_fd("\n", 1);
+		printf("----1\n");
+		prepare_map(argv[1]);
+		printf("----2\n");
 
 		game = get_game_struct();
 		game->mlx = mlx_init();
 		game->win = mlx_new_window(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "cub3d");
-		
+		printf("----3\n");
+
 		// temp init value
 		game->player_pos.x = 200;
 		game->player_pos.y = 200;
@@ -61,6 +50,7 @@ int	main(int argc, char *argv[])
 			val += 2;
 			i += 1;
 		}
+		printf("----4\n");
 
 		mlx_mouse_hook(game->win, mouse_hook, NULL);
 		mlx_hook(game->win, 2, 0L, key_down_hook, NULL);
