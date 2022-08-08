@@ -2,6 +2,7 @@ cub3d
 .vscode
 *.swiftdoc
 *.swiftmodule
+*.swiftsourceinfo
 
 # Prerequisites
 *.d
