@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parse.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 01:13:38 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/08 01:15:56 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/12 18:08:14 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,11 @@ int	read_colors(void)
 
 int	parse_map(void)
 {
-	t_game *game;
-	t_map * map;
+	t_game	*game;
+	// t_map	*map;
 
 	game = get_game_struct();
-	map = &(game->map);
+	// map = &(game->map);
 	if (game->map.raw == NULL)
 		return (FT_ERROR);
 	if (read_textures() == FT_ERROR ||

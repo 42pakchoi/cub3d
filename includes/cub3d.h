@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/08 17:40:39 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/12 17:27:30 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,11 +102,9 @@ typedef struct s_delta
 typedef struct s_player
 {
 	char		character;
-	t_point		grid_pos;
 	t_vector	pos;
 	t_vector	dir;
-	t_line		fov;
-	t_vector	rays[21];
+	t_vector	plane;
 	t_delta		delta;
 }				t_player;
 

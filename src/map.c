@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:43:07 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/08 01:15:03 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/12 17:36:56 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,10 @@ static void print_map_data(void)
 
 void prepare_map(char *map_filepath)
 {
-	t_game	*game;
+	// t_game	*game;
 	int		filde;
 
-	game = get_game_struct();
+	// game = get_game_struct();
 	if (vaildate_file_extension(map_filepath) == FT_ERROR)
 	{
 		printf("<error> Invalid file extension. Extension must be '.cub'.\n");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 17:16:16 by cpak              #+#    #+#             */
-/*   Updated: 2022/08/08 17:48:25 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/12 16:45:56 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ int	key_down_hook(int keycode)
 
 	game = get_game_struct();
 	if (keycode == KEY_W)
-		game->player.delta.y = -5;
+		game->player.delta.y = -0.2;
 	if (keycode == KEY_A)
-		game->player.delta.x = -5;
+		game->player.delta.x = -0.2;
 	if (keycode == KEY_S)
-		game->player.delta.y = 5;
+		game->player.delta.y = 0.2;
 	if (keycode == KEY_D)
-		game->player.delta.x = 5;
+		game->player.delta.x = 0.2;
 	if (keycode == KEY_ARROW_LEFT)
 		game->player.delta.angle = 350;
 	if (keycode == KEY_ARROW_RIGHT)
