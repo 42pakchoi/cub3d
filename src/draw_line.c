@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 11:08:31 by cpak              #+#    #+#             */
-/*   Updated: 2022/08/07 17:41:55 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/12 17:35:32 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,11 @@ void	draw_line(t_vector start, t_vector end, int color)
 	int	w;
 	int	h;
 
+	start.x *= MINIMAP_TILE_SIZE;
+	start.y *= MINIMAP_TILE_SIZE;
+	end.x *= MINIMAP_TILE_SIZE;
+	end.y *= MINIMAP_TILE_SIZE;
+	
 	w = end.x - start.x;
 	h = end.y - start.y;
 	if (w >= 0 && h >= 0)
