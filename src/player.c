@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 17:33:46 by cpak              #+#    #+#             */
-/*   Updated: 2022/08/15 15:22:17 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/15 15:47:32 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	set_player_pos(void)
 	}
 }
 
-void	prepare_player(void)
+void	init_player(void)
 {
 	t_game	*game;
 

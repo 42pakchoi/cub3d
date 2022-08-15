@@ -1,42 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_frame.c                                       :+:      :+:    :+:   */
+/*   draw_minimap_fov.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/04 10:34:02 by cpak              #+#    #+#             */
-/*   Updated: 2022/08/15 18:15:28 by sarchoi          ###   ########seoul.kr  */
+/*   Created: 2022/08/15 18:24:58 by sarchoi           #+#    #+#             */
+/*   Updated: 2022/08/15 18:25:07 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	clear_frame()
+int	draw_minimap_fov(void)
 {
-	t_game	*game;
+	t_game		*game;
+	t_line		line;
 
 	game = get_game_struct();
-	mlx_clear_window(game->mlx, game->win);
-	erase_minimap_dirline();
-	erase_minimap_fov();
-	erase_minimap_ray();
-	erase_minimap_player();
-}
-
-void draw_minimap(void)
-{
-	draw_minimap_wall();
-	draw_minimap_ray();
-	draw_minimap_dirline();
-	draw_minimap_fov();
-	draw_minimap_player();
-}
-
-int	draw_frame(void)
-{
-	clear_frame();
-	draw_wall();
-	draw_minimap();
+	line.start = game->player.pos;
+	line.end = game->player.pos;
+	line.start.x += game->player.dir.x - game->player.plane.x;
+	line.start.y += game->player.dir.y - game->player.plane.y;
+	line.end.x += game->player.dir.x + game->player.plane.x;
+	line.end.y += game->player.dir.y + game->player.plane.y;
+	draw_minimap_line(line.start, line.end, MINIMAP_DIRLINE_COLOR);
 	return (0);
 }

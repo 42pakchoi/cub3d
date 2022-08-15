@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/12 17:27:30 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/15 18:27:24 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,17 @@ typedef struct s_game
 	t_bool		is_gameend;
 }				t_game;
 
+typedef struct s_dda
+{
+	t_vector	player_pos;
+	t_vector	ray_dir;
+	t_vector	delta_dist;
+	t_point		player_grid;
+	t_point		step;
+	t_vector	side_dist;
+	int			is_hoz;
+}				t_dda;
+
 t_game	*get_game_struct(void);
 
 /*
@@ -170,16 +181,22 @@ t_game	*get_game_struct(void);
 */
 
 int			draw_frame(void);
+void		draw_minimap_wall(void);
 int			draw_minimap_dirline(void);
 int			draw_minimap_fov(void);
 int			draw_minimap_player(void);
 int			draw_minimap_ray(void);
+int			draw_wall(void);
 int			erase_minimap_dirline(void);
 int			erase_minimap_fov(void);
 int			erase_minimap_ray(void);
 int			erase_minimap_player(void);
 
-void		draw_line(t_vector start, t_vector end, int color);
+float		get_perpendicular_wall_dist(t_vector player_pos, t_vector ray_dir, t_dda *dda);
+void		init_dda(t_dda *dda);
+void		calc_collision_point(char **map_grid, t_dda *dda);
+
+void		draw_minimap_line(t_vector start, t_vector end, int color);
 void		draw_rect(t_vector start, t_vector end, int color);
 
 void		set_pixel(t_point point, int color);
@@ -187,7 +204,7 @@ void		set_pixel(t_point point, int color);
 /*
 ** minimap
 */
-void	prepare_map(char *map_filepath);
+void	init_map(char *map_filepath);
 int		parse_map(void);
 int		read_textures(void);
 int		read_colors(void);
@@ -196,7 +213,7 @@ int		validate_map(void);
 int		check_map_walls(void);
 
 void	init_images(void);
-void	put_minimap(void);
+void	draw_minimap(void);
 // void	draw_frame(void);
 
 /*
@@ -226,6 +243,6 @@ t_vector	calc_rotated_vector(t_vector v, int d);
 
 void	rotate_player(t_game *game, int angle);
 void	set_player_pos(void);
-void	prepare_player(void);
+void	init_player(void);
 
 #endif

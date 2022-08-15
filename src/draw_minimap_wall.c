@@ -6,13 +6,13 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 02:10:28 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/08 15:28:02 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/15 18:12:38 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	put_minimap_tiles()
+static void	draw_minimap_tiles()
 {
 	t_game	*game;
 	t_map	*map;
@@ -41,7 +41,7 @@ static void	put_minimap_tiles()
 	}
 }
 
-void	put_minimap(void)
+void	draw_minimap_wall(void)
 {
 	t_game	*game;
 	t_map	*map;
@@ -56,7 +56,7 @@ void	put_minimap(void)
 	end.y = map->height * MINIMAP_TILE_SIZE;
 	draw_rect(start, end, MINIMAP_FLOOR_COLOR);
 	// mlx_put_image_to_window(game->mlx, game->win, map->textures.minimap_floor->img_ptr, 0, 0);
-	put_minimap_tiles();
+	draw_minimap_tiles();
 }
 
 // void	draw_frame(void)
@@ -65,5 +65,5 @@ void	put_minimap(void)
 
 // 	game = get_game_struct();
 // 	mlx_clear_window(game->mlx, game->win);
-// 	put_minimap();
+// 	draw_minimap();
 // }

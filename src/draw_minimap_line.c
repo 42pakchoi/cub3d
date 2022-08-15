@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_line.c                                        :+:      :+:    :+:   */
+/*   draw_minimap_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -105,7 +105,7 @@ static void	draw_quadrant_two_three(t_vector start, t_vector end, int color)
 	bres_algo(point, size, m, 1, color, max);
 }
 
-void	draw_line(t_vector start, t_vector end, int color)
+void	draw_minimap_line(t_vector start, t_vector end, int color)
 {
 	int	w;
 	int	h;
@@ -114,7 +114,7 @@ void	draw_line(t_vector start, t_vector end, int color)
 	start.y *= MINIMAP_TILE_SIZE;
 	end.x *= MINIMAP_TILE_SIZE;
 	end.y *= MINIMAP_TILE_SIZE;
-	
+
 	w = end.x - start.x;
 	h = end.y - start.y;
 	if (w >= 0 && h >= 0)

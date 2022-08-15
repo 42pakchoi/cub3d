@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:43:07 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/14 21:24:46 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/15 18:14:14 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,10 @@ static void print_map_data(void)
 	printf("- rgb_ceiling_color: %x\n", map->ceiling_color);
 }
 
-void prepare_map(char *map_filepath)
+void init_map(char *map_filepath)
 {
-	// t_game	*game;
 	int		filde;
 
-	// game = get_game_struct();
 	if (vaildate_file_extension(map_filepath) == FT_ERROR)
 	{
 		printf("<error> Invalid file extension. Extension must be '.cub'.\n");
