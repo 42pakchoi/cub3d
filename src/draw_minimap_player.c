@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 10:28:45 by cpak              #+#    #+#             */
-/*   Updated: 2022/08/15 14:29:31 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/15 15:22:26 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ t_vector	dda_algo(t_vector pos, t_vector ray_dir, char **map_grid, int i)
 	delta.y = fabsf(1 / ray_dir.y);
 
 	// 지도상의 위치
-	t_vector	map_pos;
-	map_pos.x = pos.x;
-	map_pos.y = pos.y;
+	t_point	map_pos;
+	map_pos.x = (int)pos.x;
+	map_pos.y = (int)pos.y;
 
 	// 초기값
 	t_point		step;
@@ -85,22 +85,22 @@ t_vector	dda_algo(t_vector pos, t_vector ray_dir, char **map_grid, int i)
 	if (ray_dir.x < 0)
 	{
 		step.x = -1;
-		side_dist.x = (map_pos.x - map_pos.x) * delta.x;
+		side_dist.x = (pos.x - map_pos.x) * delta.x;
 	}
 	else
 	{
 		step.x = 1;
-		side_dist.x = (map_pos.x + 1 - map_pos.x) * delta.x;
+		side_dist.x = (map_pos.x + 1 - pos.x) * delta.x;
 	}
 	if (ray_dir.y < 0)
 	{
 		step.y = -1;
-		side_dist.y = (map_pos.y - map_pos.y) * delta.y;
+		side_dist.y = (pos.y - map_pos.y) * delta.y;
 	}
 	else
 	{
 		step.y = 1;
-		side_dist.y = (map_pos.y + 1 - map_pos.y) * delta.y;
+		side_dist.y = (map_pos.y + 1 - pos.y) * delta.y;
 	}
 
 	/*
@@ -135,18 +135,15 @@ t_vector	dda_algo(t_vector pos, t_vector ray_dir, char **map_grid, int i)
 	p.x = pos.x + (map_pos.x - pos.x + (1 - step.x) / 2);
 	p.y = pos.y + (map_pos.y - pos.y + (1 - step.y) / 2);
 
-	float wall;
 	if (is_hoz == 0)
 	{
 		perpWallDist = (map_pos.x  - pos.x + (1 - step.x) / 2) / ray_dir.x;
-		wall = pos.y + perpWallDist * ray_dir.y;
-		p.y = wall;
+		p.y = pos.y + perpWallDist * ray_dir.y;
 	}
 	else
 	{
 		perpWallDist = (map_pos.y - pos.y + (1 - step.y) / 2) / ray_dir.y;
-		wall = pos.x + perpWallDist * ray_dir.x;
-		p.x = wall;
+		p.x = pos.x + perpWallDist * ray_dir.x;
 	}
 
 	draw_line(pos, p, MINIMAP_RAY_COLOR);
@@ -185,16 +182,15 @@ int	draw_minimap_ray(void)
 	t_player	*player;
 	t_line		line;
 	int			i;
-	int			w = WINDOW_WIDTH;
 
 	game = get_game_struct();
 	player = &(game->player);
 	line.start = game->player.pos;
 	line.end = game->player.pos;
 	i = 0;
-	while (i < w)
+	while (i < WINDOW_WIDTH)
 	{
-		double cameraX = 2 * i / (double)(w) - 1;
+		float cameraX = 2 * i / (float)WINDOW_WIDTH - 1;
 		line.end.x = player->dir.x + player->plane.x * cameraX;
 		line.end.y = player->dir.y + player->plane.y * cameraX;
 		dda_algo(line.start, line.end, game->map.array, i);
