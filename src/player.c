@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 17:33:46 by cpak              #+#    #+#             */
-/*   Updated: 2022/08/12 18:12:39 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/15 15:22:17 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	prepare_player(void)
 	game = get_game_struct();
 	game->player.dir.x = 0;
 	game->player.dir.y = -1;
-	game->player.plane.x = 1;
+	game->player.plane.x = 0.66;
 	game->player.plane.y = 0;
 	set_player_pos();
 	if (game->player.character == MAP_PLAYER_E)
