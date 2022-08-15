@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 10:28:45 by cpak              #+#    #+#             */
-/*   Updated: 2022/08/12 18:12:15 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/15 14:08:03 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,110 @@ int	draw_minimap_fov(void)
 	return (0);
 }
 
+t_vector	dda_algo(t_vector pos, t_vector ray_dir, char **map_grid, int i)
+{
+	// delta.x: abs(광선길이 / ray.x), delta.y: abs(광선길이 / ray.y)
+	// player에서 ray까지 거리를 1로 정하고, 모두 비율로 계산한다.
+	// 그러므로 delta.x: abs(1 / ray.x), delta.y: abs(1 / ray.y)
+
+	t_vector	delta;
+	delta.x = fabsf(1 / ray_dir.x);
+	delta.y = fabsf(1 / ray_dir.y);
+
+	// 지도상의 위치
+	t_vector	map_pos;
+	map_pos.x = pos.x;
+	map_pos.y = pos.y;
+
+	// 초기값
+	t_point		step;
+	t_vector	side_dist;
+	int			is_hoz;
+
+	/*
+	초기값 설정
+	- 광선의 방향에 따라 값 설정
+		- 방향이 음수인 경우 step은 -1, 방향이 양수인 경우 step은 +1
+	- side의 시작 지점 설정
+	*/
+	if (ray_dir.x < 0)
+	{
+		step.x = -1;
+		side_dist.x = (map_pos.x - map_pos.x) * delta.x;
+	}
+	else
+	{
+		step.x = 1;
+		side_dist.x = (map_pos.x + 1 - map_pos.x) * delta.x;
+	}
+	if (ray_dir.y < 0)
+	{
+		step.y = -1;
+		side_dist.y = (map_pos.y - map_pos.y) * delta.y;
+	}
+	else
+	{
+		step.y = 1;
+		side_dist.y = (map_pos.y + 1 - map_pos.y) * delta.y;
+	}
+
+	/* 
+	충돌 좌표 구하기
+	- side_dist.x와 side_dist.y를 비교
+	- 작은 값의 side_dist를 delta만큼 증가
+	- 작은 값의 side 좌표를 1만큼 증가
+	- 1 증가된 좌표에 벽이 있는지 확인
+	*/
+	while (1)
+	{
+		if (side_dist.x < side_dist.y)
+		{
+			side_dist.x += delta.x;
+			map_pos.x += step.x;
+			is_hoz = 0;
+		}
+		else
+		{
+			side_dist.y += delta.y;
+			map_pos.y += step.y;
+			is_hoz = 1;
+		}
+		if (map_grid[(int)(map_pos).y][(int)(map_pos).x] == MAP_WALL)
+			break;
+	}
+
+	// 카메라 평면에서 충돌 지점까지 수직거리
+	float		perpWallDist;
+	t_vector	p;
+	
+	p.x = pos.x + (map_pos.x - pos.x + (1 - step.x) / 2);
+	p.y = pos.y + (map_pos.y - pos.y + (1 - step.y) / 2);
+	
+	float wall;
+	if (is_hoz == 0)
+	{
+		perpWallDist = (map_pos.x  - pos.x + (1 - step.x) / 2) / ray_dir.x;
+		wall = pos.y + perpWallDist * ray_dir.y;
+		p.y = wall;
+	}
+	else
+	{
+		perpWallDist = (map_pos.y - pos.y + (1 - step.y) / 2) / ray_dir.y;
+		wall = pos.x + perpWallDist * ray_dir.x;
+		p.x = wall;
+	}
+
+	draw_line(pos, p, MINIMAP_RAY_COLOR);
+
+	//Calculate height of line to draw on screen
+	int h = 200;
+	int lineHeight = (int)(h / perpWallDist);
+
+	// lineHeight 처리
+	
+	return (p);
+}
+
 int	draw_minimap_ray(void)
 {
 	t_game		*game;
@@ -58,9 +162,9 @@ int	draw_minimap_ray(void)
 	while (i <= w)
 	{
 		double cameraX = 2 * i / (double)(w) - 1;
-		line.end.x = player->pos.x + player->dir.x + player->plane.x * cameraX;
-		line.end.y = player->pos.y + player->dir.y + player->plane.y * cameraX;
-		draw_line(line.start, line.end, MINIMAP_RAY_COLOR);
+		line.end.x = player->dir.x + player->plane.x * cameraX;
+		line.end.y = player->dir.y + player->plane.y * cameraX;
+		dda_algo(line.start, line.end, game->map.array, i);
 		i += 1;
 	}
 	return (0);

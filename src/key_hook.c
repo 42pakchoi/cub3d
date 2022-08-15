@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 17:16:16 by cpak              #+#    #+#             */
-/*   Updated: 2022/08/12 16:45:56 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/14 21:24:50 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	key_up_hook(int keycode)
 {
 	t_game	*game;
 
+	draw_frame();
 	game = get_game_struct();
 	if (keycode == KEY_W)
 		game->player.delta.y = 0;
