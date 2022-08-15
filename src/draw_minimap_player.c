@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_minimap_player.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 10:28:45 by cpak              #+#    #+#             */
-/*   Updated: 2022/08/15 14:08:03 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/15 14:29:31 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,20 @@ int	draw_minimap_fov(void)
 	line.end.y += game->player.dir.y + game->player.plane.y;
 	draw_line(line.start, line.end, MINIMAP_DIRLINE_COLOR);
 	return (0);
+}
+
+void	draw_screen_line(int x, int y_start, int y_end, int color)
+{
+	t_game	*game;
+	int y;
+
+	game = get_game_struct();
+	y = y_start;
+	while (y <= y_end)
+	{
+		mlx_pixel_put(game->mlx, game->win, x, y, color);
+		y++;
+	}
 }
 
 t_vector	dda_algo(t_vector pos, t_vector ray_dir, char **map_grid, int i)
@@ -89,7 +103,7 @@ t_vector	dda_algo(t_vector pos, t_vector ray_dir, char **map_grid, int i)
 		side_dist.y = (map_pos.y + 1 - map_pos.y) * delta.y;
 	}
 
-	/* 
+	/*
 	충돌 좌표 구하기
 	- side_dist.x와 side_dist.y를 비교
 	- 작은 값의 side_dist를 delta만큼 증가
@@ -117,10 +131,10 @@ t_vector	dda_algo(t_vector pos, t_vector ray_dir, char **map_grid, int i)
 	// 카메라 평면에서 충돌 지점까지 수직거리
 	float		perpWallDist;
 	t_vector	p;
-	
+
 	p.x = pos.x + (map_pos.x - pos.x + (1 - step.x) / 2);
 	p.y = pos.y + (map_pos.y - pos.y + (1 - step.y) / 2);
-	
+
 	float wall;
 	if (is_hoz == 0)
 	{
@@ -138,11 +152,30 @@ t_vector	dda_algo(t_vector pos, t_vector ray_dir, char **map_grid, int i)
 	draw_line(pos, p, MINIMAP_RAY_COLOR);
 
 	//Calculate height of line to draw on screen
-	int h = 200;
+	int h = WINDOW_HEIGHT;
 	int lineHeight = (int)(h / perpWallDist);
+	int drawStart = -lineHeight / 2 + h / 2;
+	if (drawStart < 0)
+		drawStart = 0;
+	int drawEnd = lineHeight / 2 + h / 2;
+	if (drawEnd >= h)
+		drawEnd = h - 1;
 
-	// lineHeight 처리
-	
+	// NSWE 방향에 따라 색상 설정
+	int wall_color = 0;
+	if (is_hoz == 0 && ray_dir.x > 0)
+		wall_color = 0xFF0000;
+	else if (is_hoz == 0 && ray_dir.x < 0)
+		wall_color = 0x00FF00;
+	else if (is_hoz == 1 && ray_dir.y > 0)
+		wall_color = 0x0000FF;
+	else if (is_hoz == 1 && ray_dir.y < 0)
+		wall_color = 0xFFFF00;
+	else
+		wall_color = 0x00FF00;
+
+	draw_screen_line(i, drawStart, drawEnd, wall_color);
+
 	return (p);
 }
 
@@ -152,14 +185,14 @@ int	draw_minimap_ray(void)
 	t_player	*player;
 	t_line		line;
 	int			i;
-	int			w = 20;
+	int			w = WINDOW_WIDTH;
 
 	game = get_game_struct();
 	player = &(game->player);
 	line.start = game->player.pos;
 	line.end = game->player.pos;
 	i = 0;
-	while (i <= w)
+	while (i < w)
 	{
 		double cameraX = 2 * i / (double)(w) - 1;
 		line.end.x = player->dir.x + player->plane.x * cameraX;
