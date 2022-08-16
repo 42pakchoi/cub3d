@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/15 18:27:24 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 16:29:35 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,18 @@ typedef struct s_map
 	t_textures	textures;
 }				t_map;
 
+typedef struct s_key
+{
+	int			move[4];
+	int			rotate;
+}				t_key;
+
 typedef struct s_delta
 {
-	float		x;
-	float		y;
-	float		angle;
-}			t_delta;
-
+	float	x;
+	float	y;
+	float	angle;
+}				t_delta;
 
 typedef struct s_player
 {
@@ -105,6 +110,7 @@ typedef struct s_player
 	t_vector	pos;
 	t_vector	dir;
 	t_vector	plane;
+	t_key		key;
 	t_delta		delta;
 }				t_player;
 
@@ -140,10 +146,9 @@ t_game	*get_game_struct(void);
 # define MINIMAP_WALL_COLOR 0x0000FFFF
 # define MINIMAP_FLOOR_COLOR 0x00989898
 # define MINIMAP_DIRLINE_COLOR 0xFFFFFF
-# define MINIMAP_RAY_COLOR 0xFF0000
-# define MINIMAP_PLAYER_COLOR 0x00FF00FF
-# define MINIMAP_PLAYER_WIDTH 10
-# define MINIMAP_PLAYER_HEIGHT 10
+# define MINIMAP_RAY_COLOR 0xFFFFFF
+# define MINIMAP_PLAYER_COLOR 0x00FF00
+# define MINIMAP_PLAYER_SIZE 10
 
 /*
 ** map characters
@@ -228,8 +233,10 @@ void	put_image(void *img_ptr, t_vector *img_pos);
 */
 
 int			mouse_hook(int button, int x, int y);
-int			key_down_hook(int keycode);
-int			key_up_hook(int keycode);
+int			key_down(int keycode);
+int			key_up(int keycode);
+
+void		set_player(void);
 
 /*
 ** functions - calc

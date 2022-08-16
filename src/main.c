@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:33:12 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/15 18:12:32 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 15:55:00 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	init_mlx()
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "cub3d");
 	mlx_mouse_hook(game->win, mouse_hook, NULL);
-	mlx_hook(game->win, 2, 0L, key_down_hook, NULL);
+	mlx_hook(game->win, 2, 0L, key_down, NULL);
+	mlx_hook(game->win, 3, 0L, key_up, NULL);
 	mlx_loop_hook(game->mlx, draw_frame, NULL);
-	mlx_loop(game->mlx);
 }
 
 void	run_game(char *filepath)
