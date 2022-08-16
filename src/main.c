@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:33:12 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/16 15:55:00 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 16:44:06 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@ void	init_mlx()
 	game = get_game_struct();
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "cub3d");
-	mlx_mouse_hook(game->win, mouse_hook, NULL);
 	mlx_hook(game->win, 2, 0L, key_down, NULL);
 	mlx_hook(game->win, 3, 0L, key_up, NULL);
+	mlx_hook(game->win, 4, 0L, mouse_down, NULL);
+	mlx_hook(game->win, 5, 0L, mouse_up, NULL);
+	mlx_hook(game->win, 6, 0L, mouse_move, NULL);
 	mlx_loop_hook(game->mlx, draw_frame, NULL);
 }
 

@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/16 16:29:35 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 17:03:58 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ typedef struct s_key
 {
 	int			move[4];
 	int			rotate;
+	int			rotate_origin;
 }				t_key;
 
 typedef struct s_delta
@@ -232,9 +233,11 @@ void	put_image(void *img_ptr, t_vector *img_pos);
 ** functions - hooks
 */
 
-int			mouse_hook(int button, int x, int y);
-int			key_down(int keycode);
 int			key_up(int keycode);
+int			key_down(int keycode);
+int			mouse_up(void);
+int			mouse_down(int button, int x);
+int			mouse_move(int x);
 
 void		set_player(void);
 
