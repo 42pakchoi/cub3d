@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 04:34:00 by cpak              #+#    #+#             */
-/*   Updated: 2022/08/16 17:08:00 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 17:14:07 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	mouse_down(int button, int x)
 	game = get_game_struct();
 	game->player.key.rotate_origin = x;
 	game->player.key.rotate = 0;
-	
 	return (0);
 }
 

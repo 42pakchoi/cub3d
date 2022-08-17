@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/16 17:03:58 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/17 14:56:53 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,13 +98,6 @@ typedef struct s_key
 	int			rotate_origin;
 }				t_key;
 
-typedef struct s_delta
-{
-	float	x;
-	float	y;
-	float	angle;
-}				t_delta;
-
 typedef struct s_player
 {
 	char		character;
@@ -112,7 +105,6 @@ typedef struct s_player
 	t_vector	dir;
 	t_vector	plane;
 	t_key		key;
-	t_delta		delta;
 }				t_player;
 
 typedef struct s_game
@@ -251,8 +243,7 @@ t_vector	calc_rotated_vector(t_vector v, int d);
 ** functions - player
 */
 
-void	rotate_player(t_game *game, int angle);
-void	set_player_pos(void);
 void	init_player(void);
+void	set_player(void);
 
 #endif
