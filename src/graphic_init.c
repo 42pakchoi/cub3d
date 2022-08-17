@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 01:53:01 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/08 02:17:29 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/17 15:12:27 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static void	set_minimap_images(void)
 	game = get_game_struct();
 	map = &(game->map);
 	map->textures.minimap_floor = make_mlx_image(
-		(int)game->map.width * MINIMAP_TILE_SIZE,
-		(int)game->map.height * MINIMAP_TILE_SIZE,
+		(int)map->width * MINIMAP_TILE_SIZE,
+		(int)map->height * MINIMAP_TILE_SIZE,
 		MINIMAP_FLOOR_COLOR
 	);
 	map->textures.minimap_wall = make_mlx_image(

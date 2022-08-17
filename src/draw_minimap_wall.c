@@ -1,16 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   graphic_draw.c                                     :+:      :+:    :+:   */
+/*   draw_minimap_wall.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 02:10:28 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/15 18:12:38 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/17 15:14:55 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static void	draw_minimap_floar()
+{
+	t_game	*game;
+	t_point	top_left;
+
+	game = get_game_struct();
+	top_left.x = 0;
+	top_left.y = 0;
+	put_image(game->map.textures.minimap_floor->img_ptr, &top_left);
+}
 
 static void	draw_minimap_tiles()
 {
@@ -18,8 +29,7 @@ static void	draw_minimap_tiles()
 	t_map	*map;
 	size_t	i;
 	size_t	j;
-	t_vector	start;
-	t_vector	end;
+	t_point		wall_point;
 
 	game = get_game_struct();
 	map = &(game->map);
@@ -29,12 +39,12 @@ static void	draw_minimap_tiles()
 		j = 0;
 		while (j < map->width)
 		{
-			start.x = j * MINIMAP_TILE_SIZE;
-			start.y = i * MINIMAP_TILE_SIZE;
-			end.x = j * MINIMAP_TILE_SIZE + MINIMAP_TILE_SIZE;
-			end.y = i * MINIMAP_TILE_SIZE + MINIMAP_TILE_SIZE;
+			wall_point.x = j * MINIMAP_TILE_SIZE;
+			wall_point.y = i * MINIMAP_TILE_SIZE;
 			if (map->array[i][j] == '1')
-				draw_rect(start, end, MINIMAP_WALL_COLOR);
+			{
+				put_image(map->textures.minimap_wall->img_ptr, &wall_point);
+			}
 			j++;
 		}
 		i++;
@@ -43,27 +53,6 @@ static void	draw_minimap_tiles()
 
 void	draw_minimap_wall(void)
 {
-	t_game	*game;
-	t_map	*map;
-	t_vector	start;
-	t_vector	end;
-
-	game = get_game_struct();
-	map = &(game->map);
-	start.x = 0;
-	start.y = 0;
-	end.x = map->width * MINIMAP_TILE_SIZE;
-	end.y = map->height * MINIMAP_TILE_SIZE;
-	draw_rect(start, end, MINIMAP_FLOOR_COLOR);
-	// mlx_put_image_to_window(game->mlx, game->win, map->textures.minimap_floor->img_ptr, 0, 0);
+	draw_minimap_floar();
 	draw_minimap_tiles();
 }
-
-// void	draw_frame(void)
-// {
-// 	t_game	*game;
-
-// 	game = get_game_struct();
-// 	mlx_clear_window(game->mlx, game->win);
-// 	draw_minimap();
-// }

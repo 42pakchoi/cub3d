@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/17 14:56:53 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/17 15:47:01 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ typedef struct s_img
 	int			size_line;
 	int			bits_per_pixel;
 	int			endian;
+	int			width;
+	int			height;
 }				t_img;
 
 typedef struct s_textures
@@ -219,7 +221,7 @@ void	draw_minimap(void);
 */
 t_img	*make_mlx_image(int width, int height, int color);
 void	*get_png_image(char *filepath);
-void	put_image(void *img_ptr, t_vector *img_pos);
+void	put_image(void *img_ptr, t_point *img_pos);
 
 /*
 ** functions - hooks
