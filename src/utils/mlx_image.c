@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 01:58:15 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/17 14:55:17 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/17 15:53:47 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,8 @@ static void put_pixel(t_img *image, int x, int y, int color)
 
 static void	fill_color_image(t_img *image, unsigned int color)
 {
-	t_game	*game;
 	int		h;
 	int		w;
-
-	game = get_game_struct();
 
 	h = 0;
 	while (h < image->height)
