@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/19 17:25:07 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/19 18:44:30 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,10 @@ typedef struct s_img
 
 typedef struct s_textures
 {
-	void	*north;
-	void	*south;
-	void	*west;
-	void	*east;
+	t_img	*north;
+	t_img	*south;
+	t_img	*west;
+	t_img	*east;
 	t_img	floor;
 	t_img	ceiling;
 	t_img	*minimap_floor;
