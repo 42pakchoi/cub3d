@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_image.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 01:58:15 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/17 15:53:47 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/19 18:19:42 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,25 @@ t_img	*make_mlx_image(int width, int height, int color)
 	return (image);
 }
 
-void	*get_png_image(char *filepath)
+t_img	*get_png_image(char *filepath)
 {
 	t_game	*game;
-	void	*img_ptr;
-	int		width;
-	int		height;
+	t_img	*image;
 
 	game = get_game_struct();
-	img_ptr = mlx_png_file_to_image(game->mlx, filepath, &width, &height);
-	if (img_ptr == NULL)
+	image = (t_img *)malloc(sizeof(t_img));
+	image->img_ptr = mlx_png_file_to_image(game->mlx, filepath, &(image->width), &(image->height));
+	if (!image->img_ptr)
 		return (NULL);
-	return (img_ptr);
+	image->addr = (int *)mlx_get_data_addr(
+		image->img_ptr,
+		&(image->bits_per_pixel),
+		&(image->size_line),
+		&(image->endian)
+	);
+	printf("w: %d, h: %d, bpp: %d, sl: %d, endian: %d\n",
+		image->width, image->height, image->bits_per_pixel, image->size_line, image->endian);
+	return (image);
 }
 
 void	put_image(void *img_ptr, t_point *img_pos)

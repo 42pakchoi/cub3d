@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/17 15:47:01 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/19 17:25:07 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,7 +220,7 @@ void	draw_minimap(void);
 ** utils/mlx_image
 */
 t_img	*make_mlx_image(int width, int height, int color);
-void	*get_png_image(char *filepath);
+t_img	*get_png_image(char *filepath);
 void	put_image(void *img_ptr, t_point *img_pos);
 
 /*
