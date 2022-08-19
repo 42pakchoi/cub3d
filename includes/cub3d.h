@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/15 18:27:24 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/19 18:44:30 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,16 @@ typedef struct s_img
 	int			size_line;
 	int			bits_per_pixel;
 	int			endian;
+	int			width;
+	int			height;
 }				t_img;
 
 typedef struct s_textures
 {
-	void	*north;
-	void	*south;
-	void	*west;
-	void	*east;
+	t_img	*north;
+	t_img	*south;
+	t_img	*west;
+	t_img	*east;
 	t_img	floor;
 	t_img	ceiling;
 	t_img	*minimap_floor;
@@ -91,13 +93,12 @@ typedef struct s_map
 	t_textures	textures;
 }				t_map;
 
-typedef struct s_delta
+typedef struct s_key
 {
-	float		x;
-	float		y;
-	float		angle;
-}			t_delta;
-
+	int			move[4];
+	int			rotate;
+	int			rotate_origin;
+}				t_key;
 
 typedef struct s_player
 {
@@ -105,7 +106,7 @@ typedef struct s_player
 	t_vector	pos;
 	t_vector	dir;
 	t_vector	plane;
-	t_delta		delta;
+	t_key		key;
 }				t_player;
 
 typedef struct s_game
@@ -140,10 +141,9 @@ t_game	*get_game_struct(void);
 # define MINIMAP_WALL_COLOR 0x0000FFFF
 # define MINIMAP_FLOOR_COLOR 0x00989898
 # define MINIMAP_DIRLINE_COLOR 0xFFFFFF
-# define MINIMAP_RAY_COLOR 0xFF0000
-# define MINIMAP_PLAYER_COLOR 0x00FF00FF
-# define MINIMAP_PLAYER_WIDTH 10
-# define MINIMAP_PLAYER_HEIGHT 10
+# define MINIMAP_RAY_COLOR 0xFFFFFF
+# define MINIMAP_PLAYER_COLOR 0x00FF00
+# define MINIMAP_PLAYER_SIZE 10
 
 /*
 ** map characters
@@ -220,16 +220,20 @@ void	draw_minimap(void);
 ** utils/mlx_image
 */
 t_img	*make_mlx_image(int width, int height, int color);
-void	*get_png_image(char *filepath);
-void	put_image(void *img_ptr, t_vector *img_pos);
+t_img	*get_png_image(char *filepath);
+void	put_image(void *img_ptr, t_point *img_pos);
 
 /*
 ** functions - hooks
 */
 
-int			mouse_hook(int button, int x, int y);
-int			key_down_hook(int keycode);
-int			key_up_hook(int keycode);
+int			key_up(int keycode);
+int			key_down(int keycode);
+int			mouse_up(void);
+int			mouse_down(int button, int x);
+int			mouse_move(int x);
+
+void		set_player(void);
 
 /*
 ** functions - calc
@@ -241,8 +245,7 @@ t_vector	calc_rotated_vector(t_vector v, int d);
 ** functions - player
 */
 
-void	rotate_player(t_game *game, int angle);
-void	set_player_pos(void);
 void	init_player(void);
+void	set_player(void);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 10:34:02 by cpak              #+#    #+#             */
-/*   Updated: 2022/08/15 18:15:28 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/17 15:55:45 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,6 @@ static void	clear_frame()
 
 	game = get_game_struct();
 	mlx_clear_window(game->mlx, game->win);
-	erase_minimap_dirline();
-	erase_minimap_fov();
-	erase_minimap_ray();
-	erase_minimap_player();
 }
 
 void draw_minimap(void)
@@ -36,6 +32,7 @@ void draw_minimap(void)
 int	draw_frame(void)
 {
 	clear_frame();
+	set_player();
 	draw_wall();
 	draw_minimap();
 	return (0);

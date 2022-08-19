@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:21:53 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/15 18:22:52 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/17 15:56:47 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	draw_wall(void)
 	int			w;
 	float		cameraX;
 	t_dda		dda;
+	float		wall_dist;
 
 	game = get_game_struct();
 	player = &(game->player);
@@ -70,10 +71,7 @@ int	draw_wall(void)
 		dda.ray_dir.y = player->dir.y + player->plane.y * cameraX;
 		init_dda(&dda);
 		calc_collision_point(game->map.array, &dda);
-		float		wall_dist;
-
 		wall_dist = get_perpendicular_wall_dist(dda.player_pos, dda.ray_dir, &dda);
-		// printf("wall_dist : %f\n", wall_dist);
 		draw_screen_line(w, wall_dist, get_wall_color(dda.is_hoz, dda.ray_dir));
 		w += 1;
 	}

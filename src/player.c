@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 17:33:46 by cpak              #+#    #+#             */
-/*   Updated: 2022/08/15 15:47:32 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/17 15:45:38 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	rotate_player(t_game *game, int angle)
+static void	rotate_player(t_game *game, int angle)
 {
 	game->player.dir = calc_rotated_vector(game->player.dir, angle);
 	game->player.plane = calc_rotated_vector(game->player.plane, angle);
 }
 
-void	set_player_pos(void)
+static void	set_player_init_pos(void)
 {
 	t_game	*game;
 	t_map	*map;
@@ -58,11 +58,56 @@ void	init_player(void)
 	game->player.dir.y = -1;
 	game->player.plane.x = 0.66;
 	game->player.plane.y = 0;
-	set_player_pos();
+	set_player_init_pos();
 	if (game->player.character == MAP_PLAYER_E)
 		rotate_player(game, 90);
 	if (game->player.character == MAP_PLAYER_S)
 		rotate_player(game, 180);
 	if (game->player.character == MAP_PLAYER_W)
 		rotate_player(game, 270);
+}
+
+t_bool	calc_player_collision(t_vector pos)
+{
+	t_game	*game;
+	t_point	p;
+
+	game = get_game_struct();
+	p.x = (int)pos.x;
+	p.y = (int)pos.y;
+	return (game->map.array[p.y][p.x] == MAP_WALL);
+}
+
+void	set_player(void)
+{
+	t_game		*game;
+	t_vector	pos;
+
+	game = get_game_struct();
+	pos.x = 0;
+	pos.y = 0;
+	if (game->player.key.move[0])
+	{
+		pos.x = game->player.pos.x + game->player.dir.x / 5;
+		pos.y = game->player.pos.y + game->player.dir.y / 5;
+	}
+	if (game->player.key.move[1])
+	{
+		pos.x = game->player.pos.x - game->player.dir.x / 5;
+		pos.y = game->player.pos.y - game->player.dir.y / 5;
+	}
+	if (game->player.key.move[2])
+	{
+		pos.x = game->player.pos.x - game->player.plane.x / 5;
+		pos.y = game->player.pos.y - game->player.plane.y / 5;
+	}
+	if (game->player.key.move[3])
+	{
+		pos.x = game->player.pos.x + game->player.plane.x / 5;
+		pos.y = game->player.pos.y + game->player.plane.y / 5;
+	}
+	if (game->player.key.rotate)
+		rotate_player(game, game->player.key.rotate);
+	if (pos.x != 0 && pos.y != 0 && calc_player_collision(pos) == FT_FALSE)
+		game->player.pos = pos;
 }

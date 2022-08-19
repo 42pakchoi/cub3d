@@ -6,15 +6,39 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 04:34:00 by cpak              #+#    #+#             */
-/*   Updated: 2022/08/08 10:31:57 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 17:14:07 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	mouse_hook(int button, int x, int y)
+int	mouse_down(int button, int x)
 {
+	t_game	*game;
+
 	(void)button;
-	printf("x: %d, y: %d\n", x, y);
+	game = get_game_struct();
+	game->player.key.rotate_origin = x;
+	game->player.key.rotate = 0;
+	return (0);
+}
+
+int	mouse_move(int x)
+{
+	t_game	*game;
+
+	game = get_game_struct();
+	if (game->player.key.rotate_origin != 0)
+		game->player.key.rotate = (x - game->player.key.rotate_origin) / -20;
+	return (0);
+}
+
+int	mouse_up(void)
+{
+	t_game	*game;
+
+	game = get_game_struct();
+	game->player.key.rotate_origin = 0;
+	game->player.key.rotate = 0;
 	return (0);
 }
