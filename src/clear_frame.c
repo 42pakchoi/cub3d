@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clear_frame.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:25:42 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/16 14:49:38 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/22 02:44:42 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int erase_minimap_dirline(void)
 	line.end = game->player.pos;
 	line.end.x += game->player.dir.x;
 	line.end.y += game->player.dir.y;
-	draw_minimap_line(line.start, line.end, 0);
+	put_minimap_line(line.start, line.end, 0);
 	return (0);
 }
 
@@ -38,7 +38,7 @@ int	erase_minimap_fov(void)
 	line.start.y += game->player.dir.y - game->player.plane.y;
 	line.end.x += game->player.dir.x + game->player.plane.x;
 	line.end.y += game->player.dir.y + game->player.plane.y;
-	draw_minimap_line(line.start, line.end, 0);
+	put_minimap_line(line.start, line.end, 0);
 	return (0);
 }
 
@@ -60,7 +60,7 @@ int	erase_minimap_ray(void)
 		double cameraX = 2 * i / (double)(w) - 1;
 		line.end.x = player->pos.x + player->dir.x + player->plane.x * cameraX;
 		line.end.y = player->pos.y + player->dir.y + player->plane.y * cameraX;
-		draw_minimap_line(line.start, line.end, 0);
+		put_minimap_line(line.start, line.end, 0);
 		i += 1;
 	}
 	return (0);
@@ -77,6 +77,6 @@ int	erase_minimap_player(void)
 	start.y = game->player.pos.y - (MINIMAP_PLAYER_SIZE / 2);
 	end.x = game->player.pos.x + (MINIMAP_PLAYER_SIZE / 2);
 	end.y = game->player.pos.y + (MINIMAP_PLAYER_SIZE / 2);
-	draw_rect(start, end, 0);
+	draw_pixel_rect(start, end, 0);
 	return (0);
 }

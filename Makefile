@@ -6,7 +6,7 @@
 #    By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/28 19:18:15 by sarchoi           #+#    #+#              #
-#    Updated: 2022/08/15 18:29:19 by sarchoi          ###   ########seoul.kr   #
+#    Updated: 2022/08/22 03:00:09 by sarchoi          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,20 +26,17 @@ SRCS_ROOT = main.c \
 			graphic_init.c \
 			draw_frame.c \
       draw_wall.c \
-      draw_minimap_wall.c \
-      draw_minimap_ray.c \
-			draw_minimap_dirline.c \
-			draw_minimap_fov.c \
-			draw_minimap_player.c \
-			draw_minimap_line.c \
-			draw_rect.c \
+			put_minimap_floor.c \
+			put_minimap_tiles.c \
+			put_minimap_line.c \
+			put_minimap_player.c \
+			put_minimap_ray.c \
 			clear_frame.c \
-			set_pixel.c \
 			mouse_hook.c \
 			key_hook.c \
 			calc_rotated_vector.c \
 			player.c
-SRCS_UTIL = global.c mlx_image.c draw.c
+SRCS_UTIL = global.c draw.c draw_pixel.c mlx_image.c put_image.c
 SRCS = $(addprefix ./src/, $(SRCS_ROOT)) \
 		$(addprefix ./src/utils/, $(SRCS_UTIL))
 

@@ -6,23 +6,13 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 01:58:15 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/17 15:53:47 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/22 01:55:32 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void put_pixel(t_img *image, int x, int y, int color)
-{
-	int				offset;
-	unsigned int	index;
-
-	offset = image->bits_per_pixel / CHAR_BIT;
-	index = image->size_line / offset * y + x;
-	image->addr[index] = color;
-}
-
-static void	fill_color_image(t_img *image, unsigned int color)
+void	fill_color_image(t_img *image, unsigned int color)
 {
 	int		h;
 	int		w;
@@ -33,7 +23,7 @@ static void	fill_color_image(t_img *image, unsigned int color)
 		w = 0;
 		while (w < image->width)
 		{
-			put_pixel(image, w, h, color);
+			put_image_pixel(image, w, h, color);
 			w++;
 		}
 		h++;

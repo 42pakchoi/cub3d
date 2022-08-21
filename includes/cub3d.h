@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/17 15:47:01 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/22 03:09:22 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,13 +137,13 @@ t_game	*get_game_struct(void);
 
 # define WINDOW_WIDTH 640
 # define WINDOW_HEIGHT 480
-# define MINIMAP_TILE_SIZE 15
+# define MINIMAP_TILE_SIZE 5
 # define MINIMAP_WALL_COLOR 0x0000FFFF
-# define MINIMAP_FLOOR_COLOR 0x00989898
+# define MINIMAP_FLOOR_COLOR 0xAAFFFF00
 # define MINIMAP_DIRLINE_COLOR 0xFFFFFF
 # define MINIMAP_RAY_COLOR 0xFFFFFF
-# define MINIMAP_PLAYER_COLOR 0x00FF00
-# define MINIMAP_PLAYER_SIZE 10
+# define MINIMAP_PLAYER_COLOR 0xFF00FF
+# define MINIMAP_PLAYER_SIZE 3
 
 /*
 ** map characters
@@ -181,11 +181,6 @@ t_game	*get_game_struct(void);
 */
 
 int			draw_frame(void);
-void		draw_minimap_wall(void);
-int			draw_minimap_dirline(void);
-int			draw_minimap_fov(void);
-int			draw_minimap_player(void);
-int			draw_minimap_ray(void);
 int			draw_wall(void);
 int			erase_minimap_dirline(void);
 int			erase_minimap_fov(void);
@@ -196,10 +191,11 @@ float		get_perpendicular_wall_dist(t_vector player_pos, t_vector ray_dir, t_dda 
 void		init_dda(t_dda *dda);
 void		calc_collision_point(char **map_grid, t_dda *dda);
 
-void		draw_minimap_line(t_vector start, t_vector end, int color);
-void		draw_rect(t_vector start, t_vector end, int color);
-
-void		set_pixel(t_point point, int color);
+void		put_minimap_floor(void);
+void		put_minimap_tiles(void);
+void		put_minimap_line(t_vector start, t_vector end, int color);
+int			put_minimap_player(void);
+int			put_minimap_ray(void);
 
 /*
 ** minimap
@@ -213,15 +209,30 @@ int		validate_map(void);
 int		check_map_walls(void);
 
 void	init_images(void);
-void	draw_minimap(void);
-// void	draw_frame(void);
 
 /*
 ** utils/mlx_image
 */
+void draw_rect_in_image(t_img *image, t_point *start, t_size *size, unsigned int color);
+void put_pixel(t_img *image, int x, int y, int color);
+void	fill_color_image(t_img *image, unsigned int color);
 t_img	*make_mlx_image(int width, int height, int color);
 void	*get_png_image(char *filepath);
 void	put_image(void *img_ptr, t_point *img_pos);
+
+/*
+** utils/draw_pixel
+*/
+void	draw_pixel(t_point point, int color);
+void	draw_pixel_line(float m, t_point point, t_point dpoint, int color);
+void	draw_pixel_rect(t_vector start, t_vector end, int color);
+
+/*
+** utils/put_image
+*/
+void	put_image_pixel(t_img *image, int x, int y, int color);
+void	put_image_line(t_img *image, float m, t_point point, t_point dpoint, int color);
+void	put_image_rect(t_img *image, t_point start, t_point end, int color);
 
 /*
 ** functions - hooks

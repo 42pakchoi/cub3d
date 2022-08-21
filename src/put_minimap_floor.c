@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_minimap_fov.c                                 :+:      :+:    :+:   */
+/*   put_minimap_floor.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/15 18:24:58 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/15 18:25:07 by sarchoi          ###   ########seoul.kr  */
+/*   Created: 2022/08/22 02:58:10 by sarchoi           #+#    #+#             */
+/*   Updated: 2022/08/22 03:00:32 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	draw_minimap_fov(void)
+void	put_minimap_floor(void)
 {
-	t_game		*game;
-	t_line		line;
+	t_game	*game;
+	t_map	*map;
+	t_point	top_left;
+	t_point	bottom_right;
 
 	game = get_game_struct();
-	line.start = game->player.pos;
-	line.end = game->player.pos;
-	line.start.x += game->player.dir.x - game->player.plane.x;
-	line.start.y += game->player.dir.y - game->player.plane.y;
-	line.end.x += game->player.dir.x + game->player.plane.x;
-	line.end.y += game->player.dir.y + game->player.plane.y;
-	draw_minimap_line(line.start, line.end, MINIMAP_DIRLINE_COLOR);
-	return (0);
+	map = &game->map;
+	top_left.x = 0;
+	top_left.y = 0;
+	bottom_right.x = map->width * MINIMAP_TILE_SIZE;
+	bottom_right.y = map->height * MINIMAP_TILE_SIZE;
+	put_image_rect(
+		map->textures.minimap_floor,
+		top_left,
+		bottom_right,
+		MINIMAP_FLOOR_COLOR
+	);
 }
