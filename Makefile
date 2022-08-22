@@ -6,7 +6,7 @@
 #    By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/28 19:18:15 by sarchoi           #+#    #+#              #
-#    Updated: 2022/08/22 03:00:09 by sarchoi          ###   ########seoul.kr   #
+#    Updated: 2022/08/22 17:02:09 by sarchoi          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,12 @@ SRCS_ROOT = main.c \
 			key_hook.c \
 			calc_rotated_vector.c \
 			player.c
-SRCS_UTIL = global.c draw.c draw_pixel.c mlx_image.c put_image.c
+SRCS_UTIL = global.c \
+	draw.c \
+	draw_pixel.c \
+	mlx_image.c \
+	put_image.c \
+	get_image.c
 SRCS = $(addprefix ./src/, $(SRCS_ROOT)) \
 		$(addprefix ./src/utils/, $(SRCS_UTIL))
 

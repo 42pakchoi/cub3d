@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/22 03:09:22 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/22 17:01:42 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,6 +226,11 @@ void	put_image(void *img_ptr, t_point *img_pos);
 void	draw_pixel(t_point point, int color);
 void	draw_pixel_line(float m, t_point point, t_point dpoint, int color);
 void	draw_pixel_rect(t_vector start, t_vector end, int color);
+
+/*
+** utils/get_image
+*/
+int	get_image_pixel(t_img *image, int x, int y);
 
 /*
 ** utils/put_image
