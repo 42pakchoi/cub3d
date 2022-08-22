@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_frame.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 10:34:02 by cpak              #+#    #+#             */
-/*   Updated: 2022/08/17 15:55:45 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/22 02:00:09 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ int	draw_frame(void)
 	clear_frame();
 	set_player();
 	draw_wall();
-	draw_minimap();
+	// draw_minimap();
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 01:53:01 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/19 18:34:46 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/22 14:48:53 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ static void	set_texture_images(void)
 		printf("error\n");
 		return ;
 	}
+
+	
 }
 
 void	init_images(void)

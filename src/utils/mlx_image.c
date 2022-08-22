@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 01:58:15 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/19 18:19:42 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/22 14:25:03 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,12 @@ t_img	*get_png_image(char *filepath)
 		&(image->size_line),
 		&(image->endian)
 	);
-	printf("w: %d, h: %d, bpp: %d, sl: %d, endian: %d\n",
-		image->width, image->height, image->bits_per_pixel, image->size_line, image->endian);
+
+	int len = image->size_line * image->bits_per_pixel / 8;
+	
+	
+	printf("%s, w: %d, h: %d, bpp: %d, sl: %d, endian: %d, len: %d\n",
+		filepath, image->width, image->height, image->bits_per_pixel, image->size_line, image->endian, len);
 	return (image);
 }
 

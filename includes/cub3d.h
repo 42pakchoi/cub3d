@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/19 18:44:30 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/19 19:10:59 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ typedef struct s_dda
 	t_point		player_grid;
 	t_point		step;
 	t_vector	side_dist;
-	int			is_hoz;
+	int			wall_dir;
 }				t_dda;
 
 t_game	*get_game_struct(void);
@@ -144,6 +144,11 @@ t_game	*get_game_struct(void);
 # define MINIMAP_RAY_COLOR 0xFFFFFF
 # define MINIMAP_PLAYER_COLOR 0x00FF00
 # define MINIMAP_PLAYER_SIZE 10
+
+# define WALL_DIR_N			0
+# define WALL_DIR_S			1
+# define WALL_DIR_E			2
+# define WALL_DIR_W			3
 
 /*
 ** map characters
