@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/22 17:01:42 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/22 17:06:48 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,10 @@ typedef struct s_img
 
 typedef struct s_textures
 {
-	void	*north;
-	void	*south;
-	void	*west;
-	void	*east;
+	t_img	*north;
+	t_img	*south;
+	t_img	*west;
+	t_img	*east;
 	t_img	floor;
 	t_img	ceiling;
 	t_img	*minimap_floor;
@@ -126,7 +126,7 @@ typedef struct s_dda
 	t_point		player_grid;
 	t_point		step;
 	t_vector	side_dist;
-	int			is_hoz;
+	int			wall_dir;
 }				t_dda;
 
 t_game	*get_game_struct(void);
@@ -144,6 +144,11 @@ t_game	*get_game_struct(void);
 # define MINIMAP_RAY_COLOR 0xFFFFFF
 # define MINIMAP_PLAYER_COLOR 0xFF00FF
 # define MINIMAP_PLAYER_SIZE 3
+
+# define WALL_DIR_N			0
+# define WALL_DIR_S			1
+# define WALL_DIR_E			2
+# define WALL_DIR_W			3
 
 /*
 ** map characters
@@ -217,7 +222,7 @@ void draw_rect_in_image(t_img *image, t_point *start, t_size *size, unsigned int
 void put_pixel(t_img *image, int x, int y, int color);
 void	fill_color_image(t_img *image, unsigned int color);
 t_img	*make_mlx_image(int width, int height, int color);
-void	*get_png_image(char *filepath);
+t_img	*get_png_image(char *filepath);
 void	put_image(void *img_ptr, t_point *img_pos);
 
 /*

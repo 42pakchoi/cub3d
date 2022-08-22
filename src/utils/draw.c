@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:26:53 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/15 18:27:26 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/19 19:23:16 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ float	get_perpendicular_wall_dist(t_vector player_pos, t_vector ray_dir, t_dda *
 {
 	float wall_dist;
 
-	if (dda->is_hoz == 0)
+	if (dda->wall_dir == WALL_DIR_E || dda->wall_dir == WALL_DIR_W)
 		wall_dist = (dda->player_grid.x  - player_pos.x + (1 - dda->step.x) / 2) / ray_dir.x;
 	else
 		wall_dist = (dda->player_grid.y - player_pos.y + (1 - dda->step.y) / 2) / ray_dir.y;
@@ -61,13 +61,19 @@ void	calc_collision_point(char **map_grid, t_dda *dda)
 		{
 			dda->side_dist.x += dda->delta_dist.x;
 			dda->player_grid.x += dda->step.x;
-			dda->is_hoz = 0;
+			if (dda->ray_dir.x > 0)
+				dda->wall_dir = WALL_DIR_W;
+			else
+				dda->wall_dir = WALL_DIR_E;
 		}
 		else
 		{
 			dda->side_dist.y += dda->delta_dist.y;
 			dda->player_grid.y += dda->step.y;
-			dda->is_hoz = 1;
+			if (dda->ray_dir.y > 0)
+				dda->wall_dir = WALL_DIR_N;
+			else
+				dda->wall_dir = WALL_DIR_S;
 		}
 		if (map_grid[(int)(dda->player_grid).y][(int)(dda->player_grid).x] == MAP_WALL)
 			break;
