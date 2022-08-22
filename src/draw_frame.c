@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_frame.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 10:34:02 by cpak              #+#    #+#             */
-/*   Updated: 2022/08/17 15:55:45 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/22 17:07:00 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,23 @@ static void	clear_frame()
 	mlx_clear_window(game->mlx, game->win);
 }
 
-void draw_minimap(void)
+static void	update_minimap_frame(void)
 {
-	draw_minimap_wall();
-	draw_minimap_ray();
-	draw_minimap_dirline();
-	draw_minimap_fov();
-	draw_minimap_player();
+	put_minimap_floor();
+	put_minimap_tiles();
+	put_minimap_ray();
+	put_minimap_player();
+}
+
+static void	draw_minimap(void)
+{
+	t_game	*game;
+	t_point	top_left;
+
+	game = get_game_struct();
+	top_left.x = 0;
+	top_left.y = 0;
+	put_image(game->map.textures.minimap_floor->img_ptr, &top_left);
 }
 
 int	draw_frame(void)
@@ -34,6 +44,7 @@ int	draw_frame(void)
 	clear_frame();
 	set_player();
 	draw_wall();
+	update_minimap_frame();
 	draw_minimap();
 	return (0);
 }

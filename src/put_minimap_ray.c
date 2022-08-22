@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_minimap_ray.c                                 :+:      :+:    :+:   */
+/*   put_minimap_ray.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-static void	draw_minimap_ray_line(t_dda *dda)
+static void	put_minimap_ray_line(t_dda *dda)
 {
 	float		wall_dist;
 	t_line		ray;
@@ -21,10 +21,10 @@ static void	draw_minimap_ray_line(t_dda *dda)
 	wall_dist = get_perpendicular_wall_dist(dda->player_pos, dda->ray_dir, dda);
 	ray.end.x = dda->player_pos.x + wall_dist * dda->ray_dir.x;
 	ray.end.y = dda->player_pos.y + wall_dist * dda->ray_dir.y;
-	draw_minimap_line(ray.start, ray.end, MINIMAP_RAY_COLOR);
+	put_minimap_line(ray.start, ray.end, MINIMAP_RAY_COLOR);
 }
 
-int	draw_minimap_ray(void)
+int	put_minimap_ray(void)
 {
 	t_game		*game;
 	t_player	*player;
@@ -44,7 +44,7 @@ int	draw_minimap_ray(void)
 		dda.ray_dir.y = player->dir.y + player->plane.y * cameraX;
 		init_dda(&dda);
 		calc_collision_point(game->map.array, &dda);
-		draw_minimap_ray_line(&dda);
+		put_minimap_ray_line(&dda);
 		w += 1;
 	}
 	return (0);

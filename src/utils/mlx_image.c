@@ -6,23 +6,13 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 01:58:15 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/19 18:19:42 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/22 17:08:51 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void put_pixel(t_img *image, int x, int y, int color)
-{
-	int				offset;
-	unsigned int	index;
-
-	offset = image->bits_per_pixel / CHAR_BIT;
-	index = image->size_line / offset * y + x;
-	image->addr[index] = color;
-}
-
-static void	fill_color_image(t_img *image, unsigned int color)
+void	fill_color_image(t_img *image, unsigned int color)
 {
 	int		h;
 	int		w;
@@ -33,7 +23,7 @@ static void	fill_color_image(t_img *image, unsigned int color)
 		w = 0;
 		while (w < image->width)
 		{
-			put_pixel(image, w, h, color);
+			put_image_pixel(image, w, h, color);
 			w++;
 		}
 		h++;
@@ -78,8 +68,12 @@ t_img	*get_png_image(char *filepath)
 		&(image->size_line),
 		&(image->endian)
 	);
-	printf("w: %d, h: %d, bpp: %d, sl: %d, endian: %d\n",
-		image->width, image->height, image->bits_per_pixel, image->size_line, image->endian);
+
+	int len = image->size_line * image->bits_per_pixel / 8;
+	
+	
+	printf("%s, w: %d, h: %d, bpp: %d, sl: %d, endian: %d, len: %d\n",
+		filepath, image->width, image->height, image->bits_per_pixel, image->size_line, image->endian, len);
 	return (image);
 }
 
