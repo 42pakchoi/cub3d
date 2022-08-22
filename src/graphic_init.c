@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 01:53:01 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/22 14:48:53 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/22 16:26:39 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,13 @@ static void	set_texture_images(void)
 		return ;
 	}
 
-	
+	// int	i = 0;
+
+	// while (map->textures.west->addr[i] != 0)
+	// {
+	// 	printf("%X ", map->textures.west->addr[i]);
+	// 	i += 1;
+	// }
 }
 
 void	init_images(void)

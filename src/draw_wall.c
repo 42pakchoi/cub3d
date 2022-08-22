@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:21:53 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/22 15:26:24 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/22 16:57:39 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,6 @@ void	draw_screen_line(int x, float wall_dist, int color)
 
 static void	draw_wall_line(int x, int wall_dir, float wall_dist, float collision_point)
 {
-	// 텍스쳐 배열에서 픽셀을 가져온다.
-	// wall_dir로 가져올 텍스쳐 이미지를 선택
-	// collision_point로 텍스쳐의 x값을 구하고,
-	// lineHeight로 텍스쳐에서 픽셀을 가져온다.
-	// 
-
 	t_game	*game;
 	t_img	*texture = NULL;
 
@@ -84,8 +78,6 @@ static void	draw_wall_line(int x, int wall_dir, float wall_dist, float collision
 
 	lineHeight = (int)(WINDOW_HEIGHT / wall_dist);
 	y_start = -lineHeight / 2 + WINDOW_HEIGHT / 2;
-	if (y_start < 0)
-		y_start = 0;
 	y_end = lineHeight / 2 + WINDOW_HEIGHT / 2;
 	if (y_end >= WINDOW_HEIGHT)
 		y_end = WINDOW_HEIGHT - 1;
@@ -94,19 +86,22 @@ static void	draw_wall_line(int x, int wall_dir, float wall_dist, float collision
 
 	while (y <= y_end)
 	{
+		
 		float	dy = (float)(texture->height) / (float)lineHeight;
+		int		offset = (texture->size_line - (texture->width * 4)) / 4;
+		
 		texture_y += dy;
-		// int		texY = (int)texture_y & (texture->height - 1);
-		// int		idx = (int)(texture_y * (texture->size_line / 4) + texture_x);
-
-		// int	offset = texture->bits_per_pixel / CHAR_BIT;
-		int	index = 64 * texture_y + texture_x;
 
 
-		unsigned int	color = texture->addr[index];
+		int		index = (texture->width + offset) * (int)texture_y + texture_x;
+		int		color = texture->addr[index];
 
-		mlx_pixel_put(game->mlx, game->win, x, y, (int)color);
 		y++;
+		if (y <= 0)
+			continue ;
+		if (y >= WINDOW_HEIGHT)
+			break ;
+		mlx_pixel_put(game->mlx, game->win, x, y, (int)color);
 	}
 }
 
@@ -135,42 +130,13 @@ int	draw_wall(void)
 
 		float collision_point;
 		if (dda.wall_dir == WALL_DIR_N || dda.wall_dir == WALL_DIR_S)
-		{
 			collision_point = dda.player_pos.x + wall_dist * dda.ray_dir.x;
-			if (dda.ray_dir.x > 0)
-				collision_point = 1 - collision_point;
-		}
 		else
-		{
 			collision_point = dda.player_pos.y + wall_dist * dda.ray_dir.y;
-			if (dda.ray_dir.y < 0)
-				collision_point = 1 - collision_point;
-		}
 		collision_point -= floor(collision_point);
 		draw_wall_line(w, dda.wall_dir, wall_dist, collision_point);
-		
 		w += 1;
 	}
-
-	// int	x = 10;
-	// int y = 10;
-	// t_img	*texture = game->map.textures.north;
-
-	// while (y < 310)
-	// {
-	// 	x = 10;
-	// 	while (x < 310)
-	// 	{
-	// 		int idx = (y - 10) * texture->size_line / 4 + (x - 10);
-	// 		int color = texture->addr[idx];
-			
-	// 		mlx_pixel_put(game->mlx, game->win, x, y, color);
-	// 		x += 1;
-	// 	}
-	// 	y += 1;
-	// }
-
-
 	return (0);
 }
 
