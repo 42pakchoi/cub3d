@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_minimap_line.c                                        :+:      :+:    :+:   */
+/*   put_minimap_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,28 +12,15 @@
 
 #include "cub3d.h"
 
-static void	set_line_pixel(float m, t_point point, t_point dpoint, int color)
-{
-	if (m > 1)
-	{
-		point.x += dpoint.y;
-		point.y += dpoint.x;
-	}
-	else
-	{
-		point.x += dpoint.x;
-		point.y += dpoint.y;
-	}
-	set_pixel(point, color);
-}
-
 static void	bres_algo(t_point point, t_size size, float m, int is_sub, int color, int max)
 {
 	int		f;
 	int		df1;
 	int		df2;
 	t_point	dpoint;
+	t_img	*image;
 
+	image = get_game_struct()->map.textures.minimap_floor;
 	f = 2 * size.h - size.w;
 	df1 = 2 * size.h;
 	df2 = 2 * (size.h - size.w);
@@ -41,7 +28,7 @@ static void	bres_algo(t_point point, t_size size, float m, int is_sub, int color
 	dpoint.y = 0;
 	while (dpoint.x <= max)
 	{
-		set_line_pixel(m, point, dpoint, color);
+		put_image_line(image, m, point, dpoint, color);
 		if (f < 0)
 			f += df1;
 		else
@@ -56,7 +43,7 @@ static void	bres_algo(t_point point, t_size size, float m, int is_sub, int color
 	}
 }
 
-static void	draw_quadrant_one_four(t_vector start, t_vector end, int color)
+static void	put_quadrant_one_four(t_vector start, t_vector end, int color)
 {
 	t_point	point;
 	t_size	size;
@@ -78,7 +65,7 @@ static void	draw_quadrant_one_four(t_vector start, t_vector end, int color)
 	bres_algo(point, size, m, 0, color, max);
 }
 
-static void	draw_quadrant_two_three(t_vector start, t_vector end, int color)
+static void	put_quadrant_two_three(t_vector start, t_vector end, int color)
 {
 	t_point	point;
 	t_size	size;
@@ -105,7 +92,7 @@ static void	draw_quadrant_two_three(t_vector start, t_vector end, int color)
 	bres_algo(point, size, m, 1, color, max);
 }
 
-void	draw_minimap_line(t_vector start, t_vector end, int color)
+void	put_minimap_line(t_vector start, t_vector end, int color)
 {
 	int	w;
 	int	h;
@@ -118,11 +105,11 @@ void	draw_minimap_line(t_vector start, t_vector end, int color)
 	w = end.x - start.x;
 	h = end.y - start.y;
 	if (w >= 0 && h >= 0)
-		draw_quadrant_one_four(start, end, color);
+		put_quadrant_one_four(start, end, color);
 	else if (w <= 0 && h <= 0)
-		draw_quadrant_one_four(end, start, color);
+		put_quadrant_one_four(end, start, color);
 	else if (w < 0)
-		draw_quadrant_two_three(start, end, color);
+		put_quadrant_two_three(start, end, color);
 	else if (h < 0)
-		draw_quadrant_two_three(end, start, color);
+		put_quadrant_two_three(end, start, color);
 }
