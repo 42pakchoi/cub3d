@@ -6,57 +6,19 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:21:53 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/22 16:57:39 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/22 17:18:11 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		get_wall_color(int wall_dir)
-{
-	if (wall_dir == 0)
-		return (0x0000FF);
-	else if (wall_dir == 1)
-		return (0xFFFF00);
-	else if (wall_dir == 2)
-		return (0x00FF00);
-	else if (wall_dir == 3)
-		return (0xFF0000);
-	else
-		return (0x00FF00);
-}
-
-void	draw_screen_line(int x, float wall_dist, int color)
+static t_img	*get_texture_img(int wall_dir)
 {
 	t_game	*game;
-	int lineHeight;
-	int y_start;
-	int y_end;
-	int y;
+	t_img	*texture;
 
+	texture = NULL;
 	game = get_game_struct();
-	lineHeight = (int)(WINDOW_HEIGHT / wall_dist);
-	y_start = -lineHeight / 2 + WINDOW_HEIGHT / 2;
-	if (y_start < 0)
-		y_start = 0;
-	y_end = lineHeight / 2 + WINDOW_HEIGHT / 2;
-	if (y_end >= WINDOW_HEIGHT)
-		y_end = WINDOW_HEIGHT - 1;
-	y = y_start;
-	while (y <= y_end)
-	{
-		mlx_pixel_put(game->mlx, game->win, x, y, color);
-		y++;
-	}
-}
-
-static void	draw_wall_line(int x, int wall_dir, float wall_dist, float collision_point)
-{
-	t_game	*game;
-	t_img	*texture = NULL;
-
-	game = get_game_struct();
-
 	if (wall_dir == WALL_DIR_N)
 		texture = game->map.textures.north;
 	else if (wall_dir == WALL_DIR_S)
@@ -65,43 +27,44 @@ static void	draw_wall_line(int x, int wall_dir, float wall_dist, float collision
 		texture = game->map.textures.east;
 	else if (wall_dir == WALL_DIR_W)
 		texture = game->map.textures.west;
+	return (texture);
+}
+
+static void	draw_wall_line(int x, int wall_dir, float wall_dist, float collision_point)
+{
+	t_game	*game;
+	t_img	*texture;
 
 	int		texture_x;
 	float	texture_y;
 	int		lineHeight;
 
-	int		y_start;
 	int		y_end;
+	int		y;
+
+	game = get_game_struct();
+	texture = get_texture_img(wall_dir);
 
 	texture_x = (int)((float)(texture->width) * collision_point);
 	texture_y = 0;
 
 	lineHeight = (int)(WINDOW_HEIGHT / wall_dist);
-	y_start = -lineHeight / 2 + WINDOW_HEIGHT / 2;
 	y_end = lineHeight / 2 + WINDOW_HEIGHT / 2;
 	if (y_end >= WINDOW_HEIGHT)
 		y_end = WINDOW_HEIGHT - 1;
-	
-	int		y = y_start;
-
+	y = -lineHeight / 2 + WINDOW_HEIGHT / 2;
 	while (y <= y_end)
 	{
-		
-		float	dy = (float)(texture->height) / (float)lineHeight;
-		int		offset = (texture->size_line - (texture->width * 4)) / 4;
-		
-		texture_y += dy;
-
-
-		int		index = (texture->width + offset) * (int)texture_y + texture_x;
-		int		color = texture->addr[index];
-
+		texture_y += (float)(texture->height) / (float)lineHeight;
 		y++;
 		if (y <= 0)
 			continue ;
 		if (y >= WINDOW_HEIGHT)
 			break ;
-		mlx_pixel_put(game->mlx, game->win, x, y, (int)color);
+		mlx_pixel_put(
+			game->mlx, game->win, x, y, 
+			get_image_pixel(texture, texture_x, texture_y)
+			);
 	}
 }
 
