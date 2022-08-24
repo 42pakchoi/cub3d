@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:21:53 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/22 17:18:11 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/24 13:16:53 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ static void	draw_wall_line(int x, int wall_dir, float wall_dist, float collision
 
 	int		texture_x;
 	float	texture_y;
-	int		lineHeight;
+	float	lineHeight;
 
-	int		y_end;
-	int		y;
+	float	y_end;
+	float	y;
 
 	game = get_game_struct();
 	texture = get_texture_img(wall_dir);
@@ -48,12 +48,12 @@ static void	draw_wall_line(int x, int wall_dir, float wall_dist, float collision
 	texture_x = (int)((float)(texture->width) * collision_point);
 	texture_y = 0;
 
-	lineHeight = (int)(WINDOW_HEIGHT / wall_dist);
-	y_end = lineHeight / 2 + WINDOW_HEIGHT / 2;
+	lineHeight = ((float)WINDOW_HEIGHT / wall_dist);
+	y_end = lineHeight / 2 + WINDOW_HEIGHT / 2 - 1;
 	if (y_end >= WINDOW_HEIGHT)
 		y_end = WINDOW_HEIGHT - 1;
 	y = -lineHeight / 2 + WINDOW_HEIGHT / 2;
-	while (y <= y_end)
+	while (y < y_end)
 	{
 		texture_y += (float)(texture->height) / (float)lineHeight;
 		y++;
