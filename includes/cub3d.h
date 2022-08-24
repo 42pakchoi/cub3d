@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/24 15:08:13 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/24 15:26:50 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,7 +199,8 @@ float		get_perpendicular_wall_dist(t_vector player_pos, t_vector ray_dir, t_dda 
 void		init_dda(t_dda *dda);
 void		calc_collision_point(char **map_grid, t_dda *dda);
 
-int			put_screen(void);
+int			put_screen_wall(void);
+int			put_screen_ceiling_floor(void);
 void		put_minimap_floor(void);
 void		put_minimap_tiles(void);
 void		put_minimap_line(t_vector start, t_vector end, int color);
