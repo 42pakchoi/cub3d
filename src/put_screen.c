@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_wall.c                                        :+:      :+:    :+:   */
+/*   put_screen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:21:53 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/24 13:16:53 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/24 14:41:43 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static t_img	*get_texture_img(int wall_dir)
 	return (texture);
 }
 
-static void	draw_wall_line(int x, int wall_dir, float wall_dist, float collision_point)
+static void	put_wall_line(int x, int wall_dir, float wall_dist, float collision_point)
 {
 	t_game	*game;
 	t_img	*texture;
@@ -61,14 +61,11 @@ static void	draw_wall_line(int x, int wall_dir, float wall_dist, float collision
 			continue ;
 		if (y >= WINDOW_HEIGHT)
 			break ;
-		mlx_pixel_put(
-			game->mlx, game->win, x, y, 
-			get_image_pixel(texture, texture_x, texture_y)
-			);
+		put_image_pixel(game->screen, x, y, get_image_pixel(texture, texture_x, (int)texture_y));
 	}
 }
 
-int	draw_wall(void)
+int	put_screen(void)
 {
 	t_game		*game;
 	t_player	*player;
@@ -97,7 +94,7 @@ int	draw_wall(void)
 		else
 			collision_point = dda.player_pos.y + wall_dist * dda.ray_dir.y;
 		collision_point -= floor(collision_point);
-		draw_wall_line(w, dda.wall_dir, wall_dist, collision_point);
+		put_wall_line(w, dda.wall_dir, wall_dist, collision_point);
 		w += 1;
 	}
 	return (0);

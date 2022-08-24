@@ -27,6 +27,6 @@ int	put_minimap_player(void)
 	line_start.y = (line_start.y * MINIMAP_TILE_SIZE) - (MINIMAP_PLAYER_SIZE / 2);
 	line_end.x = (line_end.x * MINIMAP_TILE_SIZE) + (MINIMAP_PLAYER_SIZE / 2);
 	line_end.y = (line_end.y * MINIMAP_TILE_SIZE) + (MINIMAP_PLAYER_SIZE / 2);
-	put_image_rect(game->map.textures.minimap_floor, line_start, line_end, MINIMAP_PLAYER_COLOR);
+	put_image_rect(game->minimap, line_start, line_end, MINIMAP_PLAYER_COLOR);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 17:16:16 by cpak              #+#    #+#             */
-/*   Updated: 2022/08/17 14:49:02 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/24 15:11:11 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	key_down(int keycode)
 		game->player.key.rotate = 355;
 	if (keycode == KEY_ARROW_RIGHT)
 		game->player.key.rotate = 5;
+	draw_frame();
 	return (0);
 }
 
