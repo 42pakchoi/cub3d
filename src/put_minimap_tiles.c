@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 02:53:00 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/22 02:53:29 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/24 14:22:47 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void put_minimap_tiles(void)
 			tile_end.y = tile_start.y + MINIMAP_TILE_SIZE;
 			if (map->array[i.y][i.x] == '1')
 			{
-				put_image_rect(map->textures.minimap_floor, tile_start, tile_end, MINIMAP_WALL_COLOR);
+				put_image_rect(game->minimap, tile_start, tile_end, MINIMAP_WALL_COLOR);
 			}
 			i.x++;
 		}

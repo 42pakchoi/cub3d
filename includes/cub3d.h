@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/22 17:06:48 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/24 15:26:50 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,8 @@ typedef struct s_game
 	void		*mlx;
 	void		*win;
 	t_map		map;
+	t_img		*minimap;
+	t_img		*screen;
 	t_player	player;
 	t_bool		is_gameend;
 }				t_game;
@@ -185,8 +187,9 @@ t_game	*get_game_struct(void);
 ** functions
 */
 
+void		update_minimap_frame(void);
+
 int			draw_frame(void);
-int			draw_wall(void);
 int			erase_minimap_dirline(void);
 int			erase_minimap_fov(void);
 int			erase_minimap_ray(void);
@@ -196,6 +199,8 @@ float		get_perpendicular_wall_dist(t_vector player_pos, t_vector ray_dir, t_dda 
 void		init_dda(t_dda *dda);
 void		calc_collision_point(char **map_grid, t_dda *dda);
 
+int			put_screen_wall(void);
+int			put_screen_ceiling_floor(void);
 void		put_minimap_floor(void);
 void		put_minimap_tiles(void);
 void		put_minimap_line(t_vector start, t_vector end, int color);
@@ -221,7 +226,7 @@ void	init_images(void);
 void draw_rect_in_image(t_img *image, t_point *start, t_size *size, unsigned int color);
 void put_pixel(t_img *image, int x, int y, int color);
 void	fill_color_image(t_img *image, unsigned int color);
-t_img	*make_mlx_image(int width, int height, int color);
+t_img	*make_mlx_image(int width, int height);
 t_img	*get_png_image(char *filepath);
 void	put_image(void *img_ptr, t_point *img_pos);
 

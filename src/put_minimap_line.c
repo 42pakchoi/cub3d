@@ -20,7 +20,7 @@ static void	bres_algo(t_point point, t_size size, float m, int is_sub, int color
 	t_point	dpoint;
 	t_img	*image;
 
-	image = get_game_struct()->map.textures.minimap_floor;
+	image = get_game_struct()->minimap;
 	f = 2 * size.h - size.w;
 	df1 = 2 * size.h;
 	df2 = 2 * (size.h - size.w);

@@ -6,7 +6,7 @@
 #    By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/28 19:18:15 by sarchoi           #+#    #+#              #
-#    Updated: 2022/08/22 17:02:09 by sarchoi          ###   ########seoul.kr   #
+#    Updated: 2022/08/24 14:33:04 by sarchoi          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ SRCS_ROOT = main.c \
       map_validate2.c \
 			graphic_init.c \
 			draw_frame.c \
-      draw_wall.c \
+      put_screen.c \
 			put_minimap_floor.c \
 			put_minimap_tiles.c \
 			put_minimap_line.c \

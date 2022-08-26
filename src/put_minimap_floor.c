@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 02:58:10 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/22 03:00:32 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/24 14:22:16 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	put_minimap_floor(void)
 	bottom_right.x = map->width * MINIMAP_TILE_SIZE;
 	bottom_right.y = map->height * MINIMAP_TILE_SIZE;
 	put_image_rect(
-		map->textures.minimap_floor,
+		game->minimap,
 		top_left,
 		bottom_right,
 		MINIMAP_FLOOR_COLOR

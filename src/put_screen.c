@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_wall.c                                        :+:      :+:    :+:   */
+/*   put_screen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:21:53 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/24 13:16:53 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/24 15:27:16 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static t_img	*get_texture_img(int wall_dir)
 	return (texture);
 }
 
-static void	draw_wall_line(int x, int wall_dir, float wall_dist, float collision_point)
+static void	put_wall_line(int x, int wall_dir, float wall_dist, float collision_point)
 {
 	t_game	*game;
 	t_img	*texture;
@@ -61,14 +61,11 @@ static void	draw_wall_line(int x, int wall_dir, float wall_dist, float collision
 			continue ;
 		if (y >= WINDOW_HEIGHT)
 			break ;
-		mlx_pixel_put(
-			game->mlx, game->win, x, y, 
-			get_image_pixel(texture, texture_x, texture_y)
-			);
+		put_image_pixel(game->screen, x, y, get_image_pixel(texture, texture_x, (int)texture_y));
 	}
 }
 
-int	draw_wall(void)
+int	put_screen_wall(void)
 {
 	t_game		*game;
 	t_player	*player;
@@ -97,11 +94,30 @@ int	draw_wall(void)
 		else
 			collision_point = dda.player_pos.y + wall_dist * dda.ray_dir.y;
 		collision_point -= floor(collision_point);
-		draw_wall_line(w, dda.wall_dir, wall_dist, collision_point);
+		put_wall_line(w, dda.wall_dir, wall_dist, collision_point);
 		w += 1;
 	}
 	return (0);
 }
 
+int	put_screen_ceiling_floor(void)
+{
+	t_game		*game;
+	t_point		ceiling_start;
+	t_point		ceiling_end;
+	t_point		floor_start;
+	t_point		floor_end;
 
-
+	game = get_game_struct();
+	ceiling_start.x = 0;
+	ceiling_start.y = 0;
+	ceiling_end.x = WINDOW_WIDTH;
+	ceiling_end.y = WINDOW_HEIGHT / 2;
+	floor_start.x = 0;
+	floor_start.y = WINDOW_HEIGHT / 2;
+	floor_end.x = WINDOW_WIDTH;
+	floor_end.y = WINDOW_HEIGHT;
+	put_image_rect(game->screen, ceiling_start, ceiling_end, game->map.ceiling_color);
+	put_image_rect(game->screen, floor_start, floor_end, game->map.floor_color);
+	return (FT_SUCCESS);
+}
