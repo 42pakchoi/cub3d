@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 17:33:46 by cpak              #+#    #+#             */
-/*   Updated: 2022/08/17 15:45:38 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/24 18:41:46 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ static void	set_player_init_pos(void)
 				map->array[i][j] == MAP_PLAYER_W)
 			{
 				game->player.character = map->array[i][j];
-				game->player.pos.y = i;
-				game->player.pos.x = j;
+				game->player.pos.y = i + 0.5;
+				game->player.pos.x = j + 0.5;
 				return ;
 			}
 			j++;
