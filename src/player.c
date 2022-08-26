@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 17:33:46 by cpak              #+#    #+#             */
-/*   Updated: 2022/08/17 15:45:38 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/26 17:34:57 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ static void	set_player_init_pos(void)
 				map->array[i][j] == MAP_PLAYER_W)
 			{
 				game->player.character = map->array[i][j];
-				game->player.pos.y = i;
-				game->player.pos.x = j;
+				game->player.pos.y = i + 0.5;
+				game->player.pos.x = j + 0.5;
 				return ;
 			}
 			j++;
@@ -88,23 +88,23 @@ void	set_player(void)
 	pos.y = 0;
 	if (game->player.key.move[0])
 	{
-		pos.x = game->player.pos.x + game->player.dir.x / 5;
-		pos.y = game->player.pos.y + game->player.dir.y / 5;
+		pos.x = game->player.pos.x + game->player.dir.x * PLAYER_SPEED;
+		pos.y = game->player.pos.y + game->player.dir.y * PLAYER_SPEED;
 	}
 	if (game->player.key.move[1])
 	{
-		pos.x = game->player.pos.x - game->player.dir.x / 5;
-		pos.y = game->player.pos.y - game->player.dir.y / 5;
+		pos.x = game->player.pos.x - game->player.dir.x * PLAYER_SPEED;
+		pos.y = game->player.pos.y - game->player.dir.y * PLAYER_SPEED;
 	}
 	if (game->player.key.move[2])
 	{
-		pos.x = game->player.pos.x - game->player.plane.x / 5;
-		pos.y = game->player.pos.y - game->player.plane.y / 5;
+		pos.x = game->player.pos.x - game->player.plane.x * PLAYER_SPEED;
+		pos.y = game->player.pos.y - game->player.plane.y * PLAYER_SPEED;
 	}
 	if (game->player.key.move[3])
 	{
-		pos.x = game->player.pos.x + game->player.plane.x / 5;
-		pos.y = game->player.pos.y + game->player.plane.y / 5;
+		pos.x = game->player.pos.x + game->player.plane.x * PLAYER_SPEED;
+		pos.y = game->player.pos.y + game->player.plane.y * PLAYER_SPEED;
 	}
 	if (game->player.key.rotate)
 		rotate_player(game, game->player.key.rotate);

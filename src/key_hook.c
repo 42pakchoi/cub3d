@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 17:16:16 by cpak              #+#    #+#             */
-/*   Updated: 2022/08/24 15:11:11 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/26 17:33:28 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,9 @@ int	key_down(int keycode)
 	if (keycode == KEY_D)
 		game->player.key.move[3] = 1;
 	if (keycode == KEY_ARROW_LEFT)
-		game->player.key.rotate = 355;
+		game->player.key.rotate = -PLAYER_ROTATE_SPEED;
 	if (keycode == KEY_ARROW_RIGHT)
-		game->player.key.rotate = 5;
-	draw_frame();
+		game->player.key.rotate = PLAYER_ROTATE_SPEED;
 	return (0);
 }
 
