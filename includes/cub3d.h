@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/24 15:26:50 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/24 18:49:45 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,9 @@ t_game	*get_game_struct(void);
 /*
 ** constants
 **/
+
+# define PLAYER_SPEED			0.1
+# define PLAYER_ROTATE_SPEED	5
 
 # define WINDOW_WIDTH 640
 # define WINDOW_HEIGHT 480

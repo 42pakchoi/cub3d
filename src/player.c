@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 17:33:46 by cpak              #+#    #+#             */
-/*   Updated: 2022/08/24 18:41:46 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/26 17:34:57 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,23 +88,23 @@ void	set_player(void)
 	pos.y = 0;
 	if (game->player.key.move[0])
 	{
-		pos.x = game->player.pos.x + game->player.dir.x / 5;
-		pos.y = game->player.pos.y + game->player.dir.y / 5;
+		pos.x = game->player.pos.x + game->player.dir.x * PLAYER_SPEED;
+		pos.y = game->player.pos.y + game->player.dir.y * PLAYER_SPEED;
 	}
 	if (game->player.key.move[1])
 	{
-		pos.x = game->player.pos.x - game->player.dir.x / 5;
-		pos.y = game->player.pos.y - game->player.dir.y / 5;
+		pos.x = game->player.pos.x - game->player.dir.x * PLAYER_SPEED;
+		pos.y = game->player.pos.y - game->player.dir.y * PLAYER_SPEED;
 	}
 	if (game->player.key.move[2])
 	{
-		pos.x = game->player.pos.x - game->player.plane.x / 5;
-		pos.y = game->player.pos.y - game->player.plane.y / 5;
+		pos.x = game->player.pos.x - game->player.plane.x * PLAYER_SPEED;
+		pos.y = game->player.pos.y - game->player.plane.y * PLAYER_SPEED;
 	}
 	if (game->player.key.move[3])
 	{
-		pos.x = game->player.pos.x + game->player.plane.x / 5;
-		pos.y = game->player.pos.y + game->player.plane.y / 5;
+		pos.x = game->player.pos.x + game->player.plane.x * PLAYER_SPEED;
+		pos.y = game->player.pos.y + game->player.plane.y * PLAYER_SPEED;
 	}
 	if (game->player.key.rotate)
 		rotate_player(game, game->player.key.rotate);
