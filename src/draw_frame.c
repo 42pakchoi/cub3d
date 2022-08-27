@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_frame.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 10:34:02 by cpak              #+#    #+#             */
-/*   Updated: 2022/08/24 15:29:59 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/27 19:47:18 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static void	clear_frame()
 {
-	t_game	*game;
+	// t_game	*game;
 
-	game = get_game_struct();
+	// game = get_game_struct();
 	// TODO: check
 	// mlx_clear_window(game->mlx, game->win);
 }

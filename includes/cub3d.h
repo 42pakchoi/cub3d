@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/24 18:49:45 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/27 20:26:07 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ t_game	*get_game_struct(void);
 ** constants
 **/
 
-# define PLAYER_SPEED			0.1
+# define PLAYER_SPEED			0.09
 # define PLAYER_ROTATE_SPEED	5
 
 # define WINDOW_WIDTH 640
@@ -154,6 +154,11 @@ t_game	*get_game_struct(void);
 # define WALL_DIR_S			1
 # define WALL_DIR_E			2
 # define WALL_DIR_W			3
+
+# define COLLISION_NONE		0
+# define COLLISION_HOZ		1
+# define COLLISION_VER		2
+# define COLLISION_CORNER	3
 
 /*
 ** map characters
@@ -185,6 +190,11 @@ t_game	*get_game_struct(void);
 # define KEY_ARROW_LEFT		123
 # define KEY_ARROW_RIGHT	124
 # define CLOSE_BUTTON		17
+
+# define KEY_INDEX_W		0
+# define KEY_INDEX_S		1
+# define KEY_INDEX_A		2
+# define KEY_INDEX_D		3
 
 /*
 ** functions

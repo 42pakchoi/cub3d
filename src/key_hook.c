@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 17:16:16 by cpak              #+#    #+#             */
-/*   Updated: 2022/08/26 17:33:28 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/27 20:06:45 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ int	key_down(int keycode)
 
 	game = get_game_struct();
 	if (keycode == KEY_W)
-		game->player.key.move[0] = 1;
+		game->player.key.move[KEY_INDEX_W] = 1;
 	if (keycode == KEY_S)
-		game->player.key.move[1] = 1;
+		game->player.key.move[KEY_INDEX_S] = 1;
 	if (keycode == KEY_A)
-		game->player.key.move[2] = 1;
+		game->player.key.move[KEY_INDEX_A] = 1;
 	if (keycode == KEY_D)
-		game->player.key.move[3] = 1;
+		game->player.key.move[KEY_INDEX_D] = 1;
 	if (keycode == KEY_ARROW_LEFT)
 		game->player.key.rotate = -PLAYER_ROTATE_SPEED;
 	if (keycode == KEY_ARROW_RIGHT)
@@ -39,13 +39,13 @@ int	key_up(int keycode)
 	set_player();
 	game = get_game_struct();
 	if (keycode == KEY_W)
-		game->player.key.move[0] = 0;
+		game->player.key.move[KEY_INDEX_W] = 0;
 	if (keycode == KEY_S)
-		game->player.key.move[1] = 0;
+		game->player.key.move[KEY_INDEX_S] = 0;
 	if (keycode == KEY_A)
-		game->player.key.move[2] = 0;
+		game->player.key.move[KEY_INDEX_A] = 0;
 	if (keycode == KEY_D)
-		game->player.key.move[3] = 0;
+		game->player.key.move[KEY_INDEX_D] = 0;
 	if (keycode == KEY_ARROW_LEFT)
 		game->player.key.rotate = 0;
 	if (keycode == KEY_ARROW_RIGHT)
