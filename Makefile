@@ -6,7 +6,7 @@
 #    By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/28 19:18:15 by sarchoi           #+#    #+#              #
-#    Updated: 2022/08/24 14:33:04 by sarchoi          ###   ########seoul.kr   #
+#    Updated: 2022/08/26 23:49:40 by sarchoi          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,8 @@ SRCS_UTIL = global.c \
 	draw_pixel.c \
 	mlx_image.c \
 	put_image.c \
-	get_image.c
+	get_image.c \
+	exit.c
 SRCS = $(addprefix ./src/, $(SRCS_ROOT)) \
 		$(addprefix ./src/utils/, $(SRCS_UTIL))
 

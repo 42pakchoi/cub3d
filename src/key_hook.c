@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 17:16:16 by cpak              #+#    #+#             */
-/*   Updated: 2022/08/26 17:33:28 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/27 03:40:16 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,7 @@ int	key_up(int keycode)
 		game->player.key.rotate = 0;
 	if (keycode == KEY_ARROW_RIGHT)
 		game->player.key.rotate = 0;
+	if (keycode == KEY_ESC)
+		exit_with_close_button();
 	return (0);
 }

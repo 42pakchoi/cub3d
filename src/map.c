@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:43:07 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/15 18:14:14 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/26 23:24:15 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,8 @@ void init_map(char *map_filepath)
 	test_print_map_raw();
 	if (parse_map() == FT_ERROR)
 	{
-		printf("<error> Failed to parse map data.\n"); // TODO: error handling
+		close(filde);
+		exit_with_error("Failed to parse map.");
 		return ;
 	}
 	print_map_data();

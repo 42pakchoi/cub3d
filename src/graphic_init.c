@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 01:53:01 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/24 15:04:28 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/27 02:59:58 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,7 @@ static void	set_texture_images(void)
 		map->textures.west == NULL || map->textures.east == NULL)
 	{
 		// 이미지 처리에 문제가 발생한 경우
-		printf("error\n");
-		return ;
+		exit_with_error("Failed to load textures");
 	}
 }
 
