@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 21:43:59 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/27 03:56:30 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/28 17:10:39 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,6 @@ void	free_game()
 		mlx_destroy_window(game->mlx, game->win);
 	if (game->mlx)
 		free(game->mlx);
-
-	exit(0);
 }
 
 void	exit_with_error(char *message)
