@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:43:07 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/26 23:24:15 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/28 17:08:26 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,24 @@ static int vaildate_file_extension(char *filepath)
 
 static void read_file(int filde)
 {
-	t_game *game;
-	t_map * map;
-	char *  buf;
-	int     result;
+	t_game	*game;
+	t_map	*map;
+	char	*buf;
+	int		result;
 
 	game = get_game_struct();
 	map = &(game->map);
-	map->raw = ft_lstnew(NULL);
-	if (map->raw == NULL)
-		return ;
+	map->raw = NULL;
 	result = get_next_line(filde, &buf);
 	while (result != FT_EOF)
 	{
-		ft_lstadd_back(&(map->raw), ft_lstnew((void *) buf));
+		if (map->raw == NULL)
+			map->raw = ft_lstnew((void *) buf);
+		else
+			ft_lstadd_back(&(map->raw), ft_lstnew((void *) buf));
 		result = get_next_line(filde, &buf);
 	}
+	free(buf);
 }
 
 static void test_print_map_raw(void)
@@ -77,6 +79,16 @@ static void print_map_data(void)
 	printf("- rgb_ceiling_color: %x\n", map->ceiling_color);
 }
 
+static void	clear_map_raw(void)
+{
+	t_game	*game;
+	t_map	*map;
+
+	game = get_game_struct();
+	map = &(game->map);
+	ft_lstclear(&(map->raw), free);
+}
+
 void init_map(char *map_filepath)
 {
 	int		filde;
@@ -101,6 +113,7 @@ void init_map(char *map_filepath)
 		exit_with_error("Failed to parse map.");
 		return ;
 	}
+	clear_map_raw();
 	print_map_data();
 	printf("<info> Completed validating map.\n");
 	close(filde);
