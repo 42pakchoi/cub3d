@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 14:21:02 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/08 16:51:58 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/27 02:40:15 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ static int	make_list_to_array(void)
 	map->height = get_map_height(raw_p);
 	map->width = get_map_width(raw_p);
 	map->array = (char **)malloc(sizeof(char *) * map->height + 1);
+	if (map->array == NULL)
+		return (FT_ERROR);
 	map->array[map->height] = NULL;
 	i = 0;
 	while (i < map->height)

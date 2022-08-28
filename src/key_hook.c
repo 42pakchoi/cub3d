@@ -50,5 +50,7 @@ int	key_up(int keycode)
 		game->player.key.rotate = 0;
 	if (keycode == KEY_ARROW_RIGHT)
 		game->player.key.rotate = 0;
+	if (keycode == KEY_ESC)
+		exit_with_close_button();
 	return (0);
 }

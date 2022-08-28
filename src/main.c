@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:33:12 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/24 16:17:30 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/27 03:56:02 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,12 @@ void	init_mlx()
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "cub3d");
 	init_images();
-	mlx_hook(game->win, 2, 0L, key_down, NULL);
-	mlx_hook(game->win, 3, 0L, key_up, NULL);
-	// mlx_hook(game->win, 4, 0L, mouse_down, NULL);
-	// mlx_hook(game->win, 5, 0L, mouse_up, NULL);
-	// mlx_hook(game->win, 6, 0L, mouse_move, NULL);
+	mlx_hook(game->win, KEY_PRESS, 0L, key_down, NULL);
+	mlx_hook(game->win, KEY_RELEASE, 0L, key_up, NULL);
+	// mlx_hook(game->win, BUTTON_PRESS, 0L, mouse_down, NULL);
+	// mlx_hook(game->win, BUTTON_RELEASE, 0L, mouse_up, NULL);
+	// mlx_hook(game->win, MOTION_NOTIFY, 0L, mouse_move, NULL);
+	mlx_hook(game->win, CLOSE_BUTTON, 0, exit_with_close_button, NULL);
 	mlx_loop_hook(game->mlx, draw_frame, NULL);
 }
 
@@ -48,5 +49,7 @@ int	main(int argc, char *argv[])
 	}
 	printf("<info> map file name: %s\n", argv[1]);
 	run_game(argv[1]);
+	free_game();
+	system("leaks cub3d");
 	return (0);
 }

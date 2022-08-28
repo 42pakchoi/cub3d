@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 18:45:00 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/04 15:19:15 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/26 23:53:35 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,16 @@ static unsigned int	ft_get_next_str_len(char const **str, char delim)
 	}
 	i = 0;
 	while ((*str)[i] != delim && (*str)[i])
+		i++;
+	return (i);
+}
+
+unsigned int 	ft_split_length(char **tab)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (tab[i])
 		i++;
 	return (i);
 }
