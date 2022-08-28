@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 01:16:53 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/28 16:05:53 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/28 18:10:18 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,9 @@ int	validate_map(void)
 		printf("<TEST> check_map_walls\n");
 		return (FT_ERROR);
 	}
+	
+	// 문을 찾고, 문이 입력될 수 있는 조건인지 확인
+	
 	if (check_map_required_characters() == FT_ERROR)
 	{
 		printf("<TEST> check_map_required_characters\n");

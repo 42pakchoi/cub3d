@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parse.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 01:13:38 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/14 21:24:49 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/26 23:54:00 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,21 @@ int	read_colors(void)
 	if (raw_line == NULL)
 		return (FT_ERROR);
 	floor_color_split = ft_split(raw_line->content + 2, ',');
-	if (floor_color_split == NULL)
+	if (floor_color_split == NULL || ft_split_length(floor_color_split) != 3)
+	{
+		ft_split_free(floor_color_split);
 		return (FT_ERROR);
+	}
 	raw_line = find_map_line(game->map.raw, "C");
 	if (raw_line == NULL)
 		return (FT_ERROR);
 	ceiling_color_split = ft_split(raw_line->content + 2, ',');
-	if (ceiling_color_split == NULL)
+	if (ceiling_color_split == NULL || ft_split_length(ceiling_color_split) != 3)
+	{
+		ft_split_free(floor_color_split);
+		ft_split_free(ceiling_color_split);
 		return (FT_ERROR);
+	}
 	floor_color = (ft_atoi(floor_color_split[0]) << 16) +
 					(ft_atoi(floor_color_split[1]) << 8) +
 					ft_atoi(floor_color_split[2]);
@@ -93,10 +100,8 @@ int	read_colors(void)
 int	parse_map(void)
 {
 	t_game	*game;
-	// t_map	*map;
 
 	game = get_game_struct();
-	// map = &(game->map);
 	if (game->map.raw == NULL)
 		return (FT_ERROR);
 	if (read_textures() == FT_ERROR ||

@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 17:16:16 by cpak              #+#    #+#             */
-/*   Updated: 2022/08/28 09:48:35 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/28 17:36:57 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,7 @@ int	key_up(int keycode)
 		game->player.key.rotate = 0;
 	if (keycode == KEY_SPACEBAR)
 		door_action();
+	if (keycode == KEY_ESC)
+		exit_with_close_button();
 	return (0);
 }

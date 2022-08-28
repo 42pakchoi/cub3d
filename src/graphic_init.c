@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 01:53:01 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/28 03:49:39 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/28 17:37:05 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ static void	set_texture_images(void)
 		map->textures.west == NULL || map->textures.east == NULL)
 	{
 		// 이미지 처리에 문제가 발생한 경우
-		printf("error\n");
-		return ;
+		exit_with_error("Failed to load textures");
 	}
 }
 

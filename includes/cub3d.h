@@ -185,18 +185,15 @@ t_game	*get_game_struct(void);
 /*
 ** keycodes
 ** ESC: exit
-** ARROW KEYS: move player
 ** WASD: move player
+** ARROW KEYS: move player's view
 ** CLOSE_BUTTON: the red close button at window bar
 */
 # define KEY_ESC			53
-# define KEY_Q				12
 # define KEY_W				13
 # define KEY_A				0
 # define KEY_S				1
 # define KEY_D				2
-# define KEY_ARROW_UP		126
-# define KEY_ARROW_DOWN		125
 # define KEY_ARROW_LEFT		123
 # define KEY_ARROW_RIGHT	124
 # define KEY_SPACEBAR		49
@@ -206,6 +203,15 @@ t_game	*get_game_struct(void);
 # define KEY_INDEX_S		1
 # define KEY_INDEX_A		2
 # define KEY_INDEX_D		3
+
+/*
+** x_event refers from X.h
+*/
+#define KEY_PRESS		2
+#define KEY_RELEASE		3
+#define BUTTON_PRESS		4
+#define BUTTON_RELEASE		5
+#define MOTION_NOTIFY		6
 
 /*
 ** functions
@@ -229,6 +235,10 @@ void		put_minimap_tiles(void);
 void		put_minimap_line(t_vector start, t_vector end, int color);
 int			put_minimap_player(void);
 int			put_minimap_ray(void);
+
+void	free_game();
+void	exit_with_error(char *message);
+int		exit_with_close_button(void);
 
 /*
 ** minimap
