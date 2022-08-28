@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:26:53 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/28 17:12:14 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/28 23:54:35 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,15 +83,22 @@ void	calc_dda(t_dda *dda)
 
 void	calc_collision_point(char **map_grid, t_dda *dda)
 {
+	int x;
+	int y;
+
 	while (1)
 	{
 		calc_dda(dda);
-		if (map_grid[(int)(dda->player_grid).y][(int)(dda->player_grid).x] == MAP_DOOR)
+		x = (int)(dda->player_grid).x;
+		y = (int)(dda->player_grid).y;
+		if (map_grid[y][x] == MAP_DOOR)
 		{
 			dda->is_door = 1;
 			break;
 		}
-		if (map_grid[(int)(dda->player_grid).y][(int)(dda->player_grid).x] == MAP_WALL)
+		if (map_grid[y][x] == MAP_DOOR_OPEN)
+			dda->is_door = 2;
+		if (map_grid[y][x] == MAP_WALL)
 			break;
 	}
 	set_perpendicular_wall_dist(dda, dda->player_pos, dda->ray_dir);
@@ -101,6 +108,17 @@ void	calc_collision_point(char **map_grid, t_dda *dda)
 	if (dda->is_door == 1)
 	{
 		dda->wall_dir = WALL_DOOR;
+		dda->is_door = 0;
+	}
+	if (dda->is_door == 2)
+	{
+		if (map_grid[y][x] == MAP_DOOR_OPEN 
+			|| map_grid[y+1][x] == MAP_DOOR_OPEN
+			|| map_grid[y][x-1] == MAP_DOOR_OPEN 
+			|| map_grid[y][x+1] == MAP_DOOR_OPEN)
+		{
+			dda->wall_dir = WALL_DOOR_SIDE;
+		}
 		dda->is_door = 0;
 	}
 }

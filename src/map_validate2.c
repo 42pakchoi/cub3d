@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validate2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 01:20:22 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/08 01:24:11 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/28 22:27:53 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	flood_wall(char **array, int x, int y)
 		map->is_walled = FT_FALSE;
 		return ;
 	}
-	if (array[y][x] != MAP_EMPTY)
+	if (array[y][x] != MAP_EMPTY && array[y][x] != MAP_DOOR)
 		return ;
 	array[y][x] = MAP_TEST_VISITED;
 	flood_wall(array, x + 1, y);

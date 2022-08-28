@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/28 15:45:45 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/28 23:46:09 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct s_textures
 	t_img	*west;
 	t_img	*east;
 	t_img	*door;
+	t_img	*door_side;
 	t_img	floor;
 	t_img	ceiling;
 	t_img	*minimap_floor;

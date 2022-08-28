@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:21:53 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/28 16:40:57 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/28 23:46:34 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static t_img	*get_texture_img(int wall_dir)
 		texture = game->map.textures.west;
 	else if (wall_dir == WALL_DOOR)
 		texture = game->map.textures.door;
+	else if (wall_dir == WALL_DOOR_SIDE)
+		texture = game->map.textures.door_side;
 	return (texture);
 }
 
@@ -92,9 +94,6 @@ int	put_screen_wall(void)
 		dda.ray_dir.y = player->dir.y + player->plane.y * cameraX;
 		init_dda(&dda);
 		calc_collision_point(game->map.array, &dda);
-
-		
-
 		put_wall_line(w, dda.wall_dir, dda.wall_dist, dda.wall_collision_point);
 		w += 1;
 	}
