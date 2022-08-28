@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 17:33:46 by cpak              #+#    #+#             */
-/*   Updated: 2022/08/26 17:34:57 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/27 20:27:24 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,47 +67,77 @@ void	init_player(void)
 		rotate_player(game, 270);
 }
 
-t_bool	calc_player_collision(t_vector pos)
+static int	calc_collision_wall(t_vector pos, t_vector delta)
+{
+	char		**map;
+	t_point		p;
+	int 		collision_hoz;
+	int 		collision_ver;
+
+	map = get_game_struct()->map.array;
+	p.x = (int)(pos.x + delta.x);
+	p.y = (int)(pos.y + delta.y);
+	collision_hoz = (map[p.y][(int)(pos.x)] == MAP_WALL);
+	collision_ver = (map[(int)pos.y][p.x] == MAP_WALL);
+	if (collision_hoz && collision_ver)
+		return (COLLISION_CORNER);
+	if (collision_ver)
+		return (COLLISION_VER);
+	if (collision_hoz)
+		return (COLLISION_HOZ);
+	return (COLLISION_NONE);
+}
+
+void	move_player(t_vector delta)
 {
 	t_game	*game;
-	t_point	p;
+	int		wall;
 
 	game = get_game_struct();
-	p.x = (int)pos.x;
-	p.y = (int)pos.y;
-	return (game->map.array[p.y][p.x] == MAP_WALL);
+	if (delta.x != 0 || delta.y != 0)
+	{
+		wall = calc_collision_wall(game->player.pos, delta);
+		if (wall == COLLISION_NONE)
+		{
+			game->player.pos.x += delta.x;
+			game->player.pos.y += delta.y;
+		}
+		else if (wall == COLLISION_HOZ)
+			game->player.pos.x += delta.x;
+		else if (wall == COLLISION_VER)
+			game->player.pos.y += delta.y;
+	}
 }
 
 void	set_player(void)
 {
 	t_game		*game;
-	t_vector	pos;
+	t_vector	delta;
 
 	game = get_game_struct();
-	pos.x = 0;
-	pos.y = 0;
-	if (game->player.key.move[0])
+	delta.x = 0;
+	delta.y = 0;
+	if (game->player.key.move[KEY_INDEX_W])
 	{
-		pos.x = game->player.pos.x + game->player.dir.x * PLAYER_SPEED;
-		pos.y = game->player.pos.y + game->player.dir.y * PLAYER_SPEED;
+		delta.x += game->player.dir.x * PLAYER_SPEED;
+		delta.y += game->player.dir.y * PLAYER_SPEED;
 	}
-	if (game->player.key.move[1])
+	if (game->player.key.move[KEY_INDEX_S])
 	{
-		pos.x = game->player.pos.x - game->player.dir.x * PLAYER_SPEED;
-		pos.y = game->player.pos.y - game->player.dir.y * PLAYER_SPEED;
+		delta.x += game->player.dir.x * PLAYER_SPEED * -1;
+		delta.y += game->player.dir.y * PLAYER_SPEED * -1;
 	}
-	if (game->player.key.move[2])
+	if (game->player.key.move[KEY_INDEX_A])
 	{
-		pos.x = game->player.pos.x - game->player.plane.x * PLAYER_SPEED;
-		pos.y = game->player.pos.y - game->player.plane.y * PLAYER_SPEED;
+		delta.x += game->player.plane.x * PLAYER_SPEED * -1;
+		delta.y += game->player.plane.y * PLAYER_SPEED * -1;
 	}
-	if (game->player.key.move[3])
+	if (game->player.key.move[KEY_INDEX_D])
 	{
-		pos.x = game->player.pos.x + game->player.plane.x * PLAYER_SPEED;
-		pos.y = game->player.pos.y + game->player.plane.y * PLAYER_SPEED;
+		delta.x += game->player.plane.x * PLAYER_SPEED;
+		delta.y += game->player.plane.y * PLAYER_SPEED;
 	}
+	move_player(delta);
 	if (game->player.key.rotate)
 		rotate_player(game, game->player.key.rotate);
-	if (pos.x != 0 && pos.y != 0 && calc_player_collision(pos) == FT_FALSE)
-		game->player.pos = pos;
 }

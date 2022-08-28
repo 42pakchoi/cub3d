@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_screen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:21:53 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/24 15:27:16 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/27 19:51:25 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,11 @@ static void	put_wall_line(int x, int wall_dir, float wall_dist, float collision_
 	if (y_end >= WINDOW_HEIGHT)
 		y_end = WINDOW_HEIGHT - 1;
 	y = -lineHeight / 2 + WINDOW_HEIGHT / 2;
+	if (y < 0)
+	{
+		texture_y = (float)(texture->height) / (float)lineHeight * (int)y * -1;
+		y -= (int)y;
+	}
 	while (y < y_end)
 	{
 		texture_y += (float)(texture->height) / (float)lineHeight;
