@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validate.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 01:16:53 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/08 01:21:12 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/28 16:05:53 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ static int	check_map_characters(void)
 				temp != MAP_PLAYER_W &&
 				temp != MAP_EMPTY &&
 				temp != MAP_WALL &&
-				temp != MAP_OUTSIDE)
+				temp != MAP_OUTSIDE &&
+				temp != MAP_DOOR
+				)
 				return (FT_ERROR);
 			j++;
 		}

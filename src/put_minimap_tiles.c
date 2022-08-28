@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_minimap_tiles.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 02:53:00 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/24 14:22:47 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/28 15:42:14 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ void put_minimap_tiles(void)
 			tile_start.y = i.y * MINIMAP_TILE_SIZE;
 			tile_end.x = tile_start.x + MINIMAP_TILE_SIZE;
 			tile_end.y = tile_start.y + MINIMAP_TILE_SIZE;
-			if (map->array[i.y][i.x] == '1')
-			{
+			if (map->array[i.y][i.x] == MAP_WALL)
 				put_image_rect(game->minimap, tile_start, tile_end, MINIMAP_WALL_COLOR);
-			}
+			if (map->array[i.y][i.x] == MAP_DOOR)
+				put_image_rect(game->minimap, tile_start, tile_end, MINIMAP_DOOR_COLOR);
 			i.x++;
 		}
 		i.y++;

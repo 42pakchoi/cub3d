@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 17:33:46 by cpak              #+#    #+#             */
-/*   Updated: 2022/08/27 20:27:24 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/28 09:51:06 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ static int	calc_collision_wall(t_vector pos, t_vector delta)
 	map = get_game_struct()->map.array;
 	p.x = (int)(pos.x + delta.x);
 	p.y = (int)(pos.y + delta.y);
-	collision_hoz = (map[p.y][(int)(pos.x)] == MAP_WALL);
-	collision_ver = (map[(int)pos.y][p.x] == MAP_WALL);
+	collision_hoz = (map[p.y][(int)(pos.x)] == MAP_WALL || map[p.y][(int)(pos.x)] == MAP_DOOR);
+	collision_ver = (map[(int)pos.y][p.x] == MAP_WALL || map[(int)pos.y][p.x] == MAP_DOOR);
 	if (collision_hoz && collision_ver)
 		return (COLLISION_CORNER);
 	if (collision_ver)
