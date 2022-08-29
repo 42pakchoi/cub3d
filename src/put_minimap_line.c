@@ -94,13 +94,15 @@ static void	put_quadrant_two_three(t_vector start, t_vector end, int color)
 
 void	put_minimap_line(t_vector start, t_vector end, int color)
 {
+	t_game *game;
 	int	w;
 	int	h;
 
-	start.x *= MINIMAP_TILE_SIZE;
-	start.y *= MINIMAP_TILE_SIZE;
-	end.x *= MINIMAP_TILE_SIZE;
-	end.y *= MINIMAP_TILE_SIZE;
+	game = get_game_struct();
+	start.x *= game->map.minimap_tile_size;
+	start.y *= game->map.minimap_tile_size;
+	end.x *= game->map.minimap_tile_size;
+	end.y *= game->map.minimap_tile_size;
 
 	w = end.x - start.x;
 	h = end.y - start.y;
