@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   graphic_init.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 01:53:01 by sarchoi           #+#    #+#             */
 /*   Updated: 2022/08/29 13:37:51 by sarchoi          ###   ########seoul.kr  */
@@ -37,6 +37,8 @@ static void	set_texture_images(void)
 	map->textures.north = get_png_image(map->path_north_texture);
 	map->textures.west = get_png_image(map->path_west_texture);
 	map->textures.east = get_png_image(map->path_east_texture);
+	map->textures.door = get_png_image("./textures/door.png");
+	map->textures.door_side = get_png_image("./textures/door_side.png");
 	if (map->textures.south == NULL || map->textures.north == NULL ||
 		map->textures.west == NULL || map->textures.east == NULL)
 	{

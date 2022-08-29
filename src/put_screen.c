@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:21:53 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/27 19:51:25 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/28 23:46:34 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ static t_img	*get_texture_img(int wall_dir)
 		texture = game->map.textures.east;
 	else if (wall_dir == WALL_DIR_W)
 		texture = game->map.textures.west;
+	else if (wall_dir == WALL_DOOR)
+		texture = game->map.textures.door;
+	else if (wall_dir == WALL_DOOR_SIDE)
+		texture = game->map.textures.door_side;
 	return (texture);
 }
 
@@ -77,7 +81,6 @@ int	put_screen_wall(void)
 	int			w;
 	float		cameraX;
 	t_dda		dda;
-	float		wall_dist;
 
 	game = get_game_struct();
 	player = &(game->player);
@@ -91,15 +94,7 @@ int	put_screen_wall(void)
 		dda.ray_dir.y = player->dir.y + player->plane.y * cameraX;
 		init_dda(&dda);
 		calc_collision_point(game->map.array, &dda);
-		wall_dist = get_perpendicular_wall_dist(dda.player_pos, dda.ray_dir, &dda);
-
-		float collision_point;
-		if (dda.wall_dir == WALL_DIR_N || dda.wall_dir == WALL_DIR_S)
-			collision_point = dda.player_pos.x + wall_dist * dda.ray_dir.x;
-		else
-			collision_point = dda.player_pos.y + wall_dist * dda.ray_dir.y;
-		collision_point -= floor(collision_point);
-		put_wall_line(w, dda.wall_dir, wall_dist, collision_point);
+		put_wall_line(w, dda.wall_dir, dda.wall_dist, dda.wall_collision_point);
 		w += 1;
 	}
 	return (0);

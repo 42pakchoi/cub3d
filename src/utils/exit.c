@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 21:43:59 by sarchoi           #+#    #+#             */
 /*   Updated: 2022/08/29 15:00:28 by sarchoi          ###   ########seoul.kr  */
@@ -77,7 +77,6 @@ void	exit_with_error(char *message)
 	ft_putstr_fd(message, 2);
 	ft_putstr_fd("\n", 2);
 	free_game();
-	system("leaks cub3d");
 	exit(EXIT_FAILURE);
 }
 

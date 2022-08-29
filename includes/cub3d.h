@@ -71,6 +71,8 @@ typedef struct s_textures
 	t_img	*south;
 	t_img	*west;
 	t_img	*east;
+	t_img	*door;
+	t_img	*door_side;
 	t_img	floor;
 	t_img	ceiling;
 	t_img	*minimap_floor;
@@ -130,6 +132,9 @@ typedef struct s_dda
 	t_point		step;
 	t_vector	side_dist;
 	int			wall_dir;
+	float		wall_dist;
+	float		wall_collision_point;
+	int			is_door;
 }				t_dda;
 
 t_game	*get_game_struct(void);
@@ -146,6 +151,7 @@ t_game	*get_game_struct(void);
 # define MINIMAP_TILE_SIZE 5
 # define MAX_MINIMAP_SIZE 100
 # define MINIMAP_WALL_COLOR 0x0000FFFF
+# define MINIMAP_DOOR_COLOR 0x000080
 # define MINIMAP_FLOOR_COLOR 0xAAFFFF00
 # define MINIMAP_DIRLINE_COLOR 0xFFFFFF
 # define MINIMAP_RAY_COLOR 0xFFFFFF
@@ -156,6 +162,9 @@ t_game	*get_game_struct(void);
 # define WALL_DIR_S			1
 # define WALL_DIR_E			2
 # define WALL_DIR_W			3
+
+# define WALL_DOOR			4
+# define WALL_DOOR_SIDE		5
 
 # define COLLISION_NONE		0
 # define COLLISION_HOZ		1
@@ -173,6 +182,8 @@ t_game	*get_game_struct(void);
 # define MAP_WALL			'1'
 # define MAP_OUTSIDE		' '
 # define MAP_TEST_VISITED	'.'
+# define MAP_DOOR			'D'
+# define MAP_DOOR_OPEN		'O'
 
 /*
 ** keycodes
@@ -188,6 +199,7 @@ t_game	*get_game_struct(void);
 # define KEY_D				2
 # define KEY_ARROW_LEFT		123
 # define KEY_ARROW_RIGHT	124
+# define KEY_SPACEBAR		49
 # define CLOSE_BUTTON		17
 
 # define KEY_INDEX_W		0
@@ -216,7 +228,6 @@ int			erase_minimap_fov(void);
 int			erase_minimap_ray(void);
 int			erase_minimap_player(void);
 
-float		get_perpendicular_wall_dist(t_vector player_pos, t_vector ray_dir, t_dda *dda);
 void		init_dda(t_dda *dda);
 void		calc_collision_point(char **map_grid, t_dda *dda);
 
