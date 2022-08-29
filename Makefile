@@ -6,7 +6,7 @@
 #    By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/28 19:18:15 by sarchoi           #+#    #+#              #
-#    Updated: 2022/08/29 15:50:05 by sarchoi          ###   ########seoul.kr   #
+#    Updated: 2022/08/29 18:50:32 by sarchoi          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,13 +19,19 @@ CFLAGS = -Wall -Wextra -Werror
 
 SRCS_ROOT = main.c \
 			map.c \
-      map_parse.c \
-      map_parse2.c \
-      map_validate.c \
-      map_validate2.c \
+			map_parse.c \
+			map_parse_read_colors.c \
+			map_parse_read_map.c \
+			map_parse_read_textures.c \
+			map_validate.c \
+			map_validate_char.c \
+			map_validate_walls.c \
+			get_map_array.c \
 			graphic_init.c \
 			draw_frame.c \
-      put_screen.c \
+			find_map_start_line.c \
+			free.c \
+			put_screen.c \
 			put_minimap_floor.c \
 			put_minimap_tiles.c \
 			put_minimap_line.c \
@@ -34,14 +40,17 @@ SRCS_ROOT = main.c \
 			mouse_hook.c \
 			key_hook.c \
 			calc_rotated_vector.c \
-			player.c
+			player.c \
+			init_player.c \
+			bres_algo.c
 SRCS_UTIL = global.c \
-	draw.c \
-	draw_pixel.c \
-	mlx_image.c \
-	put_image.c \
-	get_image.c \
-	exit.c
+			draw.c \
+			draw_pixel.c \
+			mlx_image.c \
+			put_image.c \
+			get_image.c \
+			exit.c \
+			init_dda.c
 SRCS = $(addprefix ./src/, $(SRCS_ROOT)) \
 		$(addprefix ./src/utils/, $(SRCS_UTIL))
 

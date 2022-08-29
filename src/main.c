@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:33:12 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/28 17:38:27 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/29 19:04:26 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_mlx()
+static void	init_mlx(void)
 {
 	t_game	*game;
 
@@ -29,7 +29,7 @@ void	init_mlx()
 	mlx_loop_hook(game->mlx, draw_frame, NULL);
 }
 
-void	run_game(char *filepath)
+static void	run_game(char *filepath)
 {
 	t_game	*game;
 

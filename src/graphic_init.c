@@ -3,33 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   graphic_init.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 01:53:01 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/29 15:25:31 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/29 23:00:32 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void set_images(void)
+static void	set_images(void)
 {
-	t_game *game;
-	t_map * map;
+	t_game	*game;
+	t_map	*map;
 
 	game = get_game_struct();
 	map = &(game->map);
 	game->minimap = make_mlx_image(
-		(int)map->width * map->minimap_tile_size,
-		(int)map->height * map->minimap_tile_size
-	);
+			(int)map->width * map->minimap_tile_size,
+			(int)map->height * map->minimap_tile_size
+			);
 	game->screen = make_mlx_image(WINDOW_WIDTH, WINDOW_HEIGHT);
 }
 
 char	*get_fire_image(int i)
 {
-	char *tmp;
-	char *result;
+	char	*tmp;
+	char	*result;
 
 	tmp = ft_itoa(i);
 	result = ft_strjoin("./textures/fireplace/fire-", tmp);
@@ -42,7 +42,7 @@ static int	set_fire_texture(void)
 {
 	t_game	*game;
 	t_map	*map;
-	int 	i;
+	int		i;
 	char	*path;
 
 	game = get_game_struct();
@@ -76,16 +76,17 @@ static void	set_texture_images(void)
 	map->textures.east = get_png_image(map->path_east_texture);
 	map->textures.door = get_png_image("./textures/door.png");
 	map->textures.door_side = get_png_image("./textures/door_side.png");
-	if (map->textures.south == NULL || map->textures.north == NULL ||
-		map->textures.west == NULL || map->textures.east == NULL ||
-		!set_fire_texture())
-	{
-		// 이미지 처리에 문제가 발생한 경우
+	if (
+		map->textures.south == NULL
+		|| map->textures.north == NULL
+		|| map->textures.west == NULL
+		|| map->textures.east == NULL
+		|| !set_fire_texture()
+	)
 		exit_with_error("Failed to load textures");
-	}
 }
 
-static void calc_minimap()
+static void	calc_minimap(void)
 {
 	t_game	*game;
 	t_map	*map;

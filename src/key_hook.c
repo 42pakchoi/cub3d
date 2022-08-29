@@ -3,22 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 17:16:16 by cpak              #+#    #+#             */
-/*   Updated: 2022/08/28 17:36:57 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/29 18:52:52 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	door_action(void)
+static void	door_action(void)
 {
 	t_game	*game;
+	int		x;
+	int		y;
 
 	game = get_game_struct();
-	int x = (int)(game->player.pos.x + game->player.dir.x);
-	int y = (int)(game->player.pos.y + game->player.dir.y);
+	x = (int)(game->player.pos.x + game->player.dir.x);
+	y = (int)(game->player.pos.y + game->player.dir.y);
 	if (game->map.array[y][x] == MAP_DOOR)
 		game->map.array[y][x] = MAP_DOOR_OPEN;
 	else if (game->map.array[y][x] == MAP_DOOR_OPEN)

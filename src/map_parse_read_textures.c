@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_parse.c                                        :+:      :+:    :+:   */
+/*   map_parse_read_textures.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,32 +12,29 @@
 
 #include "cub3d.h"
 
-t_list	*find_map_line(t_list *head, char *to_find)
-{
-	t_list	*ptr;
-
-	ptr = head;
-	while (ptr)
-	{
-		if (ft_strncmp(ptr->content, to_find, ft_strlen(to_find)) == 0)
-			return (ptr);
-		ptr = ptr->next;
-	}
-	return (NULL);
-}
-
-int	parse_map(void)
+int	read_textures(void)
 {
 	t_game	*game;
+	t_map	*map;
+	t_list	*raw_line;
 
 	game = get_game_struct();
-	if (game->map.raw == NULL)
+	map = &(game->map);
+	raw_line = find_map_line(game->map.raw, "NO");
+	if (raw_line == NULL)
 		return (FT_ERROR);
-	if (
-		read_textures() == FT_ERROR
-		|| read_colors() == FT_ERROR
-		|| read_map() == FT_ERROR
-	)
+	map->path_north_texture = ft_strdup(raw_line->content + 3);
+	raw_line = find_map_line(game->map.raw, "SO");
+	if (raw_line == NULL)
 		return (FT_ERROR);
+	map->path_south_texture = ft_strdup(raw_line->content + 3);
+	raw_line = find_map_line(game->map.raw, "WE");
+	if (raw_line == NULL)
+		return (FT_ERROR);
+	map->path_west_texture = ft_strdup(raw_line->content + 3);
+	raw_line = find_map_line(game->map.raw, "EA");
+	if (raw_line == NULL)
+		return (FT_ERROR);
+	map->path_east_texture = ft_strdup(raw_line->content + 3);
 	return (FT_SUCCESS);
 }

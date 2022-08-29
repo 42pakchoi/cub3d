@@ -1,22 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   calc_rotated_vector.c                              :+:      :+:    :+:   */
+/*   ft_split_util.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/08 00:58:02 by cpak              #+#    #+#             */
-/*   Updated: 2022/08/29 15:47:06 by sarchoi          ###   ########seoul.kr  */
+/*   Created: 2021/05/05 18:45:00 by sarchoi           #+#    #+#             */
+/*   Updated: 2022/08/29 18:17:49 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-t_vector	calc_rotated_vector(t_vector v, int d)
+unsigned int 	ft_split_length(char **tab)
 {
-	t_vector	result;
+	unsigned int	i;
 
-	result.x = v.x * cos(d * M_PI / 180) - v.y * sin(d * M_PI / 180);
-	result.y = v.x * sin(d * M_PI / 180) + v.y * cos(d * M_PI / 180);
-	return (result);
+	i = 0;
+	while (tab[i])
+		i++;
+	return (i);
+}
+
+char	**ft_split_free(char **tab)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		if (tab[i])
+			free(tab[i]);
+		i++;
+	}
+	free(tab);
+	return ((char **)0);
 }

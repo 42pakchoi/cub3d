@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 14:04:28 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/26 23:53:32 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/29 18:17:49 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_strtrim(char const *s1, char const *set);
 char			**ft_split(char const *s, char c);
 char			**ft_split_free(char **tab);
-unsigned int 	ft_split_length(char **tab);
+unsigned int	ft_split_length(char **tab);
 char			*ft_itoa(int n);
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void			ft_putchar_fd(char c, int fd);
@@ -58,7 +58,7 @@ void			ft_putnbr_fd(int n, int fd);
 
 void			ft_swap_int(int *a, int *b);
 
-typedef struct	s_list
+typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
@@ -73,6 +73,6 @@ void			ft_lstdelone(t_list *lst, void (*del)(void *));
 void			ft_lstclear(t_list **lst, void (*del)(void *));
 void			ft_lstiter(t_list *lst, void (*f)(void *));
 t_list			*ft_lstmap(
-	t_list *lst, void *(*f)(void *), void (*del)(void *));
+					t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 #endif
