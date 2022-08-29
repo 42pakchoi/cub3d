@@ -20,8 +20,8 @@ static void set_images(void)
 	game = get_game_struct();
 	map = &(game->map);
 	game->minimap = make_mlx_image(
-		(int)map->width * MINIMAP_TILE_SIZE,
-		(int)map->height * MINIMAP_TILE_SIZE
+		(int)map->width * map->minimap_tile_size,
+		(int)map->height * map->minimap_tile_size
 	);
 	game->screen = make_mlx_image(WINDOW_WIDTH, WINDOW_HEIGHT);
 }
@@ -85,8 +85,26 @@ static void	set_texture_images(void)
 	}
 }
 
+static void calc_minimap()
+{
+	t_game	*game;
+	t_map	*map;
+
+	game = get_game_struct();
+	map = &(game->map);
+	if (MAX_MINIMAP_SIZE < (int)map->width * MINIMAP_TILE_SIZE)
+		map->minimap_tile_size = MAX_MINIMAP_SIZE / (int)map->width;
+	if (MAX_MINIMAP_SIZE < (int)map->height * MINIMAP_TILE_SIZE)
+		map->minimap_tile_size = MAX_MINIMAP_SIZE / (int)map->height;
+	else
+		map->minimap_tile_size = MINIMAP_TILE_SIZE;
+	if (map->minimap_tile_size < 1)
+		map->minimap_tile_size = 1;
+}
+
 void	init_images(void)
 {
 	set_texture_images();
+	calc_minimap();
 	set_images();
 }

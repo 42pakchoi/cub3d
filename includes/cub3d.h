@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
 /*   Updated: 2022/08/29 15:19:44 by cpak             ###   ########seoul.kr  */
@@ -93,6 +93,7 @@ typedef struct s_map
 	char		*path_east_texture;
 	int			floor_color;
 	int			ceiling_color;
+	unsigned int	minimap_tile_size;
 	t_textures	textures;
 	float		sprite_count;
 }				t_map;
@@ -150,6 +151,7 @@ t_game	*get_game_struct(void);
 # define WINDOW_WIDTH 640
 # define WINDOW_HEIGHT 480
 # define MINIMAP_TILE_SIZE 5
+# define MAX_MINIMAP_SIZE 100
 # define MINIMAP_WALL_COLOR 0x0000FFFF
 # define MINIMAP_DOOR_COLOR 0x000080
 # define MINIMAP_FLOOR_COLOR 0xAAFFFF00

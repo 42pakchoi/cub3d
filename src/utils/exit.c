@@ -69,6 +69,9 @@ void	free_game_textures()
 	free_mlx_image_array(game->map.textures.fire);
 }
 
+/*
+** NOTE: Do not free `game->mlx` because mlx library does not provide function to free it. And `free()` is not stable.
+*/
 void	free_game()
 {
 	t_game	*game;
@@ -78,10 +81,7 @@ void	free_game()
 	free_game_textures();
 	free_mlx_image(game->minimap);
 	free_mlx_image(game->screen);
-	if (game->win)
-		mlx_destroy_window(game->mlx, game->win);
-	if (game->mlx)
-		free(game->mlx);
+	mlx_destroy_window(game->mlx, game->win);
 }
 
 void	exit_with_error(char *message)
@@ -97,6 +97,7 @@ int	exit_with_close_button(void)
 {
 	free_game();
 	printf("<info> Bye!\n");
+	system("leaks cub3d");
 	exit(EXIT_SUCCESS);
 	return (0);
 }
