@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 21:43:59 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/29 15:00:28 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/29 15:37:26 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,16 @@ void	free_mlx_image(t_img *img)
 	free(img);
 }
 
+void	free_mlx_image_array(t_img **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i] != NULL)
+		free_mlx_image(arr[i++]);
+	free(arr);
+}
+
 void	free_game_textures()
 {
 	t_game	*game;
@@ -54,6 +64,9 @@ void	free_game_textures()
 	free_mlx_image(game->map.textures.east);
 	free_mlx_image(game->map.textures.minimap_floor);
 	free_mlx_image(game->map.textures.minimap_wall);
+	free_mlx_image(game->map.textures.door);
+	free_mlx_image(game->map.textures.door_side);
+	free_mlx_image_array(game->map.textures.fire);
 }
 
 /*

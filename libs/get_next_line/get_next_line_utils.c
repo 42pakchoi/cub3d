@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 17:13:50 by sarchoi           #+#    #+#             */
-/*   Updated: 2021/09/19 04:21:21 by sarchoi          ###   ########.fr       */
+/*   Updated: 2022/08/29 14:49:25 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*ft_strchr(const char *s, int c)
 	return ((char *)s);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_gnl_strjoin(char const *s1, char const *s2)
 {
 	size_t	s1_len;
 	size_t	s2_len;
