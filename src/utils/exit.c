@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 21:43:59 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/28 17:10:39 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/29 15:00:28 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,9 @@ void	free_game_textures()
 	free_mlx_image(game->map.textures.minimap_wall);
 }
 
+/*
+** NOTE: Do not free `game->mlx` because mlx library does not provide function to free it. And `free()` is not stable.
+*/
 void	free_game()
 {
 	t_game	*game;
@@ -65,10 +68,7 @@ void	free_game()
 	free_game_textures();
 	free_mlx_image(game->minimap);
 	free_mlx_image(game->screen);
-	if (game->win)
-		mlx_destroy_window(game->mlx, game->win);
-	if (game->mlx)
-		free(game->mlx);
+	mlx_destroy_window(game->mlx, game->win);
 }
 
 void	exit_with_error(char *message)
@@ -84,8 +84,8 @@ void	exit_with_error(char *message)
 int	exit_with_close_button(void)
 {
 	free_game();
-	system("leaks cub3d");
 	printf("<info> Bye!\n");
+	system("leaks cub3d");
 	exit(EXIT_SUCCESS);
 	return (0);
 }

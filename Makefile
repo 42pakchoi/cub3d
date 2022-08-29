@@ -6,7 +6,7 @@
 #    By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/28 19:18:15 by sarchoi           #+#    #+#              #
-#    Updated: 2022/08/26 23:49:40 by sarchoi          ###   ########seoul.kr   #
+#    Updated: 2022/08/29 14:53:50 by sarchoi          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ SRCS = $(addprefix ./src/, $(SRCS_ROOT)) \
 OBJS = $(SRCS:.c=.o)
 
 MLX = minilibx
-MLX_FLAGS = -L libs/minilibx -lmlx
+MLX_FLAGS = -L libs/minilibx -lmlx -framework OpenGl -framework AppKit
 
 LIBFT = libft
 LIBFT_FLAGS = -L libs/libft -lft
@@ -77,11 +77,9 @@ $(NAME): $(OBJS) $(OBJS_GNL) $(OBJS_MANDATORY)
 
 $(LIBFT):
 	@make all bonus --silent --directory=libs/$(LIBFT)
-	$(info $(green)<MAKE>	Libft - make all bonus$(reset))
 
 $(MLX):
 	@make --silent --directory=libs/$(MLX)
-	$(info $(green)<MAKE>	MinilibX - make$(reset))
 
 clean:
 	@make clean --directory=libs/$(LIBFT)
@@ -96,6 +94,7 @@ fclean: clean
 	$(info $(green)<MAKE> Libft - fclean$(reset))
 	rm -f $(NAME)
 	rm -rf $(NAME).dSYM
+	rm -rf libs/minilibx/*.swiftsourceinfo
 	$(info $(green)<MAKE> fclean$(reset))
 
 re: fclean all
