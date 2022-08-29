@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/29 22:48:19 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 00:58:08 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,12 +156,12 @@ typedef struct s_bres
 # define WINDOW_HEIGHT			480
 # define MINIMAP_TILE_SIZE		5
 # define MAX_MINIMAP_SIZE		100
-# define MINIMAP_WALL_COLOR		0x0000FFFF
-# define MINIMAP_DOOR_COLOR		0x000080
-# define MINIMAP_FLOOR_COLOR	0xAAFFFF00
+# define MINIMAP_WALL_COLOR		0xAA00A500
+# define MINIMAP_DOOR_COLOR		0xAAFF2600
+# define MINIMAP_FLOOR_COLOR	0x55111111
 # define MINIMAP_DIRLINE_COLOR	0xFFFFFF
-# define MINIMAP_RAY_COLOR		0xFFFFFF
-# define MINIMAP_PLAYER_COLOR	0xFF00FF
+# define MINIMAP_RAY_COLOR		0xEEAAAAAA
+# define MINIMAP_PLAYER_COLOR	0x00FFFF
 # define MINIMAP_PLAYER_SIZE	3
 
 # define WALL_DIR_N			0
@@ -192,6 +192,13 @@ typedef struct s_bres
 # define MAP_TEST_VISITED	'.'
 # define MAP_DOOR			'D'
 # define MAP_DOOR_OPEN		'O'
+
+/*
+** Image Paths
+*/
+# define IMG_DOOR		"./textures/dungeon_door.png"
+# define IMG_DOOR_SIDE	"./textures/dungeon_door_side.png"
+# define PREFIX_IMG_FIRE		"./textures/fireplace/fire-"
 
 /*
 ** keycodes

@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 01:53:01 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/29 23:00:32 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 00:32:56 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*get_fire_image(int i)
 	char	*result;
 
 	tmp = ft_itoa(i);
-	result = ft_strjoin("./textures/fireplace/fire-", tmp);
+	result = ft_strjoin(PREFIX_IMG_FIRE, tmp);
 	tmp = result;
 	result = ft_strjoin(tmp, ".png");
 	return (result);
@@ -74,8 +74,8 @@ static void	set_texture_images(void)
 	map->textures.north = get_png_image(map->path_north_texture);
 	map->textures.west = get_png_image(map->path_west_texture);
 	map->textures.east = get_png_image(map->path_east_texture);
-	map->textures.door = get_png_image("./textures/door.png");
-	map->textures.door_side = get_png_image("./textures/door_side.png");
+	map->textures.door = get_png_image(IMG_DOOR);
+	map->textures.door_side = get_png_image(IMG_DOOR_SIDE);
 	if (
 		map->textures.south == NULL
 		|| map->textures.north == NULL
