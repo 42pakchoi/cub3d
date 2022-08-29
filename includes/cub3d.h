@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/29 15:19:44 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/29 22:39:49 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ typedef struct s_textures
 	t_img	*door;
 	t_img	*door_side;
 	t_img	**fire;
-	t_img	floor;
-	t_img	ceiling;
 	t_img	*minimap_floor;
 	t_img	*minimap_wall;
 }				t_textures;
@@ -123,7 +121,6 @@ typedef struct s_game
 	t_img		*screen;
 	t_img		*sprite;
 	t_player	player;
-	t_bool		is_gameend;
 }				t_game;
 
 typedef struct s_dda
