@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 21:43:59 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/29 15:30:16 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/29 15:37:26 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void	free_game_textures()
 	free_mlx_image(game->map.textures.door);
 	free_mlx_image(game->map.textures.door_side);
 	free_mlx_image_array(game->map.textures.fire);
-
 }
 
 void	free_game()
