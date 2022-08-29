@@ -6,7 +6,7 @@
 #    By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/28 19:18:15 by sarchoi           #+#    #+#              #
-#    Updated: 2022/08/29 14:53:50 by sarchoi          ###   ########seoul.kr   #
+#    Updated: 2022/08/29 15:50:05 by sarchoi          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,6 @@ SRCS_ROOT = main.c \
 			put_minimap_line.c \
 			put_minimap_player.c \
 			put_minimap_ray.c \
-			clear_frame.c \
 			mouse_hook.c \
 			key_hook.c \
 			calc_rotated_vector.c \
