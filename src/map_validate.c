@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 01:16:53 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/28 23:08:59 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/29 15:08:52 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ static int	check_map_characters(void)
 				temp != MAP_EMPTY &&
 				temp != MAP_WALL &&
 				temp != MAP_OUTSIDE &&
-				temp != MAP_DOOR
+				temp != MAP_DOOR &&
+				temp != MAP_WALL_FIRE
 				)
 				return (FT_ERROR);
 			j++;

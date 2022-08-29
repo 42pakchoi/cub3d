@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:21:53 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/28 23:46:34 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/29 15:20:29 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static t_img	*get_texture_img(int wall_dir)
 		texture = game->map.textures.east;
 	else if (wall_dir == WALL_DIR_W)
 		texture = game->map.textures.west;
+	else if (wall_dir == WALL_FIRE)
+		texture = game->map.textures.fire[(int)(game->map.sprite_count)];
 	else if (wall_dir == WALL_DOOR)
 		texture = game->map.textures.door;
 	else if (wall_dir == WALL_DOOR_SIDE)
@@ -45,10 +47,10 @@ static void	put_wall_line(int x, int wall_dir, float wall_dist, float collision_
 
 	float	y_end;
 	float	y;
+	int		color;
 
 	game = get_game_struct();
 	texture = get_texture_img(wall_dir);
-
 	texture_x = (int)((float)(texture->width) * collision_point);
 	texture_y = 0;
 
@@ -70,7 +72,8 @@ static void	put_wall_line(int x, int wall_dir, float wall_dist, float collision_
 			continue ;
 		if (y >= WINDOW_HEIGHT)
 			break ;
-		put_image_pixel(game->screen, x, y, get_image_pixel(texture, texture_x, (int)texture_y));
+		color = get_image_pixel(texture, texture_x, (int)texture_y);
+		put_image_pixel(game->screen, x, y, color);
 	}
 }
 

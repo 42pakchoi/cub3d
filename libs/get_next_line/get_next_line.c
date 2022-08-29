@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 17:13:36 by sarchoi           #+#    #+#             */
-/*   Updated: 2021/09/19 04:27:43 by sarchoi          ###   ########.fr       */
+/*   Updated: 2022/08/29 14:49:38 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static char	*ft_malloc_str(unsigned int len)
 
 static	void	join_tmp_and_store(char **tmp, char **store)
 {
-	*tmp = ft_strjoin((char const *)*tmp, *store);
+	*tmp = ft_gnl_strjoin((char const *)*tmp, *store);
 	free(*store);
 	*store = NULL;
 }
@@ -40,7 +40,7 @@ static int	ft_read_oneline(int fd, char **tmp, char **store)
 		buf[result] = '\0';
 		if (*store != NULL)
 			join_tmp_and_store(tmp, store);
-		*tmp = ft_strjoin((char const *)*tmp, buf);
+		*tmp = ft_gnl_strjoin((char const *)*tmp, buf);
 		newline_in_tmp = ft_strchr(*tmp, '\n');
 		if (newline_in_tmp != NULL)
 		{

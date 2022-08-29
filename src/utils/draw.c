@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:26:53 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/28 23:54:35 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/29 15:16:53 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,11 @@ void	calc_collision_point(char **map_grid, t_dda *dda)
 {
 	int x;
 	int y;
+	int is_door;
+	int is_fire;
 
+	is_door = 0;
+	is_fire = 0;
 	while (1)
 	{
 		calc_dda(dda);
@@ -93,11 +97,16 @@ void	calc_collision_point(char **map_grid, t_dda *dda)
 		y = (int)(dda->player_grid).y;
 		if (map_grid[y][x] == MAP_DOOR)
 		{
-			dda->is_door = 1;
+			is_door = 1;
 			break;
 		}
 		if (map_grid[y][x] == MAP_DOOR_OPEN)
-			dda->is_door = 2;
+			is_door = 2;
+		if (map_grid[y][x] == MAP_WALL_FIRE)
+		{
+			is_fire = 1;
+			break;
+		}
 		if (map_grid[y][x] == MAP_WALL)
 			break;
 	}
@@ -105,12 +114,11 @@ void	calc_collision_point(char **map_grid, t_dda *dda)
 	set_collision_point(dda);
 	if ((dda->wall_dir == WALL_DIR_N || dda->wall_dir == WALL_DIR_E))
 		dda->wall_collision_point = 1 - dda->wall_collision_point;
-	if (dda->is_door == 1)
-	{
+	if (is_door == 1)
 		dda->wall_dir = WALL_DOOR;
-		dda->is_door = 0;
-	}
-	if (dda->is_door == 2)
+	if (is_fire == 1)
+		dda->wall_dir = WALL_FIRE;
+	if (is_door == 2)
 	{
 		if (map_grid[y][x] == MAP_DOOR_OPEN 
 			|| map_grid[y+1][x] == MAP_DOOR_OPEN
@@ -119,6 +127,5 @@ void	calc_collision_point(char **map_grid, t_dda *dda)
 		{
 			dda->wall_dir = WALL_DOOR_SIDE;
 		}
-		dda->is_door = 0;
 	}
 }

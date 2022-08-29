@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/28 23:46:09 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/29 15:19:44 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct s_textures
 	t_img	*east;
 	t_img	*door;
 	t_img	*door_side;
+	t_img	**fire;
 	t_img	floor;
 	t_img	ceiling;
 	t_img	*minimap_floor;
@@ -93,6 +94,7 @@ typedef struct s_map
 	int			floor_color;
 	int			ceiling_color;
 	t_textures	textures;
+	float		sprite_count;
 }				t_map;
 
 typedef struct s_key
@@ -118,6 +120,7 @@ typedef struct s_game
 	t_map		map;
 	t_img		*minimap;
 	t_img		*screen;
+	t_img		*sprite;
 	t_player	player;
 	t_bool		is_gameend;
 }				t_game;
@@ -133,7 +136,6 @@ typedef struct s_dda
 	int			wall_dir;
 	float		wall_dist;
 	float		wall_collision_point;
-	int			is_door;
 }				t_dda;
 
 t_game	*get_game_struct(void);
@@ -163,6 +165,7 @@ t_game	*get_game_struct(void);
 
 # define WALL_DOOR			4
 # define WALL_DOOR_SIDE		5
+# define WALL_FIRE			6
 
 # define COLLISION_NONE		0
 # define COLLISION_HOZ		1
@@ -178,6 +181,7 @@ t_game	*get_game_struct(void);
 # define MAP_PLAYER_W		'W'
 # define MAP_EMPTY			'0'
 # define MAP_WALL			'1'
+# define MAP_WALL_FIRE		'2'
 # define MAP_OUTSIDE		' '
 # define MAP_TEST_VISITED	'.'
 # define MAP_DOOR			'D'
