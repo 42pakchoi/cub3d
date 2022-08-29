@@ -1,0 +1,25 @@
+NO ./textures/dungeon_wall.png
+SO ./textures/dungeon_wall.png
+WE ./textures/dungeon_wall2.png
+EA ./textures/dungeon_wall2.png
+
+C 42,44,52
+F 32,34,42
+
+111111111111
+100000000001
+100000000001
+10N011111011
+11111  10001
+       10001
+       10001
+       10001
+       11011
+       10001
+  1111110001
+  1000000001
+  1000000001
+  2000000001
+  1000000001
+  1000000001
+  1111111111
