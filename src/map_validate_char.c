@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 01:16:53 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/29 18:17:49 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 16:50:54 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	check_map_characters(void)
 	return (FT_SUCCESS);
 }
 
-static int	is_player_char(char c)
+int	is_player_char(char c)
 {
 	if (c == MAP_PLAYER_N
 		|| c == MAP_PLAYER_S
