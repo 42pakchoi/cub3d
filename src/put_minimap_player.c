@@ -21,10 +21,14 @@ int	put_minimap_player(void)
 
 	game = get_game_struct();
 	map = &game->map;
-	line_start.x = (game->player.pos.x * map->minimap_tile_size) - (MINIMAP_PLAYER_SIZE / 2);
-	line_start.y = (game->player.pos.y * map->minimap_tile_size) - (MINIMAP_PLAYER_SIZE / 2);
-	line_end.x = (game->player.pos.x * map->minimap_tile_size) + (MINIMAP_PLAYER_SIZE / 2);
-	line_end.y = (game->player.pos.y * map->minimap_tile_size) + (MINIMAP_PLAYER_SIZE / 2);
+	line_start.x = (game->player.pos.x * map->minimap_tile_size)
+		- (MINIMAP_PLAYER_SIZE / 2);
+	line_start.y = (game->player.pos.y * map->minimap_tile_size)
+		- (MINIMAP_PLAYER_SIZE / 2);
+	line_end.x = (game->player.pos.x * map->minimap_tile_size)
+		+ (MINIMAP_PLAYER_SIZE / 2);
+	line_end.y = (game->player.pos.y * map->minimap_tile_size)
+		+ (MINIMAP_PLAYER_SIZE / 2);
 	put_image_rect(game->minimap, line_start, line_end, MINIMAP_PLAYER_COLOR);
 	return (0);
 }

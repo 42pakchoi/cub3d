@@ -3,23 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   draw_frame.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 10:34:02 by cpak              #+#    #+#             */
-/*   Updated: 2022/08/29 15:20:14 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/29 22:59:00 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static void	clear_frame()
-{
-	// t_game	*game;
-
-	// game = get_game_struct();
-	// TODO: check
-	// mlx_clear_window(game->mlx, game->win);
-}
 
 // void	draw_sprite(t_img *sprite, float wall_dist, int x, int dy)
 // {
@@ -79,7 +70,7 @@ static void	clear_frame()
 // 	}
 // }
 
-void	update_frame(void)
+static void	update_frame(void)
 {
 	put_screen_ceiling_floor();
 	put_screen_wall();
@@ -109,7 +100,6 @@ static void	draw_images(void)
 
 int	draw_frame(void)
 {
-	clear_frame();
 	set_player();
 	update_frame();
 	draw_images();

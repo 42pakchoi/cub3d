@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_pixel.c                                        :+:      :+:    :+:   */
+/*   draw_pixel.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 03:35:22 by cpak              #+#    #+#             */
-/*   Updated: 2022/08/06 03:35:41 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/29 18:17:49 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	draw_pixel_rect(t_vector start, t_vector end, int color)
 {
 	t_game	*game;
 	int		x;
-	int 	y;
+	int		y;
 
 	game = get_game_struct();
 	x = start.x;
@@ -54,5 +54,3 @@ void	draw_pixel_rect(t_vector start, t_vector end, int color)
 		x += 1;
 	}
 }
-
-

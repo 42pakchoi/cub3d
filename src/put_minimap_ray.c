@@ -21,9 +21,9 @@ static void	put_minimap_ray_line(t_dda *dda)
 	ray.start = dda->player_pos;
 	ray.end.x = dda->player_pos.x + dda->wall_dist * dda->ray_dir.x;
 	ray.end.y = dda->player_pos.y + dda->wall_dist * dda->ray_dir.y;
-	if ((ray.start.x > 0 || ray.start.x < game->map.width) &&
-		(ray.start.y > 0 || ray.start.y < game->map.height))
-		put_minimap_line(ray.start, ray.end, MINIMAP_RAY_COLOR);
+	if ((ray.start.x > 0 || ray.start.x < game->map.width)
+		&& (ray.start.y > 0 || ray.start.y < game->map.height))
+		put_minimap_line(ray.start, ray.end);
 }
 
 int	put_minimap_ray(void)

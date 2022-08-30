@@ -6,15 +6,15 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:43:07 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/28 17:08:26 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/29 18:17:49 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int vaildate_file_extension(char *filepath)
+static int	vaildate_file_extension(char *filepath)
 {
-	char *p;
+	char	*p;
 
 	p = ft_strnstr(filepath, ".cub", ft_strlen(filepath));
 	if (p == NULL || ft_strlen(p) != 4)
@@ -22,7 +22,7 @@ static int vaildate_file_extension(char *filepath)
 	return (FT_SUCCESS);
 }
 
-static void read_file(int filde)
+static void	read_file(int filde)
 {
 	t_game	*game;
 	t_map	*map;
@@ -44,27 +44,10 @@ static void read_file(int filde)
 	free(buf);
 }
 
-static void test_print_map_raw(void)
+static void	print_map_data(void)
 {
-	t_game *game;
-	t_map * map;
-	t_list *raw_ptr;
-
-	game = get_game_struct();
-	map = &(game->map);
-	raw_ptr = map->raw;
-	printf("<TEST> map raw:\n");
-	while (raw_ptr != NULL)
-	{
-		printf("`%s`\n", (char *) raw_ptr->content);
-		raw_ptr = raw_ptr->next;
-	}
-}
-
-static void print_map_data(void)
-{
-	t_game *game;
-	t_map * map;
+	t_game	*game;
+	t_map	*map;
 
 	game = get_game_struct();
 	map = &(game->map);
@@ -89,7 +72,7 @@ static void	clear_map_raw(void)
 	ft_lstclear(&(map->raw), free);
 }
 
-void init_map(char *map_filepath)
+void	init_map(char *map_filepath)
 {
 	int		filde;
 
@@ -106,7 +89,6 @@ void init_map(char *map_filepath)
 	}
 	read_file(filde);
 	printf("<info> Completed reading file.\n");
-	test_print_map_raw();
 	if (parse_map() == FT_ERROR)
 	{
 		close(filde);

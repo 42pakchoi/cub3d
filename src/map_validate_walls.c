@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_validate2.c                                    :+:      :+:    :+:   */
+/*   map_validate_walls.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 01:20:22 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/28 22:27:53 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/29 18:17:49 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static t_vector	find_left_top_empty()
+static t_vector	find_left_top_empty(void)
 {
-	t_game	*game;
-	t_map	*map;
+	t_game		*game;
+	t_map		*map;
 	t_vector	left_top_empty;
 
 	game = get_game_struct();
@@ -26,7 +26,8 @@ static t_vector	find_left_top_empty()
 		left_top_empty.x = 0;
 		while (left_top_empty.x < map->width)
 		{
-			if (map->array[(int)left_top_empty.y][(int)left_top_empty.x] == MAP_EMPTY)
+			if (map->array[(int)left_top_empty.y][(int)left_top_empty.x]
+				== MAP_EMPTY)
 				return (left_top_empty);
 			left_top_empty.x++;
 		}
@@ -42,8 +43,9 @@ static void	flood_wall(char **array, int x, int y)
 
 	game = get_game_struct();
 	map = &(game->map);
-	if (x < 0 || (int)map->width <= x || y < 0 || (int)map->height <= y ||
-		array[y][x] == MAP_OUTSIDE)
+	if (x < 0 || (int)map->width <= x
+		|| y < 0 || (int)map->height <= y
+		|| array[y][x] == MAP_OUTSIDE)
 	{
 		map->is_walled = FT_FALSE;
 		return ;
@@ -61,18 +63,18 @@ static char	**duplicate_map_array(char **orig)
 {
 	t_game	*game;
 	t_map	*map;
-	size_t i;
-	size_t j;
-	char **dup;
+	size_t	i;
+	size_t	j;
+	char	**dup;
 
 	game = get_game_struct();
 	map = &(game->map);
 	i = 0;
-	dup = (char**)malloc(sizeof(char*) * map->height + 1);
+	dup = (char **)malloc(sizeof(char *) * map->height + 1);
 	dup[map->height] = NULL;
 	while (i < map->height)
 	{
-		dup[i] = (char*)malloc(sizeof(char) * map->width + 1);
+		dup[i] = (char *)malloc(sizeof(char) * map->width + 1);
 		dup[i][map->width] = '\0';
 		j = 0;
 		while (j < map->width)
@@ -87,7 +89,9 @@ static char	**duplicate_map_array(char **orig)
 
 static char	**free_array(char **array)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	while (array[i])
 	{
 		free(array[i]);
@@ -99,30 +103,17 @@ static char	**free_array(char **array)
 
 int	check_map_walls(void)
 {
-	t_game	*game;
-	t_map	*map;
+	t_game		*game;
+	t_map		*map;
 	t_vector	start_coord;
-	char	**temp_array;
+	char		**temp_array;
 
 	game = get_game_struct();
 	map = &(game->map);
 	map->is_walled = FT_TRUE;
 	start_coord = find_left_top_empty();
 	temp_array = duplicate_map_array(map->array);
-	printf("<TEST> start_coord: %f, %f\n", start_coord.x, start_coord.y);
 	flood_wall(temp_array, (int)start_coord.x, (int)start_coord.y);
-
-	// TEST
-	size_t		i;
-	i = 0;
-	printf("<TEST> 'temp_array'\n");
-	while (temp_array[i])
-	{
-		printf("|%s|\n", temp_array[i]);
-		i++;
-	}
-	// TEST
-
 	free_array(temp_array);
 	if (map->is_walled == FT_FALSE)
 		return (FT_ERROR);
