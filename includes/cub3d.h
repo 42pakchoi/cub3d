@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/30 16:50:58 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 19:20:01 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -282,6 +282,9 @@ void		free_game(void);
 **	utils
 */
 t_game		*get_game_struct(void);
+
+void		print_info(char *message);
+void		print_error(char *message);
 
 void		exit_with_error(char *message);
 int			exit_with_close_button(void);
