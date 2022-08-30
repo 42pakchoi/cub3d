@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 01:53:01 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/30 00:32:56 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 16:26:50 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ static int	set_fire_texture(void)
 
 	game = get_game_struct();
 	map = &(game->map);
-	map->textures.fire = (t_img **)malloc(sizeof(t_img *) * 20);
+	map->textures.fire = (t_img **)malloc(sizeof(t_img *) * IMG_FIRE_FRAME + 1);
 	if (!map->textures.fire)
 		return (0);
-	map->textures.fire[20] = 0;
+	map->textures.fire[IMG_FIRE_FRAME] = 0;
 	i = 0;
-	while (i < 19)
+	while (i < IMG_FIRE_FRAME)
 	{
 		path = get_fire_image(i);
 		map->textures.fire[i] = get_png_image(path);

@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 17:01:30 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/29 23:35:20 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 16:39:43 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ static void	free_mlx_image_array(t_img **arr)
 {
 	int	i;
 
+	if (arr == NULL)
+		return ;
 	i = 0;
 	while (arr[i] != NULL)
 	{
@@ -84,5 +86,6 @@ void	free_game(void)
 	free_game_textures();
 	free_mlx_image(game->minimap);
 	free_mlx_image(game->screen);
-	mlx_destroy_window(game->mlx, game->win);
+	if (game->mlx != NULL && game->win != NULL)
+		mlx_destroy_window(game->mlx, game->win);
 }

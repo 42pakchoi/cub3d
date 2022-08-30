@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/30 00:58:08 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 16:50:58 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,7 @@ typedef struct s_bres
 # define IMG_DOOR		"./textures/dungeon_door.png"
 # define IMG_DOOR_SIDE	"./textures/dungeon_door_side.png"
 # define PREFIX_IMG_FIRE		"./textures/fireplace/fire-"
+# define IMG_FIRE_FRAME			19
 
 /*
 ** keycodes
@@ -261,6 +262,7 @@ int			validate_map(void);
 int			check_map_characters(void);
 int			check_map_required_characters(void);
 int			check_map_walls(void);
+int			is_player_char(char c);
 
 void		bres_algo(t_bres bres, int is_sub);
 t_vector	calc_rotated_vector(t_vector v, int d);

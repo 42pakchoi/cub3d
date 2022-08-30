@@ -6,34 +6,33 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 01:20:22 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/29 18:17:49 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 16:59:45 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static t_vector	find_left_top_empty(void)
+static t_vector	find_player_pos(void)
 {
 	t_game		*game;
 	t_map		*map;
-	t_vector	left_top_empty;
+	t_vector	pos;
 
 	game = get_game_struct();
 	map = &(game->map);
-	left_top_empty.y = 0;
-	while (left_top_empty.y < map->height)
+	pos.y = 0;
+	while (pos.y < map->height)
 	{
-		left_top_empty.x = 0;
-		while (left_top_empty.x < map->width)
+		pos.x = 0;
+		while (pos.x < map->width)
 		{
-			if (map->array[(int)left_top_empty.y][(int)left_top_empty.x]
-				== MAP_EMPTY)
-				return (left_top_empty);
-			left_top_empty.x++;
+			if (is_player_char(map->array[(int)pos.y][(int)pos.x]))
+				return (pos);
+			pos.x++;
 		}
-		left_top_empty.y++;
+		pos.y++;
 	}
-	return (left_top_empty);
+	return (pos);
 }
 
 static void	flood_wall(char **array, int x, int y)
@@ -50,7 +49,9 @@ static void	flood_wall(char **array, int x, int y)
 		map->is_walled = FT_FALSE;
 		return ;
 	}
-	if (array[y][x] != MAP_EMPTY && array[y][x] != MAP_DOOR)
+	if (!is_player_char(array[y][x])
+		&& array[y][x] != MAP_EMPTY
+		&& array[y][x] != MAP_DOOR)
 		return ;
 	array[y][x] = MAP_TEST_VISITED;
 	flood_wall(array, x + 1, y);
@@ -111,7 +112,7 @@ int	check_map_walls(void)
 	game = get_game_struct();
 	map = &(game->map);
 	map->is_walled = FT_TRUE;
-	start_coord = find_left_top_empty();
+	start_coord = find_player_pos();
 	temp_array = duplicate_map_array(map->array);
 	flood_wall(temp_array, (int)start_coord.x, (int)start_coord.y);
 	free_array(temp_array);
