@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/30 00:58:08 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 17:04:23 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ typedef struct s_dda
 	float			wall_dist;
 	float			wall_collision_point;
 	int				is_door;
+	int				is_fire;
 }					t_dda;
 
 typedef struct s_bres
@@ -157,6 +158,7 @@ typedef struct s_bres
 # define MINIMAP_TILE_SIZE		5
 # define MAX_MINIMAP_SIZE		100
 # define MINIMAP_WALL_COLOR		0xAA00A500
+# define MINIMAP_FIRE_COLOR		0xAA77ff77
 # define MINIMAP_DOOR_COLOR		0xAAFF2600
 # define MINIMAP_FLOOR_COLOR	0x55111111
 # define MINIMAP_DIRLINE_COLOR	0xFFFFFF
@@ -284,6 +286,7 @@ int			exit_with_close_button(void);
 
 void		calc_collision_point(char **map_grid, t_dda *dda);
 void		init_dda(t_dda *dda);
+void		calc_dda(t_dda *dda);
 
 void		fill_color_image(t_img *image, unsigned int color);
 t_img		*make_mlx_image(int width, int height);
@@ -297,5 +300,12 @@ void		put_image_rect(t_img *image, t_point start, t_point end, int color);
 void		draw_pixel(t_point point, int color);
 void		draw_pixel_line(float m, t_point point, t_point dpoint, int color);
 void		draw_pixel_rect(t_vector start, t_vector end, int color);
+
+
+/*
+**	bouns
+*/
+
+int			set_fire_texture(void);
 
 #endif

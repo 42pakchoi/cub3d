@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:26:53 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/29 23:17:43 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 17:05:20 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,29 +38,7 @@ static void	set_collision_point(t_dda *dda)
 	dda->wall_collision_point -= floor(dda->wall_collision_point);
 }
 
-static void	calc_dda(t_dda *dda)
-{
-	if (dda->side_dist.x < dda->side_dist.y)
-	{
-		dda->side_dist.x += dda->delta_dist.x;
-		dda->player_grid.x += dda->step.x;
-		if (dda->ray_dir.x > 0)
-			dda->wall_dir = WALL_DIR_W;
-		else
-			dda->wall_dir = WALL_DIR_E;
-	}
-	else
-	{
-		dda->side_dist.y += dda->delta_dist.y;
-		dda->player_grid.y += dda->step.y;
-		if (dda->ray_dir.y > 0)
-			dda->wall_dir = WALL_DIR_N;
-		else
-			dda->wall_dir = WALL_DIR_S;
-	}
-}
-
-static void	set_wall_except_(t_dda *dda, char **map_grid, int x, int y)
+static void	set_wall_except(t_dda *dda, char **map_grid, int x, int y)
 {
 	if ((dda->wall_dir == WALL_DIR_N || dda->wall_dir == WALL_DIR_E))
 		dda->wall_collision_point = 1 - dda->wall_collision_point;
@@ -71,63 +49,57 @@ static void	set_wall_except_(t_dda *dda, char **map_grid, int x, int y)
 	}
 	if (dda->is_door == 2)
 	{
-		if (map_grid[y][x] == MAP_DOOR_OPEN
-			|| map_grid[y + 1][x] == MAP_DOOR_OPEN
-			|| map_grid[y][x - 1] == MAP_DOOR_OPEN
-			|| map_grid[y][x + 1] == MAP_DOOR_OPEN)
+		if ((map_grid[y - 1] != 0 && map_grid[y - 1][x] == MAP_DOOR_OPEN)
+			|| (map_grid[y + 1] != 0 && map_grid[y + 1][x] == MAP_DOOR_OPEN)
+			|| (map_grid[y][x - 1] != 0 && map_grid[y][x - 1] == MAP_DOOR_OPEN)
+			|| (map_grid[y][x + 1] != 0 && map_grid[y][x + 1] == MAP_DOOR_OPEN))
 		{
 			dda->wall_dir = WALL_DOOR_SIDE;
 		}
 		dda->is_door = 0;
 	}
+	if (dda->is_fire)
+	{
+		dda->wall_dir = WALL_FIRE;
+		dda->is_fire = 0;
+	}
+}
+
+int	get_wall_except(t_dda *dda, char **map_grid, int x, int y)
+{
+	if (map_grid[y][x] == MAP_DOOR)
+	{
+		dda->is_door = 1;
+		return (1);
+	}
+	if (map_grid[y][x] == MAP_DOOR_OPEN)
+		dda->is_door = 2;
+	if (map_grid[y][x] == MAP_WALL_FIRE)
+	{
+		dda->is_fire = 1;
+		return (1);
+	}
+	if (map_grid[y][x] == MAP_WALL)
+		return (1);
+	return (0);
 }
 
 void	calc_collision_point(char **map_grid, t_dda *dda)
 {
 	int	x;
 	int	y;
-	int	is_door;
-	int	is_fire;
 
-	is_door = 0;
-	is_fire = 0;
+	if (map_grid[dda->player_grid.y][dda->player_grid.x] == MAP_DOOR_OPEN)
+			dda->is_door = 2;
 	while (1)
 	{
 		calc_dda(dda);
 		x = (int)(dda->player_grid).x;
 		y = (int)(dda->player_grid).y;
-		if (map_grid[y][x] == MAP_DOOR)
-		{
-			dda->is_door = 1;
-			break ;
-		}
-		if (map_grid[y][x] == MAP_DOOR_OPEN)
-			is_door = 2;
-		if (map_grid[y][x] == MAP_WALL_FIRE)
-		{
-			is_fire = 1;
-			break ;
-		}
-		if (map_grid[y][x] == MAP_WALL)
+		if (get_wall_except(dda, map_grid, x, y))
 			break ;
 	}
 	set_perpendicular_wall_dist(dda, dda->player_pos, dda->ray_dir);
 	set_collision_point(dda);
-	if ((dda->wall_dir == WALL_DIR_N || dda->wall_dir == WALL_DIR_E))
-		dda->wall_collision_point = 1 - dda->wall_collision_point;
-	if (is_door == 1)
-		dda->wall_dir = WALL_DOOR;
-	if (is_fire == 1)
-		dda->wall_dir = WALL_FIRE;
-	if (is_door == 2)
-	{
-		if (map_grid[y][x] == MAP_DOOR_OPEN
-			|| map_grid[y + 1][x] == MAP_DOOR_OPEN
-			|| map_grid[y][x - 1] == MAP_DOOR_OPEN
-			|| map_grid[y][x + 1] == MAP_DOOR_OPEN)
-		{
-			dda->wall_dir = WALL_DOOR_SIDE;
-		}
-	}
-	set_wall_except_(dda, map_grid, x, y);
+	set_wall_except(dda, map_grid, x, y);
 }

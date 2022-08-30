@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphic_init.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 01:53:01 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/30 00:32:56 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 15:26:50 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,43 +24,6 @@ static void	set_images(void)
 			(int)map->height * map->minimap_tile_size
 			);
 	game->screen = make_mlx_image(WINDOW_WIDTH, WINDOW_HEIGHT);
-}
-
-char	*get_fire_image(int i)
-{
-	char	*tmp;
-	char	*result;
-
-	tmp = ft_itoa(i);
-	result = ft_strjoin(PREFIX_IMG_FIRE, tmp);
-	tmp = result;
-	result = ft_strjoin(tmp, ".png");
-	return (result);
-}
-
-static int	set_fire_texture(void)
-{
-	t_game	*game;
-	t_map	*map;
-	int		i;
-	char	*path;
-
-	game = get_game_struct();
-	map = &(game->map);
-	map->textures.fire = (t_img **)malloc(sizeof(t_img *) * 20);
-	if (!map->textures.fire)
-		return (0);
-	map->textures.fire[20] = 0;
-	i = 0;
-	while (i < 19)
-	{
-		path = get_fire_image(i);
-		map->textures.fire[i] = get_png_image(path);
-		if (map->textures.fire[i] == NULL)
-			return (0);
-		i += 1;
-	}
-	return (1);
 }
 
 static void	set_texture_images(void)

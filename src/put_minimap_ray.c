@@ -31,7 +31,7 @@ int	put_minimap_ray(void)
 	t_game		*game;
 	t_player	*player;
 	int			w;
-	float		cameraX;
+	float		camera_x;
 	t_dda		dda;
 
 	game = get_game_struct();
@@ -41,9 +41,9 @@ int	put_minimap_ray(void)
 	w = 0;
 	while (w < WINDOW_WIDTH)
 	{
-		cameraX = 2 * w / (float)WINDOW_WIDTH - 1;
-		dda.ray_dir.x = player->dir.x + player->plane.x * cameraX;
-		dda.ray_dir.y = player->dir.y + player->plane.y * cameraX;
+		camera_x = 2 * w / (float)WINDOW_WIDTH - 1;
+		dda.ray_dir.x = player->dir.x + player->plane.x * camera_x;
+		dda.ray_dir.y = player->dir.y + player->plane.y * camera_x;
 		init_dda(&dda);
 		calc_collision_point(game->map.array, &dda);
 		put_minimap_ray_line(&dda);

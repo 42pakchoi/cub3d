@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 17:33:46 by cpak              #+#    #+#             */
-/*   Updated: 2022/08/29 18:13:38 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 16:06:28 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,11 @@ static int	calc_collision_wall(t_vector pos, t_vector delta)
 	p.x = (int)(pos.x + delta.x);
 	p.y = (int)(pos.y + delta.y);
 	collision_hoz = (map[p.y][(int)(pos.x)] == MAP_WALL
-			|| map[p.y][(int)(pos.x)] == MAP_DOOR);
+			|| map[p.y][(int)(pos.x)] == MAP_DOOR
+			|| map[p.y][(int)(pos.x)] == MAP_WALL_FIRE);
 	collision_ver = (map[(int)pos.y][p.x] == MAP_WALL
-			|| map[(int)pos.y][p.x] == MAP_DOOR);
+			|| map[(int)pos.y][p.x] == MAP_DOOR
+			|| map[(int)pos.y][p.x] == MAP_WALL_FIRE);
 	if (collision_hoz && collision_ver)
 		return (COLLISION_CORNER);
 	if (collision_ver)

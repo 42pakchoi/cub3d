@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_screen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:21:53 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/29 23:05:50 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 15:24:14 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	put_wall_line(int x, t_dda dda)
 
 	game = get_game_struct();
 	texture = get_texture_img(dda.wall_dir);
-	texture_pos.x = (int)((float)(texture->width)*dda.wall_collision_point);
+	texture_pos.x = (int)((float)(texture->width) * dda.wall_collision_point);
 	texture_pos.y = 0;
 	line_height = ((float)WINDOW_HEIGHT / dda.wall_dist);
 	calc_line(&line, line_height, texture, &texture_pos);
@@ -82,7 +82,7 @@ static void	put_wall_line(int x, t_dda dda)
 int	put_screen_wall(void)
 {
 	t_game		*game;
-	float		cameraX;
+	float		camera_x;
 	t_dda		dda;
 	int			w;
 
@@ -92,9 +92,9 @@ int	put_screen_wall(void)
 	w = 0;
 	while (w < WINDOW_WIDTH)
 	{
-		cameraX = 2 * w / (float)WINDOW_WIDTH - 1;
-		dda.ray_dir.x = game->player.dir.x + game->player.plane.x * cameraX;
-		dda.ray_dir.y = game->player.dir.y + game->player.plane.y * cameraX;
+		camera_x = 2 * w / (float)WINDOW_WIDTH - 1;
+		dda.ray_dir.x = game->player.dir.x + game->player.plane.x * camera_x;
+		dda.ray_dir.y = game->player.dir.y + game->player.plane.y * camera_x;
 		init_dda(&dda);
 		calc_collision_point(game->map.array, &dda);
 		put_wall_line(w, dda);
