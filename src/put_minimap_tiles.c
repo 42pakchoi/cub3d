@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_minimap_tiles.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 02:53:00 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/30 16:30:04 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 17:19:38 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,22 @@ static void	calc_tile_points(t_point *i, t_point *tile_start, t_point *tile_end)
 	tile_start->y = i->y * map->minimap_tile_size;
 	tile_end->x = tile_start->x + map->minimap_tile_size;
 	tile_end->y = tile_start->y + map->minimap_tile_size;
+}
+
+static void	put_tile(char c, t_point *tile_start, t_point *tile_end)
+{
+	t_game	*game;
+
+	game = get_game_struct();
+	if (c == MAP_WALL)
+		put_image_rect(
+			game->minimap, *tile_start, *tile_end, MINIMAP_WALL_COLOR);
+	if (c == MAP_WALL_FIRE)
+		put_image_rect(
+			game->minimap, *tile_start, *tile_end, MINIMAP_FIRE_COLOR);
+	if (c == MAP_DOOR)
+		put_image_rect(
+			game->minimap, *tile_start, *tile_end, MINIMAP_DOOR_COLOR);
 }
 
 void	put_minimap_tiles(void)
@@ -42,15 +58,7 @@ void	put_minimap_tiles(void)
 		while (i.x < (int) map->width)
 		{
 			calc_tile_points(&i, &tile_start, &tile_end);
-			if (map->array[i.y][i.x] == MAP_WALL)
-				put_image_rect(
-					game->minimap, tile_start, tile_end, MINIMAP_WALL_COLOR);
-			if (map->array[i.y][i.x] == MAP_WALL_FIRE)
-				put_image_rect(
-					game->minimap, tile_start, tile_end, MINIMAP_FIRE_COLOR);
-			if (map->array[i.y][i.x] == MAP_DOOR)
-				put_image_rect(
-					game->minimap, tile_start, tile_end, MINIMAP_DOOR_COLOR);
+			put_tile(map->array[i.y][i.x], &tile_start, &tile_end);
 			i.x++;
 		}
 		i.y++;
