@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/30 16:50:58 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 20:36:15 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -286,7 +286,7 @@ t_game		*get_game_struct(void);
 void		exit_with_error(char *message);
 int			exit_with_close_button(void);
 
-void		calc_collision_point(char **map_grid, t_dda *dda);
+int			calc_collision_point(char **map_grid, t_dda *dda);
 void		init_dda(t_dda *dda);
 void		calc_dda(t_dda *dda);
 

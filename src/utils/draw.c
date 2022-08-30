@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:26:53 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/30 17:05:20 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 21:56:50 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,13 @@ int	get_wall_except(t_dda *dda, char **map_grid, int x, int y)
 	return (0);
 }
 
-void	calc_collision_point(char **map_grid, t_dda *dda)
+int	calc_collision_point(char **map_grid, t_dda *dda)
 {
-	int	x;
-	int	y;
+	t_game	*game;
+	int		x;
+	int		y;
 
+	game = get_game_struct();
 	if (map_grid[dda->player_grid.y][dda->player_grid.x] == MAP_DOOR_OPEN)
 			dda->is_door = 2;
 	while (1)
@@ -96,10 +98,13 @@ void	calc_collision_point(char **map_grid, t_dda *dda)
 		calc_dda(dda);
 		x = (int)(dda->player_grid).x;
 		y = (int)(dda->player_grid).y;
+		if (x < 0 || x >= (int)game->map.width || y < 0 || y >= (int)game->map.height)
+			return (0);
 		if (get_wall_except(dda, map_grid, x, y))
 			break ;
 	}
 	set_perpendicular_wall_dist(dda, dda->player_pos, dda->ray_dir);
 	set_collision_point(dda);
 	set_wall_except(dda, map_grid, x, y);
+	return (1);
 }
