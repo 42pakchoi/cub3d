@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 21:43:59 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/29 23:13:19 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 19:22:18 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 void	exit_with_error(char *message)
 {
-	ft_putstr_fd("<Error> ", 2);
-	ft_putstr_fd(message, 2);
-	ft_putstr_fd("\n", 2);
+	print_error(message);
 	free_game();
 	exit(EXIT_FAILURE);
 }
@@ -24,7 +22,7 @@ void	exit_with_error(char *message)
 int	exit_with_close_button(void)
 {
 	free_game();
-	printf("<info> Bye!\n");
+	print_info("Bye!");
 	system("leaks cub3d");
 	exit(EXIT_SUCCESS);
 	return (0);
