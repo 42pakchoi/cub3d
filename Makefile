@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+         #
+#    By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/28 19:18:15 by sarchoi           #+#    #+#              #
-#    Updated: 2022/08/29 18:50:32 by sarchoi          ###   ########seoul.kr   #
+#    Updated: 2022/08/30 17:05:39 by cpak             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,8 @@ SRCS_ROOT = main.c \
 			calc_rotated_vector.c \
 			player.c \
 			init_player.c \
-			bres_algo.c
+			bres_algo.c \
+			set_fire_texture.c
 SRCS_UTIL = global.c \
 			draw.c \
 			draw_pixel.c \
@@ -50,7 +51,7 @@ SRCS_UTIL = global.c \
 			put_image.c \
 			get_image.c \
 			exit.c \
-			init_dda.c
+			dda_algo.c
 SRCS = $(addprefix ./src/, $(SRCS_ROOT)) \
 		$(addprefix ./src/utils/, $(SRCS_UTIL))
 
