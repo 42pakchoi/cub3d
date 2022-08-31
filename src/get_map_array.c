@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map_array.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 18:43:16 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/29 19:04:26 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/31 17:59:15 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ char	**get_map_array(t_list *map_start_line, size_t h, size_t w)
 	size_t	i;
 	size_t	j;
 
-	map_array = (char **)malloc(sizeof(char *) * h + 1);
+	map_array = (char **)malloc(sizeof(char *) * (h + 1));
 	if (map_array == NULL)
 		return (NULL);
 	map_array[h] = NULL;
 	i = 0;
 	while (i < h)
 	{
-		map_array[i] = malloc(sizeof(char) * w + 1);
+		map_array[i] = malloc(sizeof(char) * (w + 1));
 		if (map_array[i] == NULL)
 			return (NULL);
 		map_array[i][w] = '\0';

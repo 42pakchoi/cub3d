@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validate_walls.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 01:20:22 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/30 16:59:45 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/31 18:00:01 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,11 @@ static char	**duplicate_map_array(char **orig)
 	game = get_game_struct();
 	map = &(game->map);
 	i = 0;
-	dup = (char **)malloc(sizeof(char *) * map->height + 1);
+	dup = (char **)malloc(sizeof(char *) * (map->height + 1));
 	dup[map->height] = NULL;
 	while (i < map->height)
 	{
-		dup[i] = (char *)malloc(sizeof(char) * map->width + 1);
+		dup[i] = (char *)malloc(sizeof(char) * (map->width + 1));
 		dup[i][map->width] = '\0';
 		j = 0;
 		while (j < map->width)

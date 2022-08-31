@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:21:53 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/30 15:24:14 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/31 19:01:54 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,10 @@ static void	put_wall_line(int x, t_dda dda)
 			continue ;
 		if (line.start.y >= WINDOW_HEIGHT)
 			break ;
-		put_image_pixel(
-			game->screen, x, line.start.y,
-			get_image_pixel(texture, (int)texture_pos.x, (int)texture_pos.y));
+		if ((int)texture_pos.x < texture->width && (int)texture_pos.y < texture->height)
+			put_image_pixel(
+				game->screen, x, line.start.y,
+				get_image_pixel(texture, (int)texture_pos.x, (int)texture_pos.y));
 	}
 }
 
