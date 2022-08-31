@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 17:33:46 by cpak              #+#    #+#             */
-/*   Updated: 2022/08/30 20:54:35 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/31 14:32:33 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,10 @@ void	set_player(void)
 	game = get_game_struct();
 	delta.x = 0;
 	delta.y = 0;
-	set_delta(&delta, game->player.key.move,
-		game->player.dir, game->player.plane
-		);
+	set_delta(&delta,
+		game->player.key.move,
+		game->player.dir,
+		game->player.plane);
 	move_player(delta);
 	if (game->player.key.rotate)
 		rotate_player(game, game->player.key.rotate);

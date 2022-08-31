@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_util.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 18:45:00 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/29 18:17:49 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/31 14:26:39 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-unsigned int 	ft_split_length(char **tab)
+unsigned int	ft_split_length(char **tab)
 {
 	unsigned int	i;
 

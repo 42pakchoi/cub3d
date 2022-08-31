@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:33:12 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/29 19:04:26 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/31 13:39:31 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,6 @@ static void	init_mlx(void)
 	init_images();
 	mlx_hook(game->win, KEY_PRESS, 0L, key_down, NULL);
 	mlx_hook(game->win, KEY_RELEASE, 0L, key_up, NULL);
-	// mlx_hook(game->win, BUTTON_PRESS, 0L, mouse_down, NULL);
-	// mlx_hook(game->win, BUTTON_RELEASE, 0L, mouse_up, NULL);
-	// mlx_hook(game->win, MOTION_NOTIFY, 0L, mouse_move, NULL);
 	mlx_hook(game->win, CLOSE_BUTTON, 0, exit_with_close_button, NULL);
 	mlx_loop_hook(game->mlx, draw_frame, NULL);
 }

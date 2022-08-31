@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validate_walls.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 01:20:22 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/30 16:59:45 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/31 13:45:41 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ static void	flood_wall(char **array, int x, int y)
 		return ;
 	}
 	if (!is_player_char(array[y][x])
-		&& array[y][x] != MAP_EMPTY
-		&& array[y][x] != MAP_DOOR)
+		&& array[y][x] != MAP_EMPTY)
 		return ;
 	array[y][x] = MAP_TEST_VISITED;
 	flood_wall(array, x + 1, y);

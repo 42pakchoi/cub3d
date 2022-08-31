@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/30 20:36:15 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/31 14:46:09 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 typedef int			t_bool;
 # define FT_TRUE	1
 # define FT_FALSE	0
+
 typedef struct s_vector
 {
 	float			x;
@@ -71,11 +72,6 @@ typedef struct s_textures
 	t_img			*south;
 	t_img			*west;
 	t_img			*east;
-	t_img			*door;
-	t_img			*door_side;
-	t_img			**fire;
-	t_img			*minimap_floor;
-	t_img			*minimap_wall;
 }					t_textures;
 
 typedef struct s_map
@@ -92,7 +88,6 @@ typedef struct s_map
 	int				floor_color;
 	int				ceiling_color;
 	unsigned int	minimap_tile_size;
-	float			sprite_count;
 	t_textures		textures;
 }					t_map;
 
@@ -117,9 +112,7 @@ typedef struct s_game
 	void			*mlx;
 	void			*win;
 	t_map			map;
-	t_img			*minimap;
 	t_img			*screen;
-	t_img			*sprite;
 	t_player		player;
 }					t_game;
 
@@ -158,8 +151,6 @@ typedef struct s_bres
 # define MINIMAP_TILE_SIZE		5
 # define MAX_MINIMAP_SIZE		100
 # define MINIMAP_WALL_COLOR		0xAA00A500
-# define MINIMAP_FIRE_COLOR		0xAA77ff77
-# define MINIMAP_DOOR_COLOR		0xAAFF2600
 # define MINIMAP_FLOOR_COLOR	0x55111111
 # define MINIMAP_DIRLINE_COLOR	0xFFFFFF
 # define MINIMAP_RAY_COLOR		0xEEAAAAAA
@@ -171,15 +162,6 @@ typedef struct s_bres
 # define WALL_DIR_E			2
 # define WALL_DIR_W			3
 
-# define WALL_DOOR			4
-# define WALL_DOOR_SIDE		5
-# define WALL_FIRE			6
-
-# define COLLISION_NONE		0
-# define COLLISION_HOZ		1
-# define COLLISION_VER		2
-# define COLLISION_CORNER	3
-
 /*
 ** map characters
 */
@@ -189,19 +171,14 @@ typedef struct s_bres
 # define MAP_PLAYER_W		'W'
 # define MAP_EMPTY			'0'
 # define MAP_WALL			'1'
-# define MAP_WALL_FIRE		'2'
 # define MAP_OUTSIDE		' '
 # define MAP_TEST_VISITED	'.'
-# define MAP_DOOR			'D'
-# define MAP_DOOR_OPEN		'O'
 
 /*
 ** Image Paths
 */
 # define IMG_DOOR		"./textures/dungeon_door.png"
 # define IMG_DOOR_SIDE	"./textures/dungeon_door_side.png"
-# define PREFIX_IMG_FIRE		"./textures/fireplace/fire-"
-# define IMG_FIRE_FRAME			19
 
 /*
 ** keycodes
@@ -243,11 +220,6 @@ void		rotate_player(t_game *game, int angle);
 void		set_player(void);
 
 void		init_images(void);
-void		put_minimap_floor(void);
-void		put_minimap_line(t_vector start, t_vector end);
-int			put_minimap_player(void);
-int			put_minimap_ray(void);
-void		put_minimap_tiles(void);
 int			put_screen_wall(void);
 int			put_screen_ceiling_floor(void);
 
@@ -266,14 +238,10 @@ int			check_map_required_characters(void);
 int			check_map_walls(void);
 int			is_player_char(char c);
 
-void		bres_algo(t_bres bres, int is_sub);
 t_vector	calc_rotated_vector(t_vector v, int d);
 
 int			key_up(int keycode);
 int			key_down(int keycode);
-int			mouse_up(void);
-int			mouse_down(int button, int x);
-int			mouse_move(int x);
 
 int			draw_frame(void);
 void		free_game(void);
@@ -302,12 +270,5 @@ void		put_image_rect(t_img *image, t_point start, t_point end, int color);
 void		draw_pixel(t_point point, int color);
 void		draw_pixel_line(float m, t_point point, t_point dpoint, int color);
 void		draw_pixel_rect(t_vector start, t_vector end, int color);
-
-
-/*
-**	bouns
-*/
-
-int			set_fire_texture(void);
 
 #endif

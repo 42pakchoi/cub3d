@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 17:01:30 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/30 16:39:43 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/31 14:35:23 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,6 @@ static void	free_mlx_image(t_img *img)
 	free(img);
 }
 
-static void	free_mlx_image_array(t_img **arr)
-{
-	int	i;
-
-	if (arr == NULL)
-		return ;
-	i = 0;
-	while (arr[i] != NULL)
-	{
-		free_mlx_image(arr[i++]);
-	}
-	free(arr);
-}
-
 static void	free_game_textures(void)
 {
 	t_game	*game;
@@ -65,11 +51,6 @@ static void	free_game_textures(void)
 	free_mlx_image(game->map.textures.south);
 	free_mlx_image(game->map.textures.west);
 	free_mlx_image(game->map.textures.east);
-	free_mlx_image(game->map.textures.minimap_floor);
-	free_mlx_image(game->map.textures.minimap_wall);
-	free_mlx_image(game->map.textures.door);
-	free_mlx_image(game->map.textures.door_side);
-	free_mlx_image_array(game->map.textures.fire);
 }
 
 /*
@@ -84,7 +65,6 @@ void	free_game(void)
 	game = get_game_struct();
 	free_game_map();
 	free_game_textures();
-	free_mlx_image(game->minimap);
 	free_mlx_image(game->screen);
 	if (game->mlx != NULL && game->win != NULL)
 		mlx_destroy_window(game->mlx, game->win);
