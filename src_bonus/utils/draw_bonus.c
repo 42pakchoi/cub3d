@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:26:53 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/09/01 17:07:27 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/09/01 20:34:27 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,31 +41,28 @@ static void	set_collision_point(t_dda *dda)
 static void	set_wall_except(t_dda *dda, char **map_grid, int x, int y)
 {
 	t_game	*game;
+	int		height;
+	int		width;
 
 	game = get_game_struct();
+	height = (int)game->map.height;
+	width = (int)game->map.width;
 	if ((dda->wall_dir == WALL_DIR_N || dda->wall_dir == WALL_DIR_E))
 		dda->wall_collision_point = 1 - dda->wall_collision_point;
 	if (dda->is_door == 1)
-	{
 		dda->wall_dir = WALL_DOOR;
-		dda->is_door = 0;
-	}
 	if (dda->is_door == 2)
 	{
 		if ((y - 1 >= 0 && map_grid[y - 1][x] == MAP_DOOR_OPEN)
-			|| (y + 1 < (int)game->map.height && map_grid[y + 1][x] == MAP_DOOR_OPEN)
+			|| (y + 1 < height && map_grid[y + 1][x] == MAP_DOOR_OPEN)
 			|| (x - 1 >= 0 && map_grid[y][x - 1] == MAP_DOOR_OPEN)
-			|| (x + 1 < (int)game->map.width && map_grid[y][x + 1] == MAP_DOOR_OPEN))
-		{
+			|| (x + 1 < width && map_grid[y][x + 1] == MAP_DOOR_OPEN))
 			dda->wall_dir = WALL_DOOR_SIDE;
-		}
-		dda->is_door = 0;
 	}
 	if (dda->is_fire)
-	{
 		dda->wall_dir = WALL_FIRE;
-		dda->is_fire = 0;
-	}
+	dda->is_fire = 0;
+	dda->is_door = 0;
 }
 
 int	get_wall_except(t_dda *dda, char **map_grid, int x, int y)

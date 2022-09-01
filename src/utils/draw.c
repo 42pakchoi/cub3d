@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:26:53 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/09/01 19:10:06 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/09/01 20:11:52 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,6 @@ static void	set_collision_point(t_dda *dda)
 
 static void	set_wall_except(t_dda *dda)
 {
-	t_game	*game;
-
-	game = get_game_struct();
 	if ((dda->wall_dir == WALL_DIR_N || dda->wall_dir == WALL_DIR_E))
 		dda->wall_collision_point = 1 - dda->wall_collision_point;
 }
