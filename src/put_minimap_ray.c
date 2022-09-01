@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-static void	put_minimap_ray_line(t_dda *dda)
+void	put_minimap_ray_line(t_dda *dda)
 {
 	t_game		*game;
 	t_line		ray;
@@ -21,9 +21,14 @@ static void	put_minimap_ray_line(t_dda *dda)
 	ray.start = dda->player_pos;
 	ray.end.x = dda->player_pos.x + dda->wall_dist * dda->ray_dir.x;
 	ray.end.y = dda->player_pos.y + dda->wall_dist * dda->ray_dir.y;
+	printf("line\n");
 	if ((ray.start.x > 0 || ray.start.x < game->map.width)
 		&& (ray.start.y > 0 || ray.start.y < game->map.height))
+	{
+		printf("x: %f, y: %f\n", ray.end.x, ray.end.y);
 		put_minimap_line(ray.start, ray.end);
+	}
+	printf("end\n");
 }
 
 int	put_minimap_ray(void)
@@ -45,8 +50,8 @@ int	put_minimap_ray(void)
 		dda.ray_dir.x = player->dir.x + player->plane.x * camera_x;
 		dda.ray_dir.y = player->dir.y + player->plane.y * camera_x;
 		init_dda(&dda);
-		calc_collision_point(game->map.array, &dda);
-		put_minimap_ray_line(&dda);
+		// if (calc_collision_point(game->map.array, &dda))
+		// 	put_minimap_ray_line(&dda);
 		w += 1;
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 18:44:19 by cpak              #+#    #+#             */
-/*   Updated: 2022/08/30 17:05:20 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 21:24:11 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,11 @@ void	init_dda(t_dda *dda)
 	dda->player_grid.x = (int)dda->player_pos.x;
 	dda->player_grid.y = (int)dda->player_pos.y;
 	set_dda_side(dda);
+	dda->wall_dir = 0;
+	dda->wall_dist = 0;
+	dda->wall_collision_point = 0;
+	dda->is_door = 0;
+	dda->is_fire = 0;
 }
 
 void	calc_dda(t_dda *dda)
