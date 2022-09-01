@@ -6,7 +6,7 @@
 #    By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/28 19:18:15 by sarchoi           #+#    #+#              #
-#    Updated: 2022/09/01 19:24:56 by sarchoi          ###   ########seoul.kr   #
+#    Updated: 2022/09/01 19:28:11 by sarchoi          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,8 +47,14 @@ SRCS_UTIL = global.c \
 			dda_algo.c \
 			print.c
 SRCS = $(addprefix ./src/, $(SRCS_ROOT)) \
-		$(addprefix ./src/utils/, $(SRCS_UTIL))
-SRCS_BONUS = $(addprefix ./src_bonus/, $(SRCS_ROOT:.c=_bonus.c)) \
+			$(addprefix ./src/utils/, $(SRCS_UTIL))
+SRCS_ONLY_BONUS = put_minimap_floor_bonus.c \
+			put_minimap_player_bonus.c \
+			put_minimap_ray_bonus.c \
+			put_minimap_tiles_bonus.c \
+			set_fire_texture_bonus.c \
+SRCS_BONUS = $(addprefix ./src_bonus/, $(SRCS_ONLY_BONUS)) \
+			$(addprefix ./src_bonus/, $(SRCS_ROOT:.c=_bonus.c)) \
 			$(addprefix ./src_bonus/utils/, $(SRCS_UTIL:.c=_bonus.c))
 
 OBJS = $(SRCS:.c=.o)
