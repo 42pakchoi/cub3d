@@ -6,7 +6,7 @@
 #    By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/28 19:18:15 by sarchoi           #+#    #+#              #
-#    Updated: 2022/09/01 20:09:07 by sarchoi          ###   ########seoul.kr   #
+#    Updated: 2022/09/01 20:14:13 by sarchoi          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,8 @@ SRCS_ONLY_BONUS = put_minimap_floor_bonus.c \
 			put_minimap_line_bonus.c \
 			put_minimap_tiles_bonus.c \
 			set_fire_texture_bonus.c \
-			bres_algo_bonus.c
+			bres_algo_bonus.c \
+			mouse_hook_bonus.c
 SRCS_BONUS = $(addprefix ./src_bonus/, $(SRCS_ONLY_BONUS)) \
 			$(addprefix ./src_bonus/, $(SRCS_ROOT:.c=_bonus.c)) \
 			$(addprefix ./src_bonus/utils/, $(SRCS_UTIL:.c=_bonus.c))
@@ -109,7 +110,7 @@ clean:
 	$(info $(green)<MAKE> Libft - clean$(reset))
 	@make clean --directory=libs/$(MLX)
 	$(info $(green)<MAKE> MinilibX - clean$(reset))
-	rm -f $(OBJECTS) $(OBJS_GNL)
+	rm -f $(OBJS) $(OBJS_BONUS) $(OBJS_GNL)
 	$(info $(green)<MAKE> clean$(reset))
 
 fclean: clean
