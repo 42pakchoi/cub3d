@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_screen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:21:53 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/09/01 19:11:26 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/09/01 20:30:45 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,32 +47,30 @@ static	void	calc_line(
 
 static void	put_wall_line(int x, t_dda dda)
 {
-	t_game		*game;
 	t_img		*texture;
-	t_vector	texture_pos;
+	t_vector	texture_p;
 	float		line_height;
 	t_line		line;
 
-	game = get_game_struct();
 	texture = get_texture_img(dda.wall_dir);
 	if (texture == NULL)
 		return ;
-	texture_pos.x = (int)((float)(texture->width) * dda.wall_collision_point);
-	texture_pos.y = 0;
+	texture_p.x = (int)((float)(texture->width) *dda.wall_collision_point);
+	texture_p.y = 0;
 	line_height = ((float)WINDOW_HEIGHT / dda.wall_dist);
-	calc_line(&line, line_height, texture, &texture_pos);
+	calc_line(&line, line_height, texture, &texture_p);
 	while (line.start.y < line.end.y)
 	{
-		texture_pos.y += (float)(texture->height) / (float)line_height;
+		texture_p.y += (float)(texture->height) / (float)line_height;
 		line.start.y++;
 		if (line.start.y <= 0)
 			continue ;
 		if (line.start.y >= WINDOW_HEIGHT)
 			break ;
-		if ((int)texture_pos.x < texture->width && (int)texture_pos.y < texture->height)
-			put_image_pixel(
-				game->screen, x, line.start.y,
-				get_image_pixel(texture, (int)texture_pos.x, (int)texture_pos.y));
+		if ((int)texture_p.x < texture->width
+			&& (int)texture_p.y < texture->height)
+			put_image_pixel(get_game_struct()->screen, x, line.start.y,
+				get_image_pixel(texture, (int)texture_p.x, (int)texture_p.y));
 	}
 }
 
