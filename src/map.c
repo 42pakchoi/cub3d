@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:43:07 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/29 18:17:49 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 19:22:05 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,14 @@ static void	print_map_data(void)
 	game = get_game_struct();
 	map = &(game->map);
 	printf("<info> map data\n");
-	printf("- height: %zu\n", map->height);
-	printf("- width: %zu\n", map->width);
-	printf("- path_north_texture: %s\n", map->path_north_texture);
-	printf("- path_south_texture: %s\n", map->path_south_texture);
-	printf("- path_west_texture: %s\n", map->path_west_texture);
-	printf("- path_east_texture: %s\n", map->path_east_texture);
-	printf("- rgb_floor_color: %x\n", map->floor_color);
-	printf("- rgb_ceiling_color: %x\n", map->ceiling_color);
+	printf("\t- height: %zu\n", map->height);
+	printf("\t- width: %zu\n", map->width);
+	printf("\t- path_north_texture: %s\n", map->path_north_texture);
+	printf("\t- path_south_texture: %s\n", map->path_south_texture);
+	printf("\t- path_west_texture: %s\n", map->path_west_texture);
+	printf("\t- path_east_texture: %s\n", map->path_east_texture);
+	printf("\t- rgb_floor_color: %x\n", map->floor_color);
+	printf("\t- rgb_ceiling_color: %x\n", map->ceiling_color);
 }
 
 static void	clear_map_raw(void)
@@ -78,17 +78,17 @@ void	init_map(char *map_filepath)
 
 	if (vaildate_file_extension(map_filepath) == FT_ERROR)
 	{
-		printf("<error> Invalid file extension. Extension must be '.cub'.\n");
+		exit_with_error("Invalid file extension. (.cub)");
 		return ;
 	}
 	filde = open(map_filepath, O_RDONLY);
 	if (filde == FT_ERROR)
 	{
-		printf("<error> Failed to open file.\n");
+		exit_with_error("Failed to open map file");
 		return ;
 	}
 	read_file(filde);
-	printf("<info> Completed reading file.\n");
+	print_info("Map file read complete");
 	if (parse_map() == FT_ERROR)
 	{
 		close(filde);
@@ -97,6 +97,6 @@ void	init_map(char *map_filepath)
 	}
 	clear_map_raw();
 	print_map_data();
-	printf("<info> Completed validating map.\n");
+	print_info("Map validation complete");
 	close(filde);
 }

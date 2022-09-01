@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 01:16:53 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/29 23:03:37 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 19:18:16 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,22 +53,22 @@ int	validate_map(void)
 {
 	if (check_map_characters() == FT_ERROR)
 	{
-		printf("<TEST> check_map_characters\n");
+		print_error("Invalid map characters");
 		return (FT_ERROR);
 	}
 	if (check_map_walls() == FT_ERROR)
 	{
-		printf("<TEST> check_map_walls\n");
+		print_error("Invalid map walls");
 		return (FT_ERROR);
 	}
 	if (check_map_doors() == FT_ERROR)
 	{
-		printf("<TEST> check_map_doors\n");
+		print_error("Invalid map doors");
 		return (FT_ERROR);
 	}
 	if (check_map_required_characters() == FT_ERROR)
 	{
-		printf("<TEST> check_map_required_characters\n");
+		print_error("Invalid map required characters");
 		return (FT_ERROR);
 	}
 	return (FT_SUCCESS);

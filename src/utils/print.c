@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/26 21:43:59 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/30 19:22:18 by sarchoi          ###   ########seoul.kr  */
+/*   Created: 2022/08/30 19:19:33 by sarchoi           #+#    #+#             */
+/*   Updated: 2022/08/30 19:19:34 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	exit_with_error(char *message)
+void	print_info(char *message)
 {
-	print_error(message);
-	free_game();
-	exit(EXIT_FAILURE);
+	ft_putstr_fd("<Info> ", 1);
+	ft_putstr_fd(message, 1);
+	ft_putstr_fd("\n", 1);
 }
 
-int	exit_with_close_button(void)
+void	print_error(char *message)
 {
-	free_game();
-	print_info("Bye!");
-	system("leaks cub3d");
-	exit(EXIT_SUCCESS);
-	return (0);
+	ft_putstr_fd("<Error> ", 2);
+	ft_putstr_fd(message, 2);
+	ft_putstr_fd("\n", 2);
 }

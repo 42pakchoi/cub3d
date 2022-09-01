@@ -3,7 +3,7 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+         #
+#    By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/28 19:18:15 by sarchoi           #+#    #+#              #
 #    Updated: 2022/08/31 21:50:20 by cpak             ###   ########seoul.kr   #
@@ -51,7 +51,8 @@ SRCS_UTIL = global.c \
 			put_image.c \
 			get_image.c \
 			exit.c \
-			dda_algo.c
+			dda_algo.c \
+			print.c
 SRCS = $(addprefix ./src/, $(SRCS_ROOT)) \
 		$(addprefix ./src/utils/, $(SRCS_UTIL))
 

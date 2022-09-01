@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:33:12 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/29 19:04:26 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 19:22:22 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	main(int argc, char *argv[])
 		ft_putstr_fd("usage: ./cub3d <map_file_name>\n", 2);
 		return (1);
 	}
-	printf("<info> map file name: %s\n", argv[1]);
+	printf("<Info> map file name: %s\n", argv[1]);
 	run_game(argv[1]);
 	free_game();
 	return (0);

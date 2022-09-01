@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:26:53 by sarchoi           #+#    #+#             */
 /*   Updated: 2022/08/31 21:40:31 by cpak             ###   ########seoul.kr  */
@@ -93,7 +93,7 @@ void	calc_collision_point(char **map_grid, t_dda *dda)
 	int	y;
 
 	if (map_grid[dda->player_grid.y][dda->player_grid.x] == MAP_DOOR_OPEN)
-			dda->is_door = 2;
+		dda->is_door = 2;
 	while (1)
 	{
 		calc_dda(dda);
