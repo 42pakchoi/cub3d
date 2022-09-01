@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_screen_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:21:53 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/09/01 20:35:58 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/09/01 20:46:10 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	put_wall_line(int x, t_dda dda)
 
 	game = get_game_struct();
 	texture = get_texture_img(dda.wall_dir);
-	texture_p.x = (int)((float)(texture->width) *dda.wall_collision_point);
+	texture_p.x = (int)((float)(texture->width) * dda.wall_collision_point);
 	texture_p.y = 0;
 	line_height = ((float)WINDOW_HEIGHT / dda.wall_dist);
 	calc_line(&line, line_height, texture, &texture_p);

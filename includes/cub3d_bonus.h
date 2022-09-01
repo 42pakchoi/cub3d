@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/09/01 17:06:52 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/09/01 20:52:50 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <stdio.h>
-# include <string.h>
 # include <math.h>
 # include "mlx.h"
 # include "libft.h"
@@ -30,6 +29,7 @@
 typedef int			t_bool;
 # define FT_TRUE	1
 # define FT_FALSE	0
+
 typedef struct s_vector
 {
 	float			x;
