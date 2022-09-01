@@ -6,7 +6,7 @@
 #    By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/28 19:18:15 by sarchoi           #+#    #+#              #
-#    Updated: 2022/09/01 20:14:13 by sarchoi          ###   ########seoul.kr   #
+#    Updated: 2022/09/01 20:41:24 by sarchoi          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 NAME = cub3d
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror
 
 SRCS_ROOT = main.c \
 			map.c \
