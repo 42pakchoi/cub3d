@@ -6,11 +6,7 @@
 #    By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/28 19:18:15 by sarchoi           #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2022/08/31 14:46:05 by cpak             ###   ########seoul.kr   #
-=======
-#    Updated: 2022/09/01 17:03:39 by sarchoi          ###   ########seoul.kr   #
->>>>>>> develop
+#    Updated: 2022/09/01 19:24:56 by sarchoi          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +52,10 @@ SRCS_BONUS = $(addprefix ./src_bonus/, $(SRCS_ROOT:.c=_bonus.c)) \
 			$(addprefix ./src_bonus/utils/, $(SRCS_UTIL:.c=_bonus.c))
 
 OBJS = $(SRCS:.c=.o)
-OBJS_BONUS = $(SRCS_BONUS:.c=.o)
+
+ifdef BONUS
+	OBJS = $(SRCS_BONUS:.c=.o)
+endif
 
 MLX = minilibx
 MLX_FLAGS = -L libs/minilibx -lmlx -framework OpenGl -framework AppKit
@@ -76,6 +75,9 @@ reset:=$(shell tput sgr0)
 
 all: $(LIBFT) $(MLX) $(NAME)
 
+bonus:
+	make BONUS=1 all
+
 $(NAME): $(OBJS) $(OBJS_GNL)
 	$(info $(green)<MAKE> NAME$(reset))
 	$(CC) $(CFLAGS) -o $@ $^ $(LIBFT_FLAGS) $(MLX_FLAGS)
@@ -86,17 +88,10 @@ $(NAME): $(OBJS) $(OBJS_GNL)
 	$(info $(green)<MAKE> $(<) -> $(@)$(reset))
 
 $(LIBFT):
-	make all bonus --directory=libs/$(LIBFT)
+	make all --directory=libs/$(LIBFT)
 
 $(MLX):
 	make --directory=libs/$(MLX)
-
-bonus: $(OBJS_BONUS) $(OBJS_GNL)
-	$(info $(green)<MAKE> bonus$(reset))
-	make $(LIBFT)
-	make $(MLX)
-	$(CC) $(CFLAGS) -o $(NAME) $^ $(LIBFT_FLAGS) $(MLX_FLAGS)
-	install_name_tool -change libmlx.dylib $(CURDIR)/libs/$(MLX)/libmlx.dylib $(NAME)
 
 clean:
 	@make clean --directory=libs/$(LIBFT)
