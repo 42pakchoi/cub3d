@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   put_minimap_floor_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/26 21:43:59 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/30 19:22:18 by sarchoi          ###   ########seoul.kr  */
+/*   Created: 2022/08/22 02:58:10 by sarchoi           #+#    #+#             */
+/*   Updated: 2022/09/01 17:07:27 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
-void	exit_with_error(char *message)
+void	put_minimap_floor(void)
 {
-	print_error(message);
-	free_game();
-	exit(EXIT_FAILURE);
-}
+	t_game	*game;
+	t_map	*map;
+	t_point	top_left;
+	t_point	bottom_right;
 
-int	exit_with_close_button(void)
-{
-	free_game();
-	print_info("Bye!");
-	system("leaks cub3d");
-	exit(EXIT_SUCCESS);
-	return (0);
+	game = get_game_struct();
+	map = &game->map;
+	top_left.x = 0;
+	top_left.y = 0;
+	bottom_right.x = map->width * map->minimap_tile_size;
+	bottom_right.y = map->height * map->minimap_tile_size;
+	put_image_rect(game->minimap, top_left, bottom_right, MINIMAP_FLOOR_COLOR);
 }

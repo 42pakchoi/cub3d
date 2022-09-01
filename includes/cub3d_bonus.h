@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/30 20:36:15 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/09/01 17:06:52 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -290,7 +290,7 @@ int			print_error(char *message);
 void		exit_with_error(char *message);
 int			exit_with_close_button(void);
 
-int			calc_collision_point(char **map_grid, t_dda *dda);
+void		calc_collision_point(char **map_grid, t_dda *dda);
 void		init_dda(t_dda *dda);
 void		calc_dda(t_dda *dda);
 
@@ -306,11 +306,6 @@ void		put_image_rect(t_img *image, t_point start, t_point end, int color);
 void		draw_pixel(t_point point, int color);
 void		draw_pixel_line(float m, t_point point, t_point dpoint, int color);
 void		draw_pixel_rect(t_vector start, t_vector end, int color);
-
-
-/*
-**	bouns
-*/
 
 int			set_fire_texture(void);
 

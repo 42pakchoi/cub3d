@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   get_image_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/26 21:43:59 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/30 19:22:18 by sarchoi          ###   ########seoul.kr  */
+/*   Created: 2022/08/22 17:01:02 by sarchoi           #+#    #+#             */
+/*   Updated: 2022/09/01 17:07:27 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
-void	exit_with_error(char *message)
+int	get_image_pixel(t_img *image, int x, int y)
 {
-	print_error(message);
-	free_game();
-	exit(EXIT_FAILURE);
-}
+	int				bytes;
+	int				offset;
+	unsigned int	index;
 
-int	exit_with_close_button(void)
-{
-	free_game();
-	print_info("Bye!");
-	system("leaks cub3d");
-	exit(EXIT_SUCCESS);
-	return (0);
+	bytes = image->bits_per_pixel / CHAR_BIT;
+	offset = (image->size_line - image->width * bytes) / bytes;
+	index = (image->width + offset) * y + x;
+	return (image->addr[index]);
 }

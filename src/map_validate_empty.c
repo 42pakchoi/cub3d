@@ -1,29 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   map_validate_empty.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/26 21:43:59 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/30 19:22:18 by sarchoi          ###   ########seoul.kr  */
+/*   Created: 2022/08/30 21:58:36 by sarchoi           #+#    #+#             */
+/*   Updated: 2022/08/30 21:58:52 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	exit_with_error(char *message)
+static int	is_empty_line(char *line)
 {
-	print_error(message);
-	free_game();
-	exit(EXIT_FAILURE);
+	size_t	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] != MAP_OUTSIDE)
+			return (FT_FALSE);
+		i++;
+	}
+	return (FT_TRUE);
 }
 
-int	exit_with_close_button(void)
+int	check_map_empty_line(void)
 {
-	free_game();
-	print_info("Bye!");
-	system("leaks cub3d");
-	exit(EXIT_SUCCESS);
-	return (0);
+	t_game	*game;
+	t_map	*map;
+	size_t	i;
+
+	game = get_game_struct();
+	map = &(game->map);
+	i = 0;
+	while (i < map->height)
+	{
+		if (is_empty_line(map->array[i]) == FT_TRUE)
+			return (FT_ERROR);
+		i++;
+	}
+	return (FT_SUCCESS);
 }
