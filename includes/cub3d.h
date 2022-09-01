@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/30 19:20:01 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 22:00:52 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,6 +264,7 @@ int			validate_map(void);
 int			check_map_characters(void);
 int			check_map_required_characters(void);
 int			check_map_walls(void);
+int			check_map_empty_line(void);
 int			is_player_char(char c);
 
 void		bres_algo(t_bres bres, int is_sub);
@@ -284,7 +285,7 @@ void		free_game(void);
 t_game		*get_game_struct(void);
 
 void		print_info(char *message);
-void		print_error(char *message);
+int			print_error(char *message);
 
 void		exit_with_error(char *message);
 int			exit_with_close_button(void);

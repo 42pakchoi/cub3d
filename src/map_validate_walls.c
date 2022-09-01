@@ -115,6 +115,15 @@ int	check_map_walls(void)
 	start_coord = find_player_pos();
 	temp_array = duplicate_map_array(map->array);
 	flood_wall(temp_array, (int)start_coord.x, (int)start_coord.y);
+
+	// print temp_array
+	int i = 0;
+	while (temp_array[i])
+	{
+		printf("|%s|\n", temp_array[i]);
+		i++;
+	}
+
 	free_array(temp_array);
 	if (map->is_walled == FT_FALSE)
 		return (FT_ERROR);
