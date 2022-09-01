@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_parse_read_map.c                               :+:      :+:    :+:   */
+/*   map_parse_read_map_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 14:21:02 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/30 21:52:09 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/09/01 17:07:27 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static size_t	get_map_height(t_list *map_start_line)
 {

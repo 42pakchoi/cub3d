@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_validate_walls.c                               :+:      :+:    :+:   */
+/*   map_validate_walls_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 01:20:22 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/09/01 19:12:37 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/09/01 17:07:27 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static t_vector	find_player_pos(void)
 {
@@ -50,7 +50,8 @@ static void	flood_wall(char **array, int x, int y)
 		return ;
 	}
 	if (!is_player_char(array[y][x])
-		&& array[y][x] != MAP_EMPTY)
+		&& array[y][x] != MAP_EMPTY
+		&& array[y][x] != MAP_DOOR)
 		return ;
 	array[y][x] = MAP_TEST_VISITED;
 	flood_wall(array, x + 1, y);

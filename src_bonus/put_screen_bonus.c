@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_screen.c                                       :+:      :+:    :+:   */
+/*   put_screen_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:21:53 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/09/01 19:11:26 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/09/01 17:07:27 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static t_img	*get_texture_img(int wall_dir)
 {
@@ -27,6 +27,12 @@ static t_img	*get_texture_img(int wall_dir)
 		texture = game->map.textures.east;
 	else if (wall_dir == WALL_DIR_W)
 		texture = game->map.textures.west;
+	else if (wall_dir == WALL_FIRE)
+		texture = game->map.textures.fire[(int)(game->map.sprite_count)];
+	else if (wall_dir == WALL_DOOR)
+		texture = game->map.textures.door;
+	else if (wall_dir == WALL_DOOR_SIDE)
+		texture = game->map.textures.door_side;
 	return (texture);
 }
 
@@ -55,9 +61,7 @@ static void	put_wall_line(int x, t_dda dda)
 
 	game = get_game_struct();
 	texture = get_texture_img(dda.wall_dir);
-	if (texture == NULL)
-		return ;
-	texture_pos.x = (int)((float)(texture->width) * dda.wall_collision_point);
+	texture_pos.x = (int)((float)(texture->width) *dda.wall_collision_point);
 	texture_pos.y = 0;
 	line_height = ((float)WINDOW_HEIGHT / dda.wall_dist);
 	calc_line(&line, line_height, texture, &texture_pos);
@@ -93,8 +97,8 @@ int	put_screen_wall(void)
 		dda.ray_dir.x = game->player.dir.x + game->player.plane.x * camera_x;
 		dda.ray_dir.y = game->player.dir.y + game->player.plane.y * camera_x;
 		init_dda(&dda);
-		if (calc_collision_point(game->map.array, &dda))
-			put_wall_line(w, dda);
+		calc_collision_point(game->map.array, &dda);
+		put_wall_line(w, dda);
 		w += 1;
 	}
 	return (0);

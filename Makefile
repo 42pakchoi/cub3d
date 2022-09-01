@@ -3,10 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+         #
+#    By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/28 19:18:15 by sarchoi           #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2022/08/31 14:46:05 by cpak             ###   ########seoul.kr   #
+=======
+#    Updated: 2022/09/01 17:03:39 by sarchoi          ###   ########seoul.kr   #
+>>>>>>> develop
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +30,7 @@ SRCS_ROOT = main.c \
 			map_validate.c \
 			map_validate_char.c \
 			map_validate_walls.c \
+			map_validate_empty.c \
 			get_map_array.c \
 			graphic_init.c \
 			draw_frame.c \
@@ -43,11 +48,15 @@ SRCS_UTIL = global.c \
 			put_image.c \
 			get_image.c \
 			exit.c \
-			dda_algo.c
+			dda_algo.c \
+			print.c
 SRCS = $(addprefix ./src/, $(SRCS_ROOT)) \
 		$(addprefix ./src/utils/, $(SRCS_UTIL))
+SRCS_BONUS = $(addprefix ./src_bonus/, $(SRCS_ROOT:.c=_bonus.c)) \
+			$(addprefix ./src_bonus/utils/, $(SRCS_UTIL:.c=_bonus.c))
 
 OBJS = $(SRCS:.c=.o)
+OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 
 MLX = minilibx
 MLX_FLAGS = -L libs/minilibx -lmlx -framework OpenGl -framework AppKit
@@ -67,7 +76,7 @@ reset:=$(shell tput sgr0)
 
 all: $(LIBFT) $(MLX) $(NAME)
 
-$(NAME): $(OBJS) $(OBJS_GNL) $(OBJS_MANDATORY)
+$(NAME): $(OBJS) $(OBJS_GNL)
 	$(info $(green)<MAKE> NAME$(reset))
 	$(CC) $(CFLAGS) -o $@ $^ $(LIBFT_FLAGS) $(MLX_FLAGS)
 	install_name_tool -change libmlx.dylib $(CURDIR)/libs/$(MLX)/libmlx.dylib $(NAME)
@@ -77,10 +86,17 @@ $(NAME): $(OBJS) $(OBJS_GNL) $(OBJS_MANDATORY)
 	$(info $(green)<MAKE> $(<) -> $(@)$(reset))
 
 $(LIBFT):
-	@make all bonus --silent --directory=libs/$(LIBFT)
+	make all bonus --directory=libs/$(LIBFT)
 
 $(MLX):
-	@make --silent --directory=libs/$(MLX)
+	make --directory=libs/$(MLX)
+
+bonus: $(OBJS_BONUS) $(OBJS_GNL)
+	$(info $(green)<MAKE> bonus$(reset))
+	make $(LIBFT)
+	make $(MLX)
+	$(CC) $(CFLAGS) -o $(NAME) $^ $(LIBFT_FLAGS) $(MLX_FLAGS)
+	install_name_tool -change libmlx.dylib $(CURDIR)/libs/$(MLX)/libmlx.dylib $(NAME)
 
 clean:
 	@make clean --directory=libs/$(LIBFT)

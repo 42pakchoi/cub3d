@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_map_array.c                                    :+:      :+:    :+:   */
+/*   get_map_array_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 18:43:16 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/31 17:59:15 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/09/01 17:07:27 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static void	copy_char(
 	t_list *map_start_line, char **map_array, size_t i, size_t j)
