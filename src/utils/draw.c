@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:26:53 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/30 21:56:50 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/09/01 19:10:06 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,50 +38,17 @@ static void	set_collision_point(t_dda *dda)
 	dda->wall_collision_point -= floor(dda->wall_collision_point);
 }
 
-static void	set_wall_except(t_dda *dda, char **map_grid, int x, int y)
+static void	set_wall_except(t_dda *dda)
 {
 	t_game	*game;
 
 	game = get_game_struct();
 	if ((dda->wall_dir == WALL_DIR_N || dda->wall_dir == WALL_DIR_E))
 		dda->wall_collision_point = 1 - dda->wall_collision_point;
-	if (dda->is_door == 1)
-	{
-		dda->wall_dir = WALL_DOOR;
-		dda->is_door = 0;
-	}
-	if (dda->is_door == 2)
-	{
-		if ((y - 1 >= 0 && map_grid[y - 1][x] == MAP_DOOR_OPEN)
-			|| (y + 1 < (int)game->map.height && map_grid[y + 1][x] == MAP_DOOR_OPEN)
-			|| (x - 1 >= 0 && map_grid[y][x - 1] == MAP_DOOR_OPEN)
-			|| (x + 1 < (int)game->map.width && map_grid[y][x + 1] == MAP_DOOR_OPEN))
-		{
-			dda->wall_dir = WALL_DOOR_SIDE;
-		}
-		dda->is_door = 0;
-	}
-	if (dda->is_fire)
-	{
-		dda->wall_dir = WALL_FIRE;
-		dda->is_fire = 0;
-	}
 }
 
-int	get_wall_except(t_dda *dda, char **map_grid, int x, int y)
+static int	get_wall_except(char **map_grid, int x, int y)
 {
-	if (map_grid[y][x] == MAP_DOOR)
-	{
-		dda->is_door = 1;
-		return (1);
-	}
-	if (map_grid[y][x] == MAP_DOOR_OPEN)
-		dda->is_door = 2;
-	if (map_grid[y][x] == MAP_WALL_FIRE)
-	{
-		dda->is_fire = 1;
-		return (1);
-	}
 	if (map_grid[y][x] == MAP_WALL)
 		return (1);
 	return (0);
@@ -94,20 +61,19 @@ int	calc_collision_point(char **map_grid, t_dda *dda)
 	int		y;
 
 	game = get_game_struct();
-	if (map_grid[dda->player_grid.y][dda->player_grid.x] == MAP_DOOR_OPEN)
-		dda->is_door = 2;
 	while (1)
 	{
 		calc_dda(dda);
 		x = (int)(dda->player_grid).x;
 		y = (int)(dda->player_grid).y;
-		if (x < 0 || x >= (int)game->map.width || y < 0 || y >= (int)game->map.height)
+		if (x < 0 || x >= (int)game->map.width
+			|| y < 0 || y >= (int)game->map.height)
 			return (0);
-		if (get_wall_except(dda, map_grid, x, y))
+		if (get_wall_except(map_grid, x, y))
 			break ;
 	}
 	set_perpendicular_wall_dist(dda, dda->player_pos, dda->ray_dir);
 	set_collision_point(dda);
-	set_wall_except(dda, map_grid, x, y);
+	set_wall_except(dda);
 	return (1);
 }

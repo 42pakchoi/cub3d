@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_screen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:21:53 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/30 21:55:15 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/09/01 19:11:26 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,6 @@ static t_img	*get_texture_img(int wall_dir)
 		texture = game->map.textures.east;
 	else if (wall_dir == WALL_DIR_W)
 		texture = game->map.textures.west;
-	else if (wall_dir == WALL_FIRE)
-		texture = game->map.textures.fire[(int)(game->map.sprite_count)];
-	else if (wall_dir == WALL_DOOR)
-		texture = game->map.textures.door;
-	else if (wall_dir == WALL_DOOR_SIDE)
-		texture = game->map.textures.door_side;
 	return (texture);
 }
 
@@ -51,7 +45,7 @@ static	void	calc_line(
 	}
 }
 
-void	put_wall_line(int x, t_dda dda)
+static void	put_wall_line(int x, t_dda dda)
 {
 	t_game		*game;
 	t_img		*texture;
@@ -60,7 +54,6 @@ void	put_wall_line(int x, t_dda dda)
 	t_line		line;
 
 	game = get_game_struct();
-	printf("texture\n");
 	texture = get_texture_img(dda.wall_dir);
 	if (texture == NULL)
 		return ;

@@ -6,7 +6,11 @@
 #    By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/28 19:18:15 by sarchoi           #+#    #+#              #
+<<<<<<< HEAD
+#    Updated: 2022/08/31 14:46:05 by cpak             ###   ########seoul.kr   #
+=======
 #    Updated: 2022/09/01 17:03:39 by sarchoi          ###   ########seoul.kr   #
+>>>>>>> develop
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,18 +37,10 @@ SRCS_ROOT = main.c \
 			find_map_start_line.c \
 			free.c \
 			put_screen.c \
-			put_minimap_floor.c \
-			put_minimap_tiles.c \
-			put_minimap_line.c \
-			put_minimap_player.c \
-			put_minimap_ray.c \
-			mouse_hook.c \
 			key_hook.c \
 			calc_rotated_vector.c \
 			player.c \
-			init_player.c \
-			bres_algo.c \
-			set_fire_texture.c
+			init_player.c
 SRCS_UTIL = global.c \
 			draw.c \
 			draw_pixel.c \
