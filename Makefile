@@ -6,7 +6,7 @@
 #    By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/28 19:18:15 by sarchoi           #+#    #+#              #
-#    Updated: 2022/08/30 19:27:25 by sarchoi          ###   ########seoul.kr   #
+#    Updated: 2022/09/01 15:25:09 by sarchoi          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRCS_ROOT = main.c \
 			map_validate.c \
 			map_validate_char.c \
 			map_validate_walls.c \
+			map_validate_empty.c \
 			get_map_array.c \
 			graphic_init.c \
 			draw_frame.c \

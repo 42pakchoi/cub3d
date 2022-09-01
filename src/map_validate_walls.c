@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 01:20:22 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/30 16:59:45 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 21:03:58 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,15 @@ int	check_map_walls(void)
 	start_coord = find_player_pos();
 	temp_array = duplicate_map_array(map->array);
 	flood_wall(temp_array, (int)start_coord.x, (int)start_coord.y);
+
+	// print temp_array
+	int i = 0;
+	while (temp_array[i])
+	{
+		printf("|%s|\n", temp_array[i]);
+		i++;
+	}
+
 	free_array(temp_array);
 	if (map->is_walled == FT_FALSE)
 		return (FT_ERROR);

@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 14:21:02 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/29 19:04:26 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 21:57:43 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,28 @@
 static size_t	get_map_height(t_list *map_start_line)
 {
 	size_t	height;
+	size_t	i;
+	t_list	*tmp;
 
 	height = 0;
+	tmp = map_start_line;
 	while (map_start_line)
 	{
-		if (ft_strlen(map_start_line->content) == 0)
-			break ;
 		height++;
+		if (map_start_line->next == NULL)
+			break ;
 		map_start_line = map_start_line->next;
 	}
-	return (height);
+	i = 0;
+	while (tmp)
+	{
+		if (ft_strlen(tmp->content) == 0)
+			i++;
+		else
+			i = 0;
+		tmp = tmp->next;
+	}
+	return (height - i);
 }
 
 static size_t	get_map_width(t_list *map_start_line)
