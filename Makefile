@@ -6,7 +6,7 @@
 #    By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/28 19:18:15 by sarchoi           #+#    #+#              #
-#    Updated: 2022/09/01 19:28:11 by sarchoi          ###   ########seoul.kr   #
+#    Updated: 2022/09/01 20:09:07 by sarchoi          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 NAME = cub3d
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 
 SRCS_ROOT = main.c \
 			map.c \
@@ -51,16 +51,21 @@ SRCS = $(addprefix ./src/, $(SRCS_ROOT)) \
 SRCS_ONLY_BONUS = put_minimap_floor_bonus.c \
 			put_minimap_player_bonus.c \
 			put_minimap_ray_bonus.c \
+			put_minimap_line_bonus.c \
 			put_minimap_tiles_bonus.c \
 			set_fire_texture_bonus.c \
+			bres_algo_bonus.c
 SRCS_BONUS = $(addprefix ./src_bonus/, $(SRCS_ONLY_BONUS)) \
 			$(addprefix ./src_bonus/, $(SRCS_ROOT:.c=_bonus.c)) \
 			$(addprefix ./src_bonus/utils/, $(SRCS_UTIL:.c=_bonus.c))
 
 OBJS = $(SRCS:.c=.o)
+OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 
 ifdef BONUS
-	OBJS = $(SRCS_BONUS:.c=.o)
+	OBJECTS = $(OBJS_BONUS)
+else
+	OBJECTS = $(OBJS)
 endif
 
 MLX = minilibx
@@ -84,7 +89,7 @@ all: $(LIBFT) $(MLX) $(NAME)
 bonus:
 	make BONUS=1 all
 
-$(NAME): $(OBJS) $(OBJS_GNL)
+$(NAME): $(OBJECTS) $(OBJS_GNL)
 	$(info $(green)<MAKE> NAME$(reset))
 	$(CC) $(CFLAGS) -o $@ $^ $(LIBFT_FLAGS) $(MLX_FLAGS)
 	install_name_tool -change libmlx.dylib $(CURDIR)/libs/$(MLX)/libmlx.dylib $(NAME)
@@ -104,7 +109,7 @@ clean:
 	$(info $(green)<MAKE> Libft - clean$(reset))
 	@make clean --directory=libs/$(MLX)
 	$(info $(green)<MAKE> MinilibX - clean$(reset))
-	rm -f $(OBJS) $(OBJS_GNL)
+	rm -f $(OBJECTS) $(OBJS_GNL)
 	$(info $(green)<MAKE> clean$(reset))
 
 fclean: clean
