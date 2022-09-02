@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/09/01 20:52:50 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/09/02 13:25:27 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,10 +198,10 @@ typedef struct s_bres
 /*
 ** Image Paths
 */
-# define IMG_DOOR		"./textures/dungeon_door.png"
-# define IMG_DOOR_SIDE	"./textures/dungeon_door_side.png"
-# define PREFIX_IMG_FIRE		"./textures/fireplace/fire-"
-# define IMG_FIRE_FRAME			19
+# define IMG_DOOR			"./textures/dungeon_door.png"
+# define IMG_DOOR_SIDE		"./textures/dungeon_door_side.png"
+# define PREFIX_IMG_FIRE	"./textures/fireplace/fire-"
+# define IMG_FIRE_FRAME		19
 
 /*
 ** keycodes

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validate_char_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 01:16:53 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/09/01 17:07:27 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/09/02 13:21:37 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static int	is_map_char(char c)
 		|| c == MAP_PLAYER_W
 		|| c == MAP_EMPTY
 		|| c == MAP_WALL
+		|| c == MAP_WALL_FIRE
 		|| c == MAP_OUTSIDE
 		|| c == MAP_DOOR)
 		return (FT_TRUE);
@@ -44,7 +45,7 @@ int	check_map_characters(void)
 		{
 			temp = map->array[i][j];
 			if (is_map_char(temp) == FT_FALSE)
-				return (FT_FALSE);
+				return (FT_ERROR);
 			j++;
 		}
 		i++;
