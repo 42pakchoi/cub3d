@@ -19,10 +19,7 @@ int	validate_map(void)
 	if (check_map_characters() == FT_ERROR)
 		return (print_error("Invalid map characters"));
 	if (check_map_walls() == FT_ERROR)
-	{
-		printf("<TEST> check_map_walls\n");
-		return (FT_ERROR);
-	}
+		return (print_error("Invalid map walls"));
 	if (check_map_required_characters() == FT_ERROR)
 		return (print_error("Invalid map required characters"));
 	return (FT_SUCCESS);
