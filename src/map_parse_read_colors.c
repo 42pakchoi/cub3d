@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 01:13:38 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/08/29 18:17:49 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/09/02 17:18:17 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	check_color_range(int color)
 {
-	if (color < 0 || color > 255)
+	if (color < 0 || 255 < color)
 		return (FT_ERROR);
 	return (FT_SUCCESS);
 }
@@ -26,7 +26,9 @@ static int	check_map_color_range(char **color_split)
 		|| check_color_range(ft_atoi(color_split[1])) == FT_ERROR
 		|| check_color_range(ft_atoi(color_split[2])) == FT_ERROR
 	)
+	{
 		return (FT_ERROR);
+	}
 	return (FT_SUCCESS);
 }
 
@@ -80,6 +82,10 @@ int	read_colors(void)
 	game = get_game_struct();
 	map = &(game->map);
 	map->floor_color = get_color("F");
+	if (map->floor_color == FT_ERROR)
+		return (FT_ERROR);
 	map->ceiling_color = get_color("C");
+	if (map->ceiling_color == FT_ERROR)
+		return (FT_ERROR);
 	return (FT_SUCCESS);
 }
