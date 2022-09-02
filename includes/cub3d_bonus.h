@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/09/02 13:25:27 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/09/02 14:11:08 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ typedef struct s_dda
 	float			wall_dist;
 	float			wall_collision_point;
 	int				is_door;
+	t_point			door_pos;
 	int				is_fire;
 }					t_dda;
 
