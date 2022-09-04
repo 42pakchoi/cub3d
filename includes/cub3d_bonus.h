@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 01:31:51 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/09/02 14:11:08 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/09/04 23:34:27 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -274,7 +274,7 @@ t_vector	calc_rotated_vector(t_vector v, int d);
 int			key_up(int keycode);
 int			key_down(int keycode);
 int			mouse_up(void);
-int			mouse_down(int button, int x);
+int			mouse_down(int button, int x, int y);
 int			mouse_move(int x);
 
 int			draw_frame(void);

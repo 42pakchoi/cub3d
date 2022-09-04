@@ -6,7 +6,7 @@
 /*   By: cpak <cpak@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:26:53 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/09/02 14:47:46 by cpak             ###   ########seoul.kr  */
+/*   Updated: 2022/09/04 23:42:55 by cpak             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +63,17 @@ static int	get_wall_except(t_dda *dda, char **map_grid, int x, int y)
 
 static void	set_wall_except(t_dda *dda, int x, int y)
 {
-	t_game	*game;
-
-	game = get_game_struct();
 	if ((dda->wall_dir == WALL_DIR_N || dda->wall_dir == WALL_DIR_E))
 		dda->wall_collision_point = 1 - dda->wall_collision_point;
 	if (dda->is_door == MAP_DOOR)
 		dda->wall_dir = WALL_DOOR;
 	if (dda->is_door == MAP_DOOR_OPEN)
 	{
-		if (dda->door_pos.x - 1 <= x && dda->door_pos.x + 1 >= x
-			&& dda->door_pos.y - 1 <= y && dda->door_pos.y + 1 >= y)
-				dda->wall_dir = WALL_DOOR_SIDE;
+		if (((dda->door_pos.x - 1 <= x && dda->door_pos.x + 1 >= x)
+				&& dda->door_pos.y == y)
+			|| ((dda->door_pos.y - 1 <= y && dda->door_pos.y + 1 >= y)
+				&& dda->door_pos.x == x))
+			dda->wall_dir = WALL_DOOR_SIDE;
 	}
 	if (dda->is_fire)
 		dda->wall_dir = WALL_FIRE;
