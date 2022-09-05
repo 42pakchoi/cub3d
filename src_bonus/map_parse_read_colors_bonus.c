@@ -12,9 +12,20 @@
 
 #include "cub3d_bonus.h"
 
-static int	check_color_range(int color)
+static int	check_color_range(char *color)
 {
-	if (color < 0 || 255 < color)
+	int		number;
+	char	*tmp;
+
+	tmp = color;
+	while (*tmp)
+	{
+		if (!ft_isdigit(*tmp))
+			return (FT_ERROR);
+		tmp++;
+	}
+	number = ft_atoi(color);
+	if (number < 0 || 255 < number)
 		return (FT_ERROR);
 	return (FT_SUCCESS);
 }
@@ -22,9 +33,9 @@ static int	check_color_range(int color)
 static int	check_map_color_range(char **color_split)
 {
 	if (
-		check_color_range(ft_atoi(color_split[0])) == FT_ERROR
-		|| check_color_range(ft_atoi(color_split[1])) == FT_ERROR
-		|| check_color_range(ft_atoi(color_split[2])) == FT_ERROR
+		check_color_range(color_split[0]) == FT_ERROR
+		|| check_color_range(color_split[1]) == FT_ERROR
+		|| check_color_range(color_split[2]) == FT_ERROR
 	)
 		return (FT_ERROR);
 	return (FT_SUCCESS);
