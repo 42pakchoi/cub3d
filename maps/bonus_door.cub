@@ -3,14 +3,14 @@ SO ./textures/dungeon_wall.png
 WE ./textures/dungeon_wall2.png
 EA ./textures/dungeon_wall2.png
 
-C 42,44,52
+C 42,44,10
 F 32,34,42
 
 111111111111
 100000000001
 100000000001
 100011111D11
-11111  10001
+11111  11011
        11D11
        10001
        10001
