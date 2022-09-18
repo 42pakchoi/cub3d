@@ -118,6 +118,87 @@ $ ./cub3d maps/error_invalid_extension.txt # Invalid file extension.
 
 ## Logics
 
+### Flow chart
+
+```mermaid
+graph LR
+    e1([Start])
+    e2[Initial]
+    e3[[Frame Loop]]
+    e4[Free]
+    e5([Exit])
+
+    e1 --> e2 --> e3 --> e4 --> e5
+```
+
+#### **Initial**
+
+```mermaid
+flowchart TD
+    x1(Read file)
+    x2(Parse map)
+    x3(Clear map raw)
+    x4(Close file)
+
+    y1(Init player struct)
+    y2(Set player position)
+    y3(Set player direction)
+
+    z1(Init mlx)
+    z2(Init window)
+    z3(Init images)
+    z4(Init hooks)
+
+    subgraph s1[Init map]
+      direction LR
+      x1 --> x2 --> x3 --> x4
+    end
+    subgraph s2 [Init player]
+      direction LR
+      y1 --> y2 --> y3
+    end
+    subgraph s3 [Init mlx]
+      direction LR
+      z1 --> z2 --> z3 --> z4
+    end
+
+    s1 --> s2 --> s3
+```
+
+#### **Frame Loop**
+
+```mermaid
+flowchart TD
+    x1(Get delta)
+    x2(Set player position)
+    x3(Set player direction)
+
+    y1("Set screen image <br/>( ceiling & floor )")
+    y2("Set screen image <br/>( wall )")
+    y3(Set minimap image)
+
+    z1(Set sprite counter)
+    z2(Put screen image)
+    z3(Put minimap image)
+
+    subgraph s1 [Set player]
+      direction LR
+      x1 --> x2 --> x3
+    end
+    subgraph s2 [Update frame]
+      direction LR
+      y1 --> y2 --> y3
+    end
+    subgraph s3 [Draw images]
+      direction LR
+      z1 --> z2 --> z3
+    end
+
+    s1 --> s2 --> s3
+```
+
+
+
 
 
 
